@@ -632,6 +632,16 @@ export default function Home() {
             </div>
           </div>
         </div>
+        <div className="text-center mt-2">
+          <a
+            href="https://github.com/johndimm/gradual-daylight-saving"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-xs text-zinc-400 dark:text-zinc-500 hover:text-zinc-600 dark:hover:text-zinc-300 transition-colors"
+          >
+            GitHub
+          </a>
+        </div>
       </div>
     </div>
   );

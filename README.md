@@ -1,38 +1,59 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Gradual Daylight Saving
 
-## Getting Started
+**What if daylight saving happened gradually?**
 
-First, run the development server:
+Instead of jumping an hour overnight twice a year, clocks could shift by a few seconds each day — spreading the transition over months. Since most clocks already sync from the network, time servers could ease us in without anyone noticing.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+[Live demo](https://gradual-daylight-saving-five.vercel.app/)
+
+## The idea
+
+Daylight saving time transitions are jarring. Every spring we lose an hour of sleep; every fall our schedules lurch the other way. But the underlying problem — aligning our clocks with the seasons — doesn't require a sudden jump. The seasons change gradually, and our clocks could too.
+
+This app shows two clocks side by side:
+
+- **Normal clock** — works like your clock does today, jumping 1 hour overnight at each DST transition
+- **Gradual clock** — spreads that same hour over the months between transitions, shifting just a few seconds per day
+
+Both clocks arrive at the same time at each transition point. They diverge in between, reaching a maximum difference of about 30 minutes at the midpoint (mid-summer and mid-winter).
+
+## How it works
+
+The gradual offset uses **cosine easing** to smooth the transition:
+
+```
+offset = (1 - cos(π × progress)) / 2 × 3600000ms
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Where `progress` is how far we are between two DST transitions (0 at one transition, 1 at the next).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+This has two nice properties:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+1. **Zero offset at transitions** — the clocks match exactly when DST changes happen
+2. **Zero rate of change at transitions** — the gradual clock doesn't suddenly start or stop drifting; it eases in and out smoothly
 
-## Learn More
+At the midpoint (peak drift), the gradual clock runs about 24 seconds slow or fast per day — imperceptible in daily life.
 
-To learn more about Next.js, take a look at the following resources:
+## The app
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+The interactive demo lets you explore the concept:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- **Tour stops** walk through key moments: spring forward, mid-summer peak, fall back
+- **Timeline bar** — click anywhere to jump to that point in the year
+- **Playback controls** — step by minute/hour/day or play continuously at various speeds
+- **Clock speed stats** — shows the instantaneous rate of each clock (the normal clock shows 95.83% on spring-forward day and 104.17% on fall-back day; the gradual clock never deviates more than ~0.03%)
 
-## Deploy on Vercel
+## Implementation
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Since most devices already sync time from NTP servers, this wouldn't require any hardware changes. The servers would simply report a slightly adjusted time — a few seconds off from UTC — following the cosine easing curve. Devices that sync frequently would track the gradual shift smoothly. Devices that sync less often (once a day, say) would still get a much gentler transition than the current 1-hour jump.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
-# gradual-daylight-saving
+## Running locally
 
+```bash
+npm install
+npm run dev
+```
+
+Open [http://localhost:3000](http://localhost:3000).
+
+Built with Next.js, React, and Tailwind CSS.
