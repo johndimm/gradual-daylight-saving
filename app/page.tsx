@@ -632,7 +632,13 @@ export default function Home() {
             </div>
           </div>
         </div>
-        <div className="text-center mt-2">
+        <div className="flex justify-center gap-4 mt-2">
+          <a
+            href="/clock"
+            className="text-xs text-zinc-400 dark:text-zinc-500 hover:text-zinc-600 dark:hover:text-zinc-300 transition-colors"
+          >
+            Smooth Clock
+          </a>
           <a
             href="https://github.com/johndimm/gradual-daylight-saving"
             target="_blank"
