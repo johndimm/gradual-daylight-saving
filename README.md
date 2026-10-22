@@ -15,7 +15,7 @@ This app shows two clocks side by side:
 - **Normal clock** — works like your clock does today, jumping 1 hour overnight at each DST transition
 - **Gradual clock** — spreads that same hour over the months between transitions, shifting just a few seconds per day
 
-Both clocks arrive at the same time at each transition point. They diverge in between, reaching a maximum difference of about 30 minutes at the midpoint (mid-summer and mid-winter).
+Both clocks are in sync at each transition point. In between, they diverge steadily — the gradual clock falls further and further behind (or ahead), reaching nearly a full hour of difference just before the next transition. At that moment, the normal clock jumps to meet it and they're back in sync.
 
 ## How it works
 
@@ -32,7 +32,7 @@ This has two nice properties:
 1. **Zero offset at transitions** — the clocks match exactly when DST changes happen
 2. **Zero rate of change at transitions** — the gradual clock doesn't suddenly start or stop drifting; it eases in and out smoothly
 
-At the midpoint (peak drift), the gradual clock runs about 24 seconds slow or fast per day — imperceptible in daily life.
+At its fastest drift (mid-summer/mid-winter), the gradual clock loses or gains about 24 seconds per day — imperceptible in daily life.
 
 ## The app
 
