@@ -416,6 +416,9 @@ export default function SmoothClock() {
         </div>
       )}
 
+      {/* Title */}
+      <div className="text-sm uppercase tracking-widest text-zinc-700 mb-1">Smooth Clock</div>
+
       {/* Clock display */}
       {displayStyle === "digital" && (
         <>
@@ -556,10 +559,29 @@ export default function SmoothClock() {
             </div>
           </div>
 
-          {/* Footer */}
-          <div className="pt-2 border-t border-zinc-800">
-            <a href="/" className="text-xs text-zinc-600 hover:text-zinc-400 transition-colors">
-              How does this work?
+          {/* About */}
+          <div>
+            <div className="text-sm text-zinc-400 uppercase tracking-wider mb-3">What is Smooth Clock?</div>
+            <div className="text-sm text-zinc-400 leading-relaxed space-y-2">
+              <p>
+                This clock doesn&apos;t jump an hour twice a year. Instead, it shifts
+                by a few seconds each day, spreading the daylight saving transition
+                over months.
+              </p>
+              <p>
+                Set your alarm to smooth time and you&apos;ll never lose an hour of
+                sleep overnight. By the time the official clocks spring forward,
+                you&apos;ve already adjusted — gradually, without noticing.
+              </p>
+              <p>
+                Right now this clock is <span className="text-zinc-200 font-mono">{offsetLabel}</span> from
+                normal time. The drift rate varies through the year — near zero
+                close to DST transitions, peaking at about 24 seconds per day
+                at the midpoints.
+              </p>
+            </div>
+            <a href="/" className="inline-block mt-3 text-xs text-zinc-600 hover:text-zinc-400 transition-colors">
+              See the interactive explainer →
             </a>
           </div>
         </div>

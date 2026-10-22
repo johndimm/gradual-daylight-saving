@@ -299,7 +299,7 @@ const TOUR_STOPS = [
   {
     date: () => new Date(2026, 6, 5, 12, 0, 0),
     label: "Mid-summer",
-    desc: "Halfway there — the gradual clock is 30 minutes behind and still falling back. It loses about 24 seconds per day, reaching a full hour behind by fall, when the normal clock jumps back to meet it.",
+    desc: "Halfway there — the gradual clock is 30 minutes behind and still falling back. The drift rate peaks here at about 24 seconds per day, then gradually slows as it approaches a full hour behind by fall.",
   },
   {
     date: () => new Date(2026, 9, 31, 12, 0, 0),
