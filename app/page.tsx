@@ -185,7 +185,7 @@ function ClockFace({ time, label, subtitle }: { time: Date; label: string; subti
           </div>
         )}
       </div>
-      <svg viewBox="0 0 200 200" className="w-24 h-24 sm:w-48 sm:h-48">
+      <svg viewBox="0 0 200 200" className="w-32 h-32 sm:w-48 sm:h-48">
         <circle
           cx="100"
           cy="100"
@@ -773,33 +773,13 @@ export default function Home() {
         </p>
       </div>
 
-      {/* Sync method selector */}
-      <div className="flex items-center justify-center gap-2 pt-3">
-        <span className="text-xs text-zinc-500 dark:text-zinc-400">Sync at:</span>
-        <div className="flex rounded-full overflow-hidden border border-zinc-300 dark:border-zinc-600">
-          {(["transitions", "solstices"] as SyncMethod[]).map((m) => (
-            <button
-              key={m}
-              onClick={() => setSyncMethod(m)}
-              className={`px-3 py-1 text-xs font-medium transition-colors ${
-                syncMethod === m
-                  ? "bg-zinc-900 text-white dark:bg-zinc-100 dark:text-zinc-900"
-                  : "bg-white dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-700"
-              }`}
-            >
-              {m === "transitions" ? "DST transitions" : "Solstices"}
-            </button>
-          ))}
-        </div>
-      </div>
-
       {/* Date label */}
       <div className="text-center text-sm text-zinc-500 dark:text-zinc-400 font-medium pt-2">
         {formatDate(simDate)}
       </div>
 
       {/* Clocks + difference */}
-      <div className="flex items-center justify-center gap-3 sm:gap-14 px-4 py-4">
+      <div className="flex items-center justify-center gap-2 sm:gap-14 px-3 sm:px-4 py-4">
         <ClockFace time={simDate} label="Normal" subtitle="Jumps 1 hour overnight" />
         <div className="flex flex-col items-center gap-1 shrink-0">
           <div className="text-[9px] sm:text-[10px] uppercase tracking-wider text-zinc-400 dark:text-zinc-500">
@@ -901,9 +881,6 @@ export default function Home() {
         </div>
       </div>
 
-      {/* Offset comparison chart */}
-      <OffsetChart syncMethod={syncMethod} simDate={simDate} />
-
       {/* Controls bar */}
       <div className="mt-auto border-t border-zinc-200 dark:border-zinc-800 px-4 py-3">
         <div className="max-w-lg mx-auto flex flex-wrap items-center justify-center gap-2">
@@ -967,6 +944,28 @@ export default function Home() {
               ))}
             </div>
           </div>
+        </div>
+        {/* Sync method selector + chart */}
+        <div className="flex items-center justify-center gap-2 pt-4">
+          <span className="text-xs text-zinc-500 dark:text-zinc-400">Sync at:</span>
+          <div className="flex rounded-full overflow-hidden border border-zinc-300 dark:border-zinc-600">
+            {(["transitions", "solstices"] as SyncMethod[]).map((m) => (
+              <button
+                key={m}
+                onClick={() => setSyncMethod(m)}
+                className={`px-3 py-1 text-xs font-medium transition-colors ${
+                  syncMethod === m
+                    ? "bg-zinc-900 text-white dark:bg-zinc-100 dark:text-zinc-900"
+                    : "bg-white dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-700"
+                }`}
+              >
+                {m === "transitions" ? "DST transitions" : "Solstices"}
+              </button>
+            ))}
+          </div>
+        </div>
+        <div className="pt-2">
+          <OffsetChart syncMethod={syncMethod} simDate={simDate} />
         </div>
         {/* Smooth Clock CTA */}
         <div className="mt-6 mx-4">
