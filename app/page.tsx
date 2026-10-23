@@ -967,6 +967,20 @@ export default function Home() {
         <div className="pt-2">
           <OffsetChart syncMethod={syncMethod} simDate={simDate} />
         </div>
+        {/* Origin */}
+        <div className="max-w-md mx-auto mt-6 px-4">
+          <details className="group">
+            <summary className="text-xs font-medium text-zinc-400 dark:text-zinc-500 cursor-pointer hover:text-zinc-600 dark:hover:text-zinc-300 transition-colors">
+              How this app started
+            </summary>
+            <blockquote className="mt-2 pl-3 border-l-2 border-zinc-200 dark:border-zinc-700 text-xs text-zinc-500 dark:text-zinc-400 leading-relaxed italic">
+              I want an app that shows 2 clocks. The first is a normal clock showing standard time or daylight saving time. The second is a hypothetical clock that follows the daylight saving pattern without making the sudden 1-hour jumps. Instead, it makes microchanges every day (or hour or second) to satisfy 2 conditions: it tracks the normal time shifts, and there is no sudden jump in time. The changes are smoothed out over the entire period. There is a calendar to switch to a different day or month so you can watch how the times differ. Maybe a play button to sit back and watch.
+            </blockquote>
+            <p className="mt-1.5 text-[10px] text-zinc-400 dark:text-zinc-500">
+              — the prompt to Claude Code that built this app
+            </p>
+          </details>
+        </div>
         {/* Smooth Clock CTA */}
         <div className="mt-6 mx-4">
           <div className="max-w-md mx-auto text-center mb-3">

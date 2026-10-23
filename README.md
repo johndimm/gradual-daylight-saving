@@ -6,6 +6,17 @@ Instead of jumping an hour overnight twice a year, clocks could shift by a few s
 
 [Live demo](https://gradual-daylight-saving-five.vercel.app/)
 
+## Origin
+
+This app started as a prompt to Claude Code:
+
+> I want an app that shows 2 clocks. The first is a normal clock showing standard time or daylight saving time. The second is a hypothetical clock that follows the daylight saving pattern without making the sudden 1-hour jumps. Instead, it makes microchanges every day (or hour or second) to satisfy 2 conditions:
+>
+> - it tracks the normal time shifts. When the clocks change by one hour, the new clock matches the time after the jump.
+> - but there is no sudden jump in time. The changes are smoothed out over the entire period.
+>
+> There is a calendar to switch to a different day or month so you can watch how the times differ. Maybe a play button to sit back and watch.
+
 ## The idea
 
 Daylight saving time transitions are jarring. Every spring we lose an hour of sleep; every fall our schedules lurch the other way. But the underlying problem — aligning our clocks with the seasons — doesn't require a sudden jump. The seasons change gradually, and our clocks could too.
