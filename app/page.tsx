@@ -645,7 +645,7 @@ export default function Home() {
   const playRef = useRef(false);
 
   useEffect(() => {
-    setSimDate(new Date(2026, 6, 5, 12, 0, 0));
+    setSimDate(new Date(2026, 5, 21, 12, 0, 0));
   }, []);
 
   useEffect(() => {
