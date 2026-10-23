@@ -13,9 +13,9 @@ Daylight saving time transitions are jarring. Every spring we lose an hour of sl
 This app shows two clocks side by side:
 
 - **Normal clock** — works like your clock does today, jumping 1 hour overnight at each DST transition
-- **Gradual clock** — spreads that same hour over the months between transitions, shifting just a few seconds per day
+- **Gradual clock** — spreads that same hour over months, shifting just a few seconds per day
 
-Both clocks are in sync at each transition point. In between, they diverge steadily — the gradual clock falls further and further behind (or ahead), reaching nearly a full hour of difference just before the next transition. At that moment, the normal clock jumps to meet it and they're back in sync.
+By default, the gradual clock syncs at the **solstices** — zero offset at the summer and winter solstices, smoothly easing between them. This is a better smoothing of the normal DST step function, with about half the total cumulative deviation from normal time compared to syncing at DST transitions.
 
 ## How it works
 
@@ -25,20 +25,23 @@ The gradual offset uses **cosine easing** to smooth the transition:
 offset = (1 - cos(π × progress)) / 2 × 3600000ms
 ```
 
-Where `progress` is how far we are between two DST transitions (0 at one transition, 1 at the next).
+Where `progress` is how far between two sync points (0 at one, 1 at the next). With solstice sync, those points are the summer and winter solstices; with transition sync, they're spring forward and fall back.
 
 This has two nice properties:
 
-1. **Zero offset at transitions** — the clocks match exactly when DST changes happen
-2. **Zero rate of change at transitions** — the gradual clock doesn't suddenly start or stop drifting; it eases in and out smoothly
+1. **Zero offset at sync points** — the gradual and normal clocks match exactly
+2. **Zero rate of change at sync points** — the gradual clock doesn't suddenly start or stop drifting; it eases in and out smoothly
 
-At its fastest drift (mid-summer/mid-winter), the gradual clock loses or gains about 24 seconds per day — imperceptible in daily life.
+At its fastest drift, the gradual clock shifts about 24 seconds per day — imperceptible in daily life.
 
 ## The app
 
 The interactive demo lets you explore the concept:
 
-- **Tour stops** walk through key moments: spring forward, mid-summer peak, fall back
+- **Sync method selector** — choose when the gradual clock syncs with the normal clock:
+  - **Solstices** (default) — zero offset at summer and winter solstices; ~50 min max offset from normal; lowest total deviation
+  - **DST transitions** — zero offset at spring forward and fall back; max 1-hour drift mid-season
+- **Tour stops** walk through key moments in the year, with descriptions that adapt to the selected sync method
 - **Timeline bar** — click anywhere to jump to that point in the year
 - **Playback controls** — step by minute/hour/day or play continuously at various speeds
 - **Clock speed stats** — shows the instantaneous rate of each clock (the normal clock shows 95.83% on spring-forward day and 104.17% on fall-back day; the gradual clock never deviates more than ~0.03%)
@@ -54,6 +57,7 @@ Features:
 - **4 display styles** — Digital (analog + digital), Analog, Minimal, and Flip (retro split-flap)
 - **5 alarm sounds** — Chime, Pulse, Rising, Birds, and Radar, all generated with Web Audio API
 - **Bedside mode** — keeps the screen on using the Wake Lock API so the alarm fires reliably on a phone
+- **Sync point** — choose to sync at DST transitions or solstices (same as the explainer)
 - **Alarm on smooth time** — fires based on the gradually-adjusted time, with snooze and dismiss
 - All settings persist to localStorage
 

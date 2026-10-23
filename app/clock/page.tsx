@@ -12,13 +12,43 @@ function getDSTTransitions(year: number) {
   return { springForward, fallBack };
 }
 
-function getGradualOffsetMs(date: Date): number {
+type SyncMethod = "transitions" | "solstices";
+
+function getSolstice(year: number, summer: boolean): Date {
+  return summer ? new Date(year, 5, 21, 0, 0, 0) : new Date(year, 11, 21, 0, 0, 0);
+}
+
+function getGradualOffsetMs(date: Date, syncMethod: SyncMethod = "transitions"): number {
   const year = date.getFullYear();
+  const t = date.getTime();
+  const ease = (p: number) => (1 - Math.cos(Math.PI * p)) / 2;
+
+  if (syncMethod === "solstices") {
+    const summer = getSolstice(year, true);
+    const winter = getSolstice(year, false);
+    const prevWinter = getSolstice(year - 1, false);
+    const nextSummer = getSolstice(year + 1, true);
+
+    let gradualStdOffset: number;
+    if (t < summer.getTime()) {
+      const p = (t - prevWinter.getTime()) / (summer.getTime() - prevWinter.getTime());
+      gradualStdOffset = ease(p) * 3600000;
+    } else if (t < winter.getTime()) {
+      const p = (t - summer.getTime()) / (winter.getTime() - summer.getTime());
+      gradualStdOffset = (1 - ease(p)) * 3600000;
+    } else {
+      const p = (t - winter.getTime()) / (nextSummer.getTime() - winter.getTime());
+      gradualStdOffset = ease(p) * 3600000;
+    }
+
+    const { springForward, fallBack } = getDSTTransitions(year);
+    const normalDSTOffset = (t >= springForward.getTime() && t < fallBack.getTime()) ? 3600000 : 0;
+    return gradualStdOffset - normalDSTOffset;
+  }
+
   const { springForward, fallBack } = getDSTTransitions(year);
   const { fallBack: prevFallBack } = getDSTTransitions(year - 1);
   const { springForward: nextSpringForward } = getDSTTransitions(year + 1);
-  const t = date.getTime();
-  const ease = (p: number) => (1 - Math.cos(Math.PI * p)) / 2;
   if (t < springForward.getTime()) {
     const start = prevFallBack.getTime();
     const end = springForward.getTime();
@@ -286,6 +316,7 @@ export default function SmoothClock() {
   const [displayStyle, setDisplayStyle] = useState<DisplayStyle>("digital");
   const [alarmSound, setAlarmSound] = useState<AlarmSound>("chime");
   const [bedsideMode, setBedsideMode] = useState(false);
+  const [syncMethod, setSyncMethod] = useState<SyncMethod>("transitions");
   const audioCtxRef = useRef<AudioContext | null>(null);
   const alarmIntervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const firedForMinuteRef = useRef("");
@@ -297,6 +328,7 @@ export default function SmoothClock() {
     setAlarmTime(loadSetting("smoothclock-alarm-time", ""));
     setAlarmEnabled(loadSetting("smoothclock-alarm-on", false));
     setBedsideMode(loadSetting("smoothclock-bedside", false));
+    setSyncMethod(loadSetting("smoothclock-sync", "solstices"));
     setNow(new Date());
     const id = setInterval(() => setNow(new Date()), 200);
     return () => clearInterval(id);
@@ -404,7 +436,7 @@ export default function SmoothClock() {
 
   if (!now) return null;
 
-  const offsetMs = getGradualOffsetMs(now);
+  const offsetMs = getGradualOffsetMs(now, syncMethod);
   const smoothTime = new Date(now.getTime() + offsetMs);
   checkAlarm(smoothTime);
 
@@ -621,6 +653,34 @@ export default function SmoothClock() {
               </div>
               <span className="text-sm font-medium">{bedsideMode ? "On" : "Off"}</span>
             </button>
+          </div>
+
+          {/* Sync method */}
+          <div>
+            <div className="text-sm text-zinc-400 uppercase tracking-wider mb-3">Sync Point</div>
+            <div className="grid grid-cols-2 gap-2">
+              {(["transitions", "solstices"] as SyncMethod[]).map((m) => (
+                <button
+                  key={m}
+                  onClick={() => {
+                    setSyncMethod(m);
+                    saveSetting("smoothclock-sync", m);
+                  }}
+                  className={`rounded-lg px-4 py-3 text-left transition-colors ${
+                    syncMethod === m
+                      ? "bg-white text-black"
+                      : "bg-zinc-800 text-zinc-300 hover:bg-zinc-700"
+                  }`}
+                >
+                  <div className="text-sm font-medium">{m === "transitions" ? "DST transitions" : "Solstices"}</div>
+                  <div className="text-xs text-zinc-500">
+                    {m === "transitions"
+                      ? "Syncs when clocks change"
+                      : "Syncs at summer/winter peaks"}
+                  </div>
+                </button>
+              ))}
+            </div>
           </div>
 
           {/* About */}

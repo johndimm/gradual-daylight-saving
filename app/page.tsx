@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback, useRef } from "react";
+import { useState, useEffect, useCallback, useRef, useMemo } from "react";
 
 function getDSTTransitions(year: number) {
   const march1 = new Date(year, 2, 1);
@@ -14,14 +14,45 @@ function getDSTTransitions(year: number) {
   return { springForward, fallBack };
 }
 
-function getGradualOffsetMs(date: Date): number {
+type SyncMethod = "transitions" | "solstices";
+
+function getSolstice(year: number, summer: boolean): Date {
+  return summer ? new Date(year, 5, 21, 0, 0, 0) : new Date(year, 11, 21, 0, 0, 0);
+}
+
+function getGradualOffsetMs(date: Date, syncMethod: SyncMethod = "transitions"): number {
   const year = date.getFullYear();
+  const t = date.getTime();
+  const ease = (p: number) => (1 - Math.cos(Math.PI * p)) / 2;
+
+  if (syncMethod === "solstices") {
+    const summer = getSolstice(year, true);
+    const winter = getSolstice(year, false);
+    const prevWinter = getSolstice(year - 1, false);
+    const nextSummer = getSolstice(year + 1, true);
+
+    // Gradual offset from standard time: smooth 0 → +1hr → 0 synced to solstices
+    let gradualStdOffset: number;
+    if (t < summer.getTime()) {
+      const p = (t - prevWinter.getTime()) / (summer.getTime() - prevWinter.getTime());
+      gradualStdOffset = ease(p) * 3600000;
+    } else if (t < winter.getTime()) {
+      const p = (t - summer.getTime()) / (winter.getTime() - summer.getTime());
+      gradualStdOffset = (1 - ease(p)) * 3600000;
+    } else {
+      const p = (t - winter.getTime()) / (nextSummer.getTime() - winter.getTime());
+      gradualStdOffset = ease(p) * 3600000;
+    }
+
+    // Subtract normal DST offset to get offset relative to normal clock
+    const { springForward, fallBack } = getDSTTransitions(year);
+    const normalDSTOffset = (t >= springForward.getTime() && t < fallBack.getTime()) ? 3600000 : 0;
+    return gradualStdOffset - normalDSTOffset;
+  }
+
   const { springForward, fallBack } = getDSTTransitions(year);
   const { fallBack: prevFallBack } = getDSTTransitions(year - 1);
   const { springForward: nextSpringForward } = getDSTTransitions(year + 1);
-
-  const t = date.getTime();
-  const ease = (p: number) => (1 - Math.cos(Math.PI * p)) / 2;
 
   if (t < springForward.getTime()) {
     const start = prevFallBack.getTime();
@@ -41,38 +72,59 @@ function getGradualOffsetMs(date: Date): number {
   }
 }
 
-function getGradualRate(date: Date): {
+function getGradualRate(date: Date, syncMethod: SyncMethod = "solstices"): {
   speedPct: number;
   dailyShiftSec: number;
 } {
   const year = date.getFullYear();
-  const { springForward, fallBack } = getDSTTransitions(year);
-  const { fallBack: prevFallBack } = getDSTTransitions(year - 1);
-  const { springForward: nextSpringForward } = getDSTTransitions(year + 1);
-
   const t = date.getTime();
   let periodMs: number;
   let progress: number;
   let sign: number;
 
-  if (t < springForward.getTime()) {
-    const start = prevFallBack.getTime();
-    const end = springForward.getTime();
-    periodMs = end - start;
-    progress = (t - start) / periodMs;
-    sign = 1;
-  } else if (t < fallBack.getTime()) {
-    const start = springForward.getTime();
-    const end = fallBack.getTime();
-    periodMs = end - start;
-    progress = (t - start) / periodMs;
-    sign = -1;
+  if (syncMethod === "solstices") {
+    const summer = getSolstice(year, true);
+    const winter = getSolstice(year, false);
+    const prevWinter = getSolstice(year - 1, false);
+    const nextSummer = getSolstice(year + 1, true);
+
+    if (t < summer.getTime()) {
+      periodMs = summer.getTime() - prevWinter.getTime();
+      progress = (t - prevWinter.getTime()) / periodMs;
+      sign = 1;
+    } else if (t < winter.getTime()) {
+      periodMs = winter.getTime() - summer.getTime();
+      progress = (t - summer.getTime()) / periodMs;
+      sign = -1;
+    } else {
+      periodMs = nextSummer.getTime() - winter.getTime();
+      progress = (t - winter.getTime()) / periodMs;
+      sign = 1;
+    }
   } else {
-    const start = fallBack.getTime();
-    const end = nextSpringForward.getTime();
-    periodMs = end - start;
-    progress = (t - start) / periodMs;
-    sign = 1;
+    const { springForward, fallBack } = getDSTTransitions(year);
+    const { fallBack: prevFallBack } = getDSTTransitions(year - 1);
+    const { springForward: nextSpringForward } = getDSTTransitions(year + 1);
+
+    if (t < springForward.getTime()) {
+      const start = prevFallBack.getTime();
+      const end = springForward.getTime();
+      periodMs = end - start;
+      progress = (t - start) / periodMs;
+      sign = 1;
+    } else if (t < fallBack.getTime()) {
+      const start = springForward.getTime();
+      const end = fallBack.getTime();
+      periodMs = end - start;
+      progress = (t - start) / periodMs;
+      sign = -1;
+    } else {
+      const start = fallBack.getTime();
+      const end = nextSpringForward.getTime();
+      periodMs = end - start;
+      progress = (t - start) / periodMs;
+      sign = 1;
+    }
   }
 
   const ratePerMs =
@@ -279,39 +331,298 @@ function MiniTimeline({
   );
 }
 
+function OffsetChart({ syncMethod, simDate }: { syncMethod: SyncMethod; simDate: Date }) {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  const year = simDate.getFullYear();
+  const springFwd = useMemo(() => {
+    const { springForward } = getDSTTransitions(year);
+    const yearStart = new Date(year, 0, 1).getTime();
+    return (springForward.getTime() - yearStart) / (86400000);
+  }, [year]);
+  const fallBack = useMemo(() => {
+    const { fallBack } = getDSTTransitions(year);
+    const yearStart = new Date(year, 0, 1).getTime();
+    return (fallBack.getTime() - yearStart) / (86400000);
+  }, [year]);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    const container = containerRef.current;
+    if (!canvas || !container) return;
+
+    const dpr = window.devicePixelRatio || 1;
+    const cw = container.clientWidth;
+    const ch = 220;
+    canvas.width = cw * dpr;
+    canvas.height = ch * dpr;
+    canvas.style.width = cw + "px";
+    canvas.style.height = ch + "px";
+    const ctx = canvas.getContext("2d")!;
+    ctx.scale(dpr, dpr);
+
+    const dark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    const muted = dark ? "#a8a29e" : "#78716c";
+    const grid = dark ? "#292524" : "#e7e5e4";
+    const lineNormal = dark ? "#f87171" : "#dc2626";
+    const lineCurrent = dark ? "#60a5fa" : "#2563eb";
+    const lineSolstice = dark ? "#4ade80" : "#16a34a";
+
+    const pad = { top: 20, right: 12, bottom: 36, left: 40 };
+    const plotW = cw - pad.left - pad.right;
+    const plotH = ch - pad.top - pad.bottom;
+
+    const sf = springFwd;
+    const fb = fallBack;
+    const sumSol = 172;
+    const winSol = 355;
+
+    const xPos = (day: number) => pad.left + (day / 365) * plotW;
+    const yPos = (min: number) => pad.top + plotH - (min / 70) * plotH;
+    const ease = (p: number) => (1 - Math.cos(Math.PI * p)) / 2;
+
+    // Grid
+    ctx.strokeStyle = grid;
+    ctx.lineWidth = 1;
+    for (let m = 0; m <= 60; m += 30) {
+      ctx.beginPath();
+      ctx.moveTo(pad.left, yPos(m));
+      ctx.lineTo(cw - pad.right, yPos(m));
+      ctx.stroke();
+    }
+
+    // Zero baseline
+    ctx.strokeStyle = muted;
+    ctx.lineWidth = 1;
+    ctx.setLineDash([2, 4]);
+    ctx.beginPath();
+    ctx.moveTo(pad.left, yPos(0));
+    ctx.lineTo(cw - pad.right, yPos(0));
+    ctx.stroke();
+    ctx.setLineDash([]);
+
+    // Y labels
+    ctx.fillStyle = muted;
+    ctx.font = "10px system-ui";
+    ctx.textAlign = "right";
+    ctx.textBaseline = "middle";
+    for (let m = 0; m <= 60; m += 30) {
+      ctx.fillText(m === 0 ? "0" : "+" + m + "m", pad.left - 6, yPos(m));
+    }
+
+    // Month labels
+    const months = ["J","F","M","A","M","J","J","A","S","O","N","D"];
+    const monthDays = [0,31,59,90,120,151,181,212,243,273,304,334];
+    ctx.textAlign = "center";
+    ctx.textBaseline = "top";
+    ctx.font = "10px system-ui";
+    for (let i = 0; i < 12; i++) {
+      const mid = monthDays[i] + (i < 11 ? (monthDays[i+1] - monthDays[i]) / 2 : 15);
+      ctx.fillText(months[i], xPos(mid), ch - pad.bottom + 6);
+    }
+
+    // Normal (step)
+    ctx.beginPath();
+    ctx.moveTo(xPos(0), yPos(0));
+    ctx.lineTo(xPos(sf - 0.5), yPos(0));
+    ctx.lineTo(xPos(sf), yPos(60));
+    ctx.lineTo(xPos(fb - 0.5), yPos(60));
+    ctx.lineTo(xPos(fb), yPos(0));
+    ctx.lineTo(xPos(365), yPos(0));
+    ctx.strokeStyle = lineNormal;
+    ctx.lineWidth = 2;
+    ctx.stroke();
+
+    // Transition curve
+    function transitionOffset(d: number) {
+      const prevFb = fb - 365;
+      if (d < sf) return ease((d - prevFb) / (sf - prevFb)) * 60;
+      if (d < fb) return 60 - ease((d - sf) / (fb - sf)) * 60;
+      return ease((d - fb) / (sf + 365 - fb)) * 60;
+    }
+
+    // Solstice curve
+    function solsticeOffset(d: number) {
+      const prevWin = winSol - 365;
+      if (d < sumSol) return ease((d - prevWin) / (sumSol - prevWin)) * 60;
+      if (d < winSol) return 60 - ease((d - sumSol) / (winSol - sumSol)) * 60;
+      return ease((d - winSol) / (sumSol + 365 - winSol)) * 60;
+    }
+
+    function drawSmooth(fn: (d: number) => number, color: string, highlight: boolean) {
+      ctx.beginPath();
+      for (let d = 0; d <= 365; d++) {
+        const x = xPos(d), y = yPos(fn(d));
+        d === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+      }
+      ctx.strokeStyle = color;
+      ctx.lineWidth = highlight ? 2.5 : 1.5;
+      ctx.globalAlpha = highlight ? 1 : 0.4;
+      ctx.stroke();
+      ctx.globalAlpha = 1;
+    }
+
+    // Draw non-selected method dimmed, selected method bright
+    if (syncMethod === "solstices") {
+      drawSmooth(transitionOffset, lineCurrent, false);
+      drawSmooth(solsticeOffset, lineSolstice, true);
+    } else {
+      drawSmooth(solsticeOffset, lineSolstice, false);
+      drawSmooth(transitionOffset, lineCurrent, true);
+    }
+
+    // Tour stop dots on the active curve
+    const yearStart = new Date(year, 0, 1).getTime();
+    const activeFn = syncMethod === "solstices" ? solsticeOffset : transitionOffset;
+    const activeColor = syncMethod === "solstices" ? lineSolstice : lineCurrent;
+    const stops = getTourStops(syncMethod);
+    const simDayOfYear = (simDate.getTime() - yearStart) / 86400000;
+
+    for (const stop of stops) {
+      const d = stop.date();
+      const stopDay = (d.getTime() - yearStart) / 86400000;
+      const val = activeFn(stopDay);
+      const sx = xPos(stopDay);
+      const sy = yPos(val);
+      const isActive = Math.abs(stopDay - simDayOfYear) < 1;
+
+      // Dot
+      ctx.beginPath();
+      ctx.arc(sx, sy, isActive ? 5 : 3.5, 0, Math.PI * 2);
+      ctx.fillStyle = isActive ? activeColor : (dark ? "#d6d3d1" : "#57534e");
+      ctx.fill();
+      if (isActive) {
+        ctx.strokeStyle = dark ? "#1c1917" : "#ffffff";
+        ctx.lineWidth = 2;
+        ctx.stroke();
+      }
+
+      // Label
+      const isBefore = stop.label === "Before fall back";
+      const isAfter = stop.label === "After fall back";
+      const above = isAfter ? true : isBefore ? false : val > 20;
+      ctx.fillStyle = muted;
+      ctx.font = "9px system-ui";
+      ctx.textAlign = sx > cw - pad.right - 40 ? "right" : sx < pad.left + 40 ? "left" : "center";
+      ctx.textBaseline = above ? "bottom" : "top";
+      const shortLabel = stop.label
+        .replace("Summer solstice", "Summer sol.")
+        .replace("Winter solstice", "Winter sol.")
+        .replace("Before fall back", "Pre-fall")
+        .replace("After fall back", "Post-fall")
+        .replace("A month later", "Month later");
+      ctx.fillText(shortLabel, sx, sy + (above ? -8 : 8));
+    }
+
+    // Current date marker
+    const markerX = xPos(simDayOfYear);
+    ctx.strokeStyle = dark ? "#fbbf24" : "#d97706";
+    ctx.lineWidth = 1.5;
+    ctx.setLineDash([3, 3]);
+    ctx.beginPath();
+    ctx.moveTo(markerX, pad.top);
+    ctx.lineTo(markerX, ch - pad.bottom);
+    ctx.stroke();
+    ctx.setLineDash([]);
+  }, [syncMethod, simDate, year, springFwd, fallBack]);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ro = new ResizeObserver(() => {
+      canvas.dispatchEvent(new Event("resize"));
+    });
+    const container = containerRef.current;
+    if (container) ro.observe(container);
+    return () => ro.disconnect();
+  }, []);
+
+  return (
+    <div ref={containerRef} className="w-full max-w-lg mx-auto px-4">
+      <canvas ref={canvasRef} className="w-full" />
+      <div className="flex justify-center gap-4 text-[10px] mt-1">
+        <span className="flex items-center gap-1">
+          <span className="inline-block w-4 h-0.5 rounded bg-red-500 dark:bg-red-400" />
+          <span className="text-zinc-500 dark:text-zinc-400">Normal</span>
+        </span>
+        <span className="flex items-center gap-1">
+          <span className="inline-block w-4 h-0.5 rounded bg-blue-600 dark:bg-blue-400" />
+          <span className="text-zinc-500 dark:text-zinc-400">Transitions</span>
+        </span>
+        <span className="flex items-center gap-1">
+          <span className="inline-block w-4 h-0.5 rounded bg-green-600 dark:bg-green-400" />
+          <span className="text-zinc-500 dark:text-zinc-400">Solstices</span>
+        </span>
+      </div>
+    </div>
+  );
+}
+
 const PLAYBACK_SPEEDS = [
   { label: "1 hour/s", msPerTick: 3600000, tickMs: 50 },
   { label: "1 day/s", msPerTick: 86400000, tickMs: 50 },
   { label: "1 week/s", msPerTick: 604800000, tickMs: 50 },
 ];
 
-const TOUR_STOPS = [
-  {
-    date: () => new Date(2026, 2, 8, 12, 0, 0),
-    label: "Spring forward",
-    desc: "The clocks match at the transition. The gradual clock spent all winter slowly gaining time to arrive here.",
-  },
-  {
-    date: () => new Date(2026, 3, 8, 12, 0, 0),
-    label: "A month later",
-    desc: "Still close — only a couple minutes apart. The cosine easing keeps the rate of change near zero right after the transition.",
-  },
-  {
-    date: () => new Date(2026, 6, 5, 12, 0, 0),
-    label: "Mid-summer",
-    desc: "Halfway there — the gradual clock is 30 minutes behind and still falling back. The drift rate peaks here at about 24 seconds per day, then gradually slows as it approaches a full hour behind by fall.",
-  },
-  {
-    date: () => new Date(2026, 9, 31, 12, 0, 0),
-    label: "Before fall back",
-    desc: "Nearly an hour apart. The gradual clock has given back almost the full hour, matching what the sudden jump will do.",
-  },
-  {
-    date: () => new Date(2026, 10, 1, 12, 0, 0),
-    label: "After fall back",
-    desc: "Together again. The normal clock jumped back an hour; the gradual clock was already there. The cycle repeats.",
-  },
-];
+function getTourStops(method: SyncMethod) {
+  if (method === "solstices") {
+    return [
+      {
+        date: () => new Date(2026, 2, 8, 12, 0, 0),
+        label: "Spring forward",
+        desc: "The normal clock jumps ahead an hour. The gradual clock is partway through its smooth rise — about 20 minutes ahead of standard time. The gap between them shifts suddenly.",
+      },
+      {
+        date: () => new Date(2026, 5, 21, 12, 0, 0),
+        label: "Summer solstice",
+        desc: "The gradual clock catches up to the normal clock — both are a full hour ahead of standard time. This is one of two sync points per year.",
+      },
+      {
+        date: () => new Date(2026, 9, 31, 12, 0, 0),
+        label: "Before fall back",
+        desc: "The gradual clock has been easing back down toward standard time, while the normal clock stays an hour ahead. The gap between them is near its peak.",
+      },
+      {
+        date: () => new Date(2026, 10, 1, 12, 0, 0),
+        label: "After fall back",
+        desc: "The normal clock jumped back an hour. The gradual clock is still easing down smoothly — now slightly ahead of the normal clock.",
+      },
+      {
+        date: () => new Date(2026, 11, 21, 12, 0, 0),
+        label: "Winter solstice",
+        desc: "Back in sync. Both clocks are on standard time. The gradual clock smoothly reached what the normal clock jumped to. The cycle repeats.",
+      },
+    ];
+  }
+  return [
+    {
+      date: () => new Date(2026, 2, 8, 12, 0, 0),
+      label: "Spring forward",
+      desc: "The clocks match at the transition. The gradual clock spent all winter slowly gaining time to arrive here.",
+    },
+    {
+      date: () => new Date(2026, 3, 8, 12, 0, 0),
+      label: "A month later",
+      desc: "Still close — only a couple minutes apart. The cosine easing keeps the rate of change near zero right after the transition.",
+    },
+    {
+      date: () => new Date(2026, 6, 5, 12, 0, 0),
+      label: "Mid-summer",
+      desc: "Halfway there — the gradual clock is 30 minutes behind and still falling back. The drift rate peaks here at about 24 seconds per day, then gradually slows as it approaches a full hour behind by fall.",
+    },
+    {
+      date: () => new Date(2026, 9, 31, 12, 0, 0),
+      label: "Before fall back",
+      desc: "Nearly an hour apart. The gradual clock has given back almost the full hour, matching what the sudden jump will do.",
+    },
+    {
+      date: () => new Date(2026, 10, 1, 12, 0, 0),
+      label: "After fall back",
+      desc: "Together again. The normal clock jumped back an hour; the gradual clock was already there. The cycle repeats.",
+    },
+  ];
+}
 
 const STEPS = [
   { label: "-1d", delta: -86400000 },
@@ -330,6 +641,7 @@ export default function Home() {
   const [useRealtime, setUseRealtime] = useState(false);
   const [playing, setPlaying] = useState(false);
   const [speedIdx, setSpeedIdx] = useState(1);
+  const [syncMethod, setSyncMethod] = useState<SyncMethod>("solstices");
   const playRef = useRef(false);
 
   useEffect(() => {
@@ -414,13 +726,14 @@ export default function Home() {
     );
   }
 
-  const offsetMs = getGradualOffsetMs(simDate);
+  const offsetMs = getGradualOffsetMs(simDate, syncMethod);
   const gradualTime = new Date(simDate.getTime() + offsetMs);
 
   const dateStr = `${simDate.getFullYear()}-${String(simDate.getMonth() + 1).padStart(2, "0")}-${String(simDate.getDate()).padStart(2, "0")}`;
   const timeStr = `${String(simDate.getHours()).padStart(2, "0")}:${String(simDate.getMinutes()).padStart(2, "0")}`;
 
-  const activeTour = TOUR_STOPS.find((stop) => {
+  const tourStops = getTourStops(syncMethod);
+  const activeTour = tourStops.find((stop) => {
     const d = stop.date();
     return (
       simDate.getFullYear() === d.getFullYear() &&
@@ -429,7 +742,7 @@ export default function Home() {
     );
   });
 
-  const { speedPct, dailyShiftSec } = getGradualRate(simDate);
+  const { speedPct, dailyShiftSec } = getGradualRate(simDate, syncMethod);
   const gSign = dailyShiftSec >= 0 ? "+" : "";
   const dayStart = new Date(
     simDate.getFullYear(),
@@ -460,6 +773,26 @@ export default function Home() {
         </p>
       </div>
 
+      {/* Sync method selector */}
+      <div className="flex items-center justify-center gap-2 pt-3">
+        <span className="text-xs text-zinc-500 dark:text-zinc-400">Sync at:</span>
+        <div className="flex rounded-full overflow-hidden border border-zinc-300 dark:border-zinc-600">
+          {(["transitions", "solstices"] as SyncMethod[]).map((m) => (
+            <button
+              key={m}
+              onClick={() => setSyncMethod(m)}
+              className={`px-3 py-1 text-xs font-medium transition-colors ${
+                syncMethod === m
+                  ? "bg-zinc-900 text-white dark:bg-zinc-100 dark:text-zinc-900"
+                  : "bg-white dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-700"
+              }`}
+            >
+              {m === "transitions" ? "DST transitions" : "Solstices"}
+            </button>
+          ))}
+        </div>
+      </div>
+
       {/* Date label */}
       <div className="text-center text-sm text-zinc-500 dark:text-zinc-400 font-medium pt-2">
         {formatDate(simDate)}
@@ -482,7 +815,7 @@ export default function Home() {
       {/* Tour stops — primary interaction */}
       <div className="flex flex-col items-center px-4 gap-2">
         <div className="flex flex-wrap justify-center gap-2">
-          {TOUR_STOPS.map((stop, i) => {
+          {tourStops.map((stop, i) => {
             const stopDate = stop.date();
             const isActive =
               simDate.getFullYear() === stopDate.getFullYear() &&
@@ -567,6 +900,9 @@ export default function Home() {
           </span>
         </div>
       </div>
+
+      {/* Offset comparison chart */}
+      <OffsetChart syncMethod={syncMethod} simDate={simDate} />
 
       {/* Controls bar */}
       <div className="mt-auto border-t border-zinc-200 dark:border-zinc-800 px-4 py-3">
