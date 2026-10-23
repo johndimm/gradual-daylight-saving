@@ -174,18 +174,18 @@ function ClockFace({ time, label, subtitle }: { time: Date; label: string; subti
   const hourAngle = ((hours + minutes / 60) / 12) * 360;
 
   return (
-    <div className="flex flex-col items-center gap-1">
+    <div className="flex flex-col items-center gap-1 min-w-0">
       <div className="text-center">
-        <div className="text-xs font-semibold uppercase tracking-wider text-zinc-500 dark:text-zinc-400">
+        <div className="text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-zinc-500 dark:text-zinc-400">
           {label}
         </div>
         {subtitle && (
-          <div className="text-[10px] text-zinc-400 dark:text-zinc-500">
+          <div className="text-[9px] sm:text-[10px] text-zinc-400 dark:text-zinc-500">
             {subtitle}
           </div>
         )}
       </div>
-      <svg viewBox="0 0 200 200" className="w-36 h-36 sm:w-48 sm:h-48">
+      <svg viewBox="0 0 200 200" className="w-24 h-24 sm:w-48 sm:h-48">
         <circle
           cx="100"
           cy="100"
@@ -251,7 +251,7 @@ function ClockFace({ time, label, subtitle }: { time: Date; label: string; subti
           className="fill-zinc-800 dark:fill-zinc-200"
         />
       </svg>
-      <div className="text-base font-mono font-semibold tabular-nums text-zinc-900 dark:text-zinc-100">
+      <div className="text-sm sm:text-base font-mono font-semibold tabular-nums text-zinc-900 dark:text-zinc-100">
         {formatTime(time)}
       </div>
     </div>
@@ -799,13 +799,13 @@ export default function Home() {
       </div>
 
       {/* Clocks + difference */}
-      <div className="flex items-center justify-center gap-6 sm:gap-14 px-4 py-4">
+      <div className="flex items-center justify-center gap-3 sm:gap-14 px-4 py-4">
         <ClockFace time={simDate} label="Normal" subtitle="Jumps 1 hour overnight" />
-        <div className="flex flex-col items-center gap-1">
-          <div className="text-[10px] uppercase tracking-wider text-zinc-400 dark:text-zinc-500">
+        <div className="flex flex-col items-center gap-1 shrink-0">
+          <div className="text-[9px] sm:text-[10px] uppercase tracking-wider text-zinc-400 dark:text-zinc-500">
             Diff
           </div>
-          <div className="text-xl font-mono font-bold tabular-nums text-zinc-800 dark:text-zinc-200">
+          <div className="text-base sm:text-xl font-mono font-bold tabular-nums text-zinc-800 dark:text-zinc-200">
             {formatOffsetSeconds(offsetMs)}
           </div>
         </div>
