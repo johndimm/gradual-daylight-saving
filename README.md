@@ -43,9 +43,23 @@ The interactive demo lets you explore the concept:
 - **Playback controls** — step by minute/hour/day or play continuously at various speeds
 - **Clock speed stats** — shows the instantaneous rate of each clock (the normal clock shows 95.83% on spring-forward day and 104.17% on fall-back day; the gradual clock never deviates more than ~0.03%)
 
+## Smooth Clock
+
+If there were a single source of truth for time, we could tweak it to give the benefits of daylight saving without the jarring jumps. There isn't. The next best thing is to tweak your own daily routine.
+
+**Smooth Clock** is a bedside alarm clock that shifts your wake-up time by seconds per day — so you adapt to daylight saving gradually, without ever losing an hour of sleep. Available at `/clock` in the app.
+
+Features:
+
+- **4 display styles** — Digital (analog + digital), Analog, Minimal, and Flip (retro split-flap)
+- **5 alarm sounds** — Chime, Pulse, Rising, Birds, and Radar, all generated with Web Audio API
+- **Bedside mode** — keeps the screen on using the Wake Lock API so the alarm fires reliably on a phone
+- **Alarm on smooth time** — fires based on the gradually-adjusted time, with snooze and dismiss
+- All settings persist to localStorage
+
 ## Implementation
 
-Since most devices already sync time from NTP servers, this wouldn't require any hardware changes. The servers would simply report a slightly adjusted time — a few seconds off from UTC — following the cosine easing curve. Devices that sync frequently would track the gradual shift smoothly. Devices that sync less often (once a day, say) would still get a much gentler transition than the current 1-hour jump.
+If there were a single source of truth for time — a global NTP adjustment — this wouldn't require any hardware changes. The servers would simply report a slightly adjusted time following the cosine easing curve. But since there isn't, Smooth Clock applies the adjustment personally: set your alarm to smooth time and your wake-up shifts by seconds per day instead of an hour overnight.
 
 ## Running locally
 

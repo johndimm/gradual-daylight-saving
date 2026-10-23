@@ -285,19 +285,58 @@ export default function SmoothClock() {
   const [showSettings, setShowSettings] = useState(false);
   const [displayStyle, setDisplayStyle] = useState<DisplayStyle>("digital");
   const [alarmSound, setAlarmSound] = useState<AlarmSound>("chime");
+  const [bedsideMode, setBedsideMode] = useState(false);
   const audioCtxRef = useRef<AudioContext | null>(null);
   const alarmIntervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const firedForMinuteRef = useRef("");
+  const wakeLockRef = useRef<WakeLockSentinel | null>(null);
 
   useEffect(() => {
     setDisplayStyle(loadSetting("smoothclock-display", "digital"));
     setAlarmSound(loadSetting("smoothclock-sound", "chime"));
     setAlarmTime(loadSetting("smoothclock-alarm-time", ""));
     setAlarmEnabled(loadSetting("smoothclock-alarm-on", false));
+    setBedsideMode(loadSetting("smoothclock-bedside", false));
     setNow(new Date());
     const id = setInterval(() => setNow(new Date()), 200);
     return () => clearInterval(id);
   }, []);
+
+  useEffect(() => {
+    if (!bedsideMode) {
+      if (wakeLockRef.current) {
+        wakeLockRef.current.release();
+        wakeLockRef.current = null;
+      }
+      return;
+    }
+    let cancelled = false;
+    async function requestLock() {
+      try {
+        if ('wakeLock' in navigator) {
+          wakeLockRef.current = await navigator.wakeLock.request('screen');
+          wakeLockRef.current.addEventListener('release', () => {
+            wakeLockRef.current = null;
+          });
+        }
+      } catch {}
+    }
+    requestLock();
+    const reacquire = () => {
+      if (!cancelled && bedsideMode && document.visibilityState === 'visible') {
+        requestLock();
+      }
+    };
+    document.addEventListener('visibilitychange', reacquire);
+    return () => {
+      cancelled = true;
+      document.removeEventListener('visibilitychange', reacquire);
+      if (wakeLockRef.current) {
+        wakeLockRef.current.release();
+        wakeLockRef.current = null;
+      }
+    };
+  }, [bedsideMode]);
 
   useEffect(() => {
     if (!alarmFiring) {
@@ -557,6 +596,31 @@ export default function SmoothClock() {
                 </button>
               ))}
             </div>
+          </div>
+
+          {/* Bedside mode */}
+          <div>
+            <div className="text-sm text-zinc-400 uppercase tracking-wider mb-3">Bedside Mode</div>
+            <button
+              onClick={() => {
+                const next = !bedsideMode;
+                setBedsideMode(next);
+                saveSetting("smoothclock-bedside", next);
+              }}
+              className={`w-full flex items-center justify-between rounded-lg px-4 py-3 transition-colors ${
+                bedsideMode
+                  ? "bg-white text-black"
+                  : "bg-zinc-800 text-zinc-300 hover:bg-zinc-700"
+              }`}
+            >
+              <div>
+                <div className="text-sm font-medium">Keep screen on</div>
+                <div className="text-xs text-zinc-500">
+                  Prevents sleep so the alarm fires reliably
+                </div>
+              </div>
+              <span className="text-sm font-medium">{bedsideMode ? "On" : "Off"}</span>
+            </button>
           </div>
 
           {/* About */}

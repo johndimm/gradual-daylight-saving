@@ -632,13 +632,24 @@ export default function Home() {
             </div>
           </div>
         </div>
-        <div className="flex justify-center gap-4 mt-2">
+        {/* Smooth Clock CTA */}
+        <div className="mt-6 mx-4">
+          <div className="max-w-md mx-auto text-center mb-3">
+            <p className="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed">
+              If there were a single source of truth for time, we could tweak it to give the benefits of daylight saving without the jarring jumps. There isn&apos;t. The next best thing is to tweak your own daily routine.
+            </p>
+          </div>
           <a
             href="/clock"
-            className="text-xs text-zinc-400 dark:text-zinc-500 hover:text-zinc-600 dark:hover:text-zinc-300 transition-colors"
+            className="block max-w-md mx-auto rounded-2xl bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 p-5 hover:bg-zinc-800 dark:hover:bg-zinc-200 transition-colors"
           >
-            Smooth Clock
+            <div className="text-lg font-semibold mb-1">Try Smooth Clock</div>
+            <div className="text-sm text-zinc-400 dark:text-zinc-500 leading-relaxed">
+              A bedside alarm clock that shifts your wake-up time by seconds per day — so you adapt to daylight saving gradually, without ever losing an hour of sleep.
+            </div>
           </a>
+        </div>
+        <div className="flex justify-center mt-3">
           <a
             href="https://github.com/johndimm/gradual-daylight-saving"
             target="_blank"
