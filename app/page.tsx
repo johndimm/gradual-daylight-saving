@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback, useRef, useMemo } from "react";
+import { useState, useEffect, useCallback, useRef, useMemo, memo } from "react";
 
 function getDSTTransitions(year: number) {
   const march1 = new Date(year, 2, 1);
@@ -279,7 +279,7 @@ function MiniTimeline({
   return (
     <div className="w-full">
       <div
-        className="relative h-6 rounded-full overflow-hidden bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 cursor-pointer"
+        className="mini-timeline relative h-6 rounded-full overflow-hidden bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 cursor-pointer"
         onClick={(e) => {
           const rect = e.currentTarget.getBoundingClientRect();
           const pct = (e.clientX - rect.left) / rect.width;
@@ -313,7 +313,7 @@ function MiniTimeline({
           style={{ left: `${Math.min(100, Math.max(0, nowPct))}%` }}
         />
       </div>
-      <div className="relative mt-0.5 text-[9px] text-zinc-500 dark:text-zinc-400 h-3">
+      <div className="relative mt-0.5 mb-2 text-[9px] text-zinc-500 dark:text-zinc-400 h-3">
         <span
           className="absolute -translate-x-1/2"
           style={{ left: `${springPct}%` }}
@@ -331,7 +331,7 @@ function MiniTimeline({
   );
 }
 
-function OffsetChart({ syncMethod, simDate }: { syncMethod: SyncMethod; simDate: Date }) {
+const OffsetChart = memo(function OffsetChart({ syncMethod, simDate }: { syncMethod: SyncMethod; simDate: Date }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -476,16 +476,20 @@ function OffsetChart({ syncMethod, simDate }: { syncMethod: SyncMethod; simDate:
     const yearStart = new Date(year, 0, 1).getTime();
     const activeFn = syncMethod === "solstices" ? solsticeOffset : transitionOffset;
     const activeColor = syncMethod === "solstices" ? lineSolstice : lineCurrent;
-    const stops = getTourStops(syncMethod);
+    const stops = getTourStops(syncMethod, year);
     const simDayOfYear = (simDate.getTime() - yearStart) / 86400000;
 
     for (const stop of stops) {
+      const isBefore = stop.label === "Before fall back";
+      if (isBefore) continue;
+
       const d = stop.date();
       const stopDay = (d.getTime() - yearStart) / 86400000;
       const val = activeFn(stopDay);
       const sx = xPos(stopDay);
       const sy = yPos(val);
-      const isActive = Math.abs(stopDay - simDayOfYear) < 1;
+      const isActive = Math.abs(stopDay - simDayOfYear) < 1 ||
+        (stop.label === "After fall back" && Math.abs(stopDay - 1 - simDayOfYear) < 1);
 
       // Dot
       ctx.beginPath();
@@ -498,21 +502,42 @@ function OffsetChart({ syncMethod, simDate }: { syncMethod: SyncMethod; simDate:
         ctx.stroke();
       }
 
-      // Label
-      const isBefore = stop.label === "Before fall back";
+      // Label with halo for readability over chart lines
       const isAfter = stop.label === "After fall back";
-      const above = isAfter ? true : isBefore ? false : val > 20;
-      ctx.fillStyle = muted;
-      ctx.font = "9px system-ui";
-      ctx.textAlign = sx > cw - pad.right - 40 ? "right" : sx < pad.left + 40 ? "left" : "center";
-      ctx.textBaseline = above ? "bottom" : "top";
-      const shortLabel = stop.label
-        .replace("Summer solstice", "Summer sol.")
-        .replace("Winter solstice", "Winter sol.")
-        .replace("Before fall back", "Pre-fall")
-        .replace("After fall back", "Post-fall")
+      const isWinter = stop.label === "Winter solstice";
+      ctx.font = "bold 9px system-ui";
+      const fg = dark ? "#d6d3d1" : "#57534e";
+      const halo = dark ? "#1c1917" : "#fafaf9";
+      let shortLabel = stop.label
+        .replace("After fall back", "Fall back")
         .replace("A month later", "Month later");
-      ctx.fillText(shortLabel, sx, sy + (above ? -8 : 8));
+
+      function drawLabel(text: string, lx: number, ly: number) {
+        ctx.strokeStyle = halo;
+        ctx.lineWidth = 3;
+        ctx.lineJoin = "round";
+        ctx.strokeText(text, lx, ly);
+        ctx.fillStyle = fg;
+        ctx.fillText(text, lx, ly);
+      }
+
+      if (isWinter) {
+        const maxRight = cw - pad.right;
+        const textWidth = ctx.measureText(shortLabel).width;
+        const labelX = Math.min(sx, maxRight - textWidth / 2);
+        ctx.textAlign = "center";
+        ctx.textBaseline = "alphabetic";
+        drawLabel(shortLabel, labelX, sy - 16);
+      } else if (isAfter) {
+        ctx.textAlign = "right";
+        ctx.textBaseline = "bottom";
+        drawLabel(shortLabel, sx - 4, sy - 8);
+      } else {
+        const above = val > 20;
+        ctx.textAlign = sx < pad.left + 40 ? "left" : "center";
+        ctx.textBaseline = above ? "bottom" : "top";
+        drawLabel(shortLabel, sx, sy + (above ? -8 : 8));
+      }
     }
 
     // Current date marker
@@ -557,7 +582,11 @@ function OffsetChart({ syncMethod, simDate }: { syncMethod: SyncMethod; simDate:
       </div>
     </div>
   );
-}
+}, (prev, next) => {
+  const prevDay = Math.floor(prev.simDate.getTime() / 86400000);
+  const nextDay = Math.floor(next.simDate.getTime() / 86400000);
+  return prev.syncMethod === next.syncMethod && prevDay === nextDay;
+});
 
 const PLAYBACK_SPEEDS = [
   { label: "1 hour/s", msPerTick: 3600000, tickMs: 50 },
@@ -565,31 +594,38 @@ const PLAYBACK_SPEEDS = [
   { label: "1 week/s", msPerTick: 604800000, tickMs: 50 },
 ];
 
-function getTourStops(method: SyncMethod) {
+function getTourStops(method: SyncMethod, year: number) {
+  const { springForward, fallBack } = getDSTTransitions(year);
+  const sfDate = springForward;
+  const fbDate = fallBack;
+  const beforeFb = new Date(fbDate.getTime() - 86400000);
+  beforeFb.setHours(12, 0, 0, 0);
+  const afterFb = new Date(fbDate.getFullYear(), fbDate.getMonth(), fbDate.getDate(), 12, 0, 0);
+
   if (method === "solstices") {
     return [
       {
-        date: () => new Date(2026, 2, 8, 12, 0, 0),
+        date: () => new Date(year, sfDate.getMonth(), sfDate.getDate(), 12, 0, 0),
         label: "Spring forward",
         desc: "The normal clock jumps ahead an hour. The gradual clock is partway through its smooth rise — about 20 minutes ahead of standard time. The gap between them shifts suddenly.",
       },
       {
-        date: () => new Date(2026, 5, 21, 12, 0, 0),
+        date: () => new Date(year, 5, 21, 12, 0, 0),
         label: "Summer solstice",
         desc: "The gradual clock catches up to the normal clock — both are a full hour ahead of standard time. This is one of two sync points per year.",
       },
       {
-        date: () => new Date(2026, 9, 31, 12, 0, 0),
+        date: () => new Date(beforeFb.getFullYear(), beforeFb.getMonth(), beforeFb.getDate(), 12, 0, 0),
         label: "Before fall back",
         desc: "The gradual clock has been easing back down toward standard time, while the normal clock stays an hour ahead. The gap between them is near its peak.",
       },
       {
-        date: () => new Date(2026, 10, 1, 12, 0, 0),
+        date: () => afterFb,
         label: "After fall back",
         desc: "The normal clock jumped back an hour. The gradual clock is still easing down smoothly — now slightly ahead of the normal clock.",
       },
       {
-        date: () => new Date(2026, 11, 21, 12, 0, 0),
+        date: () => new Date(year, 11, 21, 12, 0, 0),
         label: "Winter solstice",
         desc: "Back in sync. Both clocks are on standard time. The gradual clock smoothly reached what the normal clock jumped to. The cycle repeats.",
       },
@@ -597,27 +633,32 @@ function getTourStops(method: SyncMethod) {
   }
   return [
     {
-      date: () => new Date(2026, 2, 8, 12, 0, 0),
+      date: () => new Date(year, sfDate.getMonth(), sfDate.getDate(), 12, 0, 0),
       label: "Spring forward",
       desc: "The clocks match at the transition. The gradual clock spent all winter slowly gaining time to arrive here.",
     },
     {
-      date: () => new Date(2026, 3, 8, 12, 0, 0),
+      date: () => {
+        const d = new Date(sfDate);
+        d.setDate(d.getDate() + 31);
+        d.setHours(12, 0, 0, 0);
+        return d;
+      },
       label: "A month later",
       desc: "Still close — only a couple minutes apart. The cosine easing keeps the rate of change near zero right after the transition.",
     },
     {
-      date: () => new Date(2026, 6, 5, 12, 0, 0),
+      date: () => new Date(year, 6, 5, 12, 0, 0),
       label: "Mid-summer",
       desc: "Halfway there — the gradual clock is 30 minutes behind and still falling back. The drift rate peaks here at about 24 seconds per day, then gradually slows as it approaches a full hour behind by fall.",
     },
     {
-      date: () => new Date(2026, 9, 31, 12, 0, 0),
+      date: () => new Date(beforeFb.getFullYear(), beforeFb.getMonth(), beforeFb.getDate(), 12, 0, 0),
       label: "Before fall back",
       desc: "Nearly an hour apart. The gradual clock has given back almost the full hour, matching what the sudden jump will do.",
     },
     {
-      date: () => new Date(2026, 10, 1, 12, 0, 0),
+      date: () => afterFb,
       label: "After fall back",
       desc: "Together again. The normal clock jumped back an hour; the gradual clock was already there. The cycle repeats.",
     },
@@ -660,13 +701,23 @@ export default function Home() {
     playRef.current = playing;
     if (!playing) return;
     const speed = PLAYBACK_SPEEDS[speedIdx];
-    const id = setInterval(() => {
+    let lastFrame = 0;
+    let rafId: number;
+    const tick = (timestamp: number) => {
       if (!playRef.current) return;
-      setSimDate((prev) =>
-        prev ? new Date(prev.getTime() + speed.msPerTick) : prev
-      );
-    }, speed.tickMs);
-    return () => clearInterval(id);
+      if (lastFrame === 0) lastFrame = timestamp;
+      const elapsed = timestamp - lastFrame;
+      if (elapsed >= speed.tickMs) {
+        const steps = Math.floor(elapsed / speed.tickMs);
+        lastFrame = timestamp - (elapsed % speed.tickMs);
+        setSimDate((prev) =>
+          prev ? new Date(prev.getTime() + speed.msPerTick * steps) : prev
+        );
+      }
+      rafId = requestAnimationFrame(tick);
+    };
+    rafId = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(rafId);
   }, [playing, speedIdx]);
 
   const handleDateChange = useCallback(
@@ -718,6 +769,12 @@ export default function Home() {
     setPlaying((p) => !p);
   }, [useRealtime]);
 
+  const handleBackgroundClick = useCallback((e: React.MouseEvent) => {
+    const target = e.target as HTMLElement;
+    if (target.closest("button, input, select, a, canvas, details, [role='button'], .mini-timeline")) return;
+    togglePlay();
+  }, [togglePlay]);
+
   if (!simDate) {
     return (
       <div className="flex flex-1 items-center justify-center">
@@ -732,7 +789,7 @@ export default function Home() {
   const dateStr = `${simDate.getFullYear()}-${String(simDate.getMonth() + 1).padStart(2, "0")}-${String(simDate.getDate()).padStart(2, "0")}`;
   const timeStr = `${String(simDate.getHours()).padStart(2, "0")}:${String(simDate.getMinutes()).padStart(2, "0")}`;
 
-  const tourStops = getTourStops(syncMethod);
+  const tourStops = getTourStops(syncMethod, simDate.getFullYear());
   const activeTour = tourStops.find((stop) => {
     const d = stop.date();
     return (
@@ -760,7 +817,7 @@ export default function Home() {
   const nSign = normalShiftSec >= 0 ? "+" : "";
 
   return (
-    <div className="flex flex-col min-h-dvh bg-zinc-50 dark:bg-zinc-950 font-sans">
+    <div className="flex flex-col min-h-dvh bg-zinc-50 dark:bg-zinc-950 font-sans cursor-pointer" onClick={handleBackgroundClick}>
       {/* Hero */}
       <div className="flex flex-col items-center px-4 pt-8 pb-2">
         <h1 className="text-2xl sm:text-3xl font-bold text-center text-zinc-900 dark:text-zinc-100">
@@ -779,17 +836,34 @@ export default function Home() {
       </div>
 
       {/* Clocks + difference */}
-      <div className="flex items-center justify-center gap-2 sm:gap-14 px-3 sm:px-4 py-4">
+      <div className="relative flex items-center justify-center gap-2 sm:gap-14 px-3 sm:px-4 py-4">
         <ClockFace time={simDate} label="Normal" subtitle="Jumps 1 hour overnight" />
-        <div className="flex flex-col items-center gap-1 shrink-0">
-          <div className="text-[9px] sm:text-[10px] uppercase tracking-wider text-zinc-400 dark:text-zinc-500">
-            Diff
-          </div>
-          <div className="text-base sm:text-xl font-mono font-bold tabular-nums text-zinc-800 dark:text-zinc-200">
-            {formatOffsetSeconds(offsetMs)}
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+          <div className="flex flex-col items-center gap-0.5 bg-zinc-50/90 dark:bg-zinc-950/90 px-3 py-1 rounded-lg">
+            <div className="text-[9px] sm:text-[10px] uppercase tracking-wider text-zinc-400 dark:text-zinc-500">
+              Diff
+            </div>
+            <div className="text-base sm:text-xl font-mono font-bold tabular-nums text-zinc-800 dark:text-zinc-200 whitespace-nowrap">
+              {formatOffsetSeconds(offsetMs)}
+            </div>
+            <div className="text-[9px] sm:text-[10px] font-mono tabular-nums text-zinc-400 dark:text-zinc-500 whitespace-nowrap">
+              {gSign}{dailyShiftSec.toFixed(1)}s/day
+            </div>
           </div>
         </div>
         <ClockFace time={gradualTime} label="Gradual" subtitle="Shifts seconds per day" />
+      </div>
+
+      {/* Timeline */}
+      <div className="w-full max-w-lg mx-auto px-4">
+        <MiniTimeline
+          date={simDate}
+          onJump={(d) => {
+            setUseRealtime(false);
+            setPlaying(false);
+            setSimDate(d);
+          }}
+        />
       </div>
 
       {/* Tour stops — primary interaction */}
@@ -837,111 +911,71 @@ export default function Home() {
         )}
       </div>
 
-      {/* Timeline */}
-      <div className="w-full max-w-lg mx-auto px-4 pt-4">
-        <MiniTimeline
-          date={simDate}
-          onJump={(d) => {
-            setUseRealtime(false);
-            setPlaying(false);
-            setSimDate(d);
-          }}
-        />
-      </div>
-
-      {/* Clock speed stats */}
-      <div className="flex justify-center gap-10 text-[11px] tabular-nums px-4 pt-2 pb-4">
-        <div className="flex flex-col items-center">
-          <span className="text-zinc-400 dark:text-zinc-500 uppercase tracking-wider text-[9px]">
-            Normal clock
-          </span>
-          <span
-            className={`font-mono ${normalPct !== 100 ? "text-red-500 font-bold" : "text-zinc-600 dark:text-zinc-400"}`}
-          >
-            {normalPct.toFixed(4)}%
-          </span>
-          <span
-            className={`font-mono ${normalShiftSec !== 0 ? "text-red-500" : "text-zinc-400 dark:text-zinc-500"}`}
-          >
-            {nSign}
-            {normalShiftSec.toFixed(1)}s/day
-          </span>
-        </div>
-        <div className="flex flex-col items-center">
-          <span className="text-zinc-400 dark:text-zinc-500 uppercase tracking-wider text-[9px]">
-            Gradual clock
-          </span>
-          <span className="font-mono text-zinc-600 dark:text-zinc-400">
-            {speedPct.toFixed(4)}%
-          </span>
-          <span className="font-mono text-zinc-400 dark:text-zinc-500">
-            {gSign}
-            {dailyShiftSec.toFixed(1)}s/day
-          </span>
-        </div>
-      </div>
-
       {/* Controls bar */}
       <div className="mt-auto border-t border-zinc-200 dark:border-zinc-800 px-4 py-3">
-        <div className="max-w-lg mx-auto flex flex-wrap items-center justify-center gap-2">
-          <input
-            type="date"
-            value={dateStr}
-            onChange={handleDateChange}
-            className="rounded border border-zinc-300 dark:border-zinc-600 bg-white dark:bg-zinc-800 px-2 py-1 text-xs text-zinc-900 dark:text-zinc-100"
-          />
-          <input
-            type="time"
-            value={timeStr}
-            onChange={handleTimeChange}
-            className="rounded border border-zinc-300 dark:border-zinc-600 bg-white dark:bg-zinc-800 px-2 py-1 text-xs text-zinc-900 dark:text-zinc-100"
-          />
-          <div className="flex rounded overflow-hidden border border-zinc-300 dark:border-zinc-600">
-            {STEPS.map((s) => (
-              <button
-                key={s.label}
-                onClick={() => step(s.delta)}
-                className="px-2 py-0.5 text-[11px] font-medium bg-white dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-700 transition-colors"
-              >
-                {s.label}
-              </button>
-            ))}
+        <div className="max-w-lg mx-auto flex flex-col items-center gap-2">
+          <div className="flex items-center gap-2">
+            <input
+              type="date"
+              value={dateStr}
+              onChange={handleDateChange}
+              className="rounded border border-zinc-300 dark:border-zinc-600 bg-white dark:bg-zinc-800 px-2 py-1 text-xs text-zinc-900 dark:text-zinc-100"
+            />
+            <input
+              type="time"
+              value={timeStr}
+              onChange={handleTimeChange}
+              className="rounded border border-zinc-300 dark:border-zinc-600 bg-white dark:bg-zinc-800 px-2 py-1 text-xs text-zinc-900 dark:text-zinc-100"
+            />
           </div>
-          <button
-            onClick={togglePlay}
-            className="rounded bg-zinc-200 dark:bg-zinc-700 px-3 py-0.5 text-xs font-medium text-zinc-700 dark:text-zinc-300 hover:bg-zinc-300 dark:hover:bg-zinc-600 transition-colors"
-          >
-            {playing ? "Pause" : "Play"}
-          </button>
-          <div className="flex rounded overflow-hidden border border-zinc-300 dark:border-zinc-600">
-            {STEPS_FWD.map((s) => (
-              <button
-                key={s.label}
-                onClick={() => step(s.delta)}
-                className="px-2 py-0.5 text-[11px] font-medium bg-white dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-700 transition-colors"
-              >
-                {s.label}
-              </button>
-            ))}
-          </div>
-          <div className="flex items-center gap-1.5">
-            <span className="text-[10px] text-zinc-500 dark:text-zinc-400">
-              Speed:
-            </span>
+          <div className="flex items-center gap-1">
             <div className="flex rounded overflow-hidden border border-zinc-300 dark:border-zinc-600">
-              {PLAYBACK_SPEEDS.map((s, i) => (
+              {STEPS.map((s) => (
                 <button
                   key={s.label}
-                  onClick={() => setSpeedIdx(i)}
-                  className={`px-2 py-0.5 text-[11px] font-medium transition-colors ${
-                    i === speedIdx
-                      ? "bg-zinc-900 text-white dark:bg-zinc-100 dark:text-zinc-900"
-                      : "bg-white dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-700"
-                  }`}
+                  onClick={() => step(s.delta)}
+                  className="px-2 py-0.5 text-[11px] font-medium bg-white dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-700 transition-colors"
                 >
                   {s.label}
                 </button>
               ))}
+            </div>
+            <button
+              onClick={togglePlay}
+              className="rounded bg-zinc-200 dark:bg-zinc-700 px-3 py-0.5 text-xs font-medium text-zinc-700 dark:text-zinc-300 hover:bg-zinc-300 dark:hover:bg-zinc-600 transition-colors"
+            >
+              {playing ? "Pause" : "Play"}
+            </button>
+            <div className="flex rounded overflow-hidden border border-zinc-300 dark:border-zinc-600">
+              {STEPS_FWD.map((s) => (
+                <button
+                  key={s.label}
+                  onClick={() => step(s.delta)}
+                  className="px-2 py-0.5 text-[11px] font-medium bg-white dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-700 transition-colors"
+                >
+                  {s.label}
+                </button>
+              ))}
+            </div>
+            <div className="flex items-center gap-1.5 ml-1">
+              <span className="text-[10px] text-zinc-500 dark:text-zinc-400">
+                Speed:
+              </span>
+              <div className="flex rounded overflow-hidden border border-zinc-300 dark:border-zinc-600">
+                {PLAYBACK_SPEEDS.map((s, i) => (
+                  <button
+                    key={s.label}
+                    onClick={() => setSpeedIdx(i)}
+                    className={`px-2 py-0.5 text-[11px] font-medium transition-colors ${
+                      i === speedIdx
+                        ? "bg-zinc-900 text-white dark:bg-zinc-100 dark:text-zinc-900"
+                        : "bg-white dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-700"
+                    }`}
+                  >
+                    {s.label}
+                  </button>
+                ))}
+              </div>
             </div>
           </div>
         </div>
