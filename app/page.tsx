@@ -331,7 +331,7 @@ function MiniTimeline({
   );
 }
 
-const OffsetChart = memo(function OffsetChart({ syncMethod, simDate }: { syncMethod: SyncMethod; simDate: Date }) {
+const OffsetChart = memo(function OffsetChart({ syncMethod, simDate, onJump }: { syncMethod: SyncMethod; simDate: Date; onJump?: (date: Date) => void }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -539,13 +539,19 @@ const OffsetChart = memo(function OffsetChart({ syncMethod, simDate }: { syncMet
     // Current date marker
     const markerX = xPos(simDayOfYear);
     ctx.strokeStyle = dark ? "#fbbf24" : "#d97706";
-    ctx.lineWidth = 1.5;
-    ctx.setLineDash([3, 3]);
+    ctx.lineWidth = 2.5;
     ctx.beginPath();
     ctx.moveTo(markerX, pad.top);
     ctx.lineTo(markerX, ch - pad.bottom);
     ctx.stroke();
-    ctx.setLineDash([]);
+    // Triangle marker at top
+    ctx.fillStyle = dark ? "#fbbf24" : "#d97706";
+    ctx.beginPath();
+    ctx.moveTo(markerX, pad.top - 2);
+    ctx.lineTo(markerX - 4, pad.top - 8);
+    ctx.lineTo(markerX + 4, pad.top - 8);
+    ctx.closePath();
+    ctx.fill();
   }, [syncMethod, simDate, year, springFwd, fallBack]);
 
   useEffect(() => {
@@ -559,13 +565,55 @@ const OffsetChart = memo(function OffsetChart({ syncMethod, simDate }: { syncMet
     return () => ro.disconnect();
   }, []);
 
+  const jumpFromX = useCallback((clientX: number) => {
+    if (!onJump || !containerRef.current || !canvasRef.current) return;
+    const rect = canvasRef.current.getBoundingClientRect();
+    const x = clientX - rect.left;
+    const cw = containerRef.current.clientWidth;
+    const padL = 40, padR = 12;
+    const plotW = cw - padL - padR;
+    const day = Math.max(0, Math.min(365, ((x - padL) / plotW) * 365));
+    const yearStart = new Date(year, 0, 1).getTime();
+    onJump(new Date(yearStart + day * 86400000));
+  }, [onJump, year]);
+
+  const dragging = useRef(false);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas || !onJump) return;
+
+    const onMouseDown = (e: MouseEvent) => { dragging.current = true; jumpFromX(e.clientX); };
+    const onMouseMove = (e: MouseEvent) => { if (dragging.current) jumpFromX(e.clientX); };
+    const onMouseUp = () => { dragging.current = false; };
+    const onTouchStart = (e: TouchEvent) => { dragging.current = true; jumpFromX(e.touches[0].clientX); };
+    const onTouchMove = (e: TouchEvent) => { if (dragging.current) { e.preventDefault(); jumpFromX(e.touches[0].clientX); } };
+    const onTouchEnd = () => { dragging.current = false; };
+
+    canvas.addEventListener("mousedown", onMouseDown);
+    window.addEventListener("mousemove", onMouseMove);
+    window.addEventListener("mouseup", onMouseUp);
+    canvas.addEventListener("touchstart", onTouchStart, { passive: false });
+    canvas.addEventListener("touchmove", onTouchMove, { passive: false });
+    canvas.addEventListener("touchend", onTouchEnd);
+
+    return () => {
+      canvas.removeEventListener("mousedown", onMouseDown);
+      window.removeEventListener("mousemove", onMouseMove);
+      window.removeEventListener("mouseup", onMouseUp);
+      canvas.removeEventListener("touchstart", onTouchStart);
+      canvas.removeEventListener("touchmove", onTouchMove);
+      canvas.removeEventListener("touchend", onTouchEnd);
+    };
+  }, [jumpFromX, onJump]);
+
   return (
     <div ref={containerRef} className="w-full max-w-lg mx-auto px-4">
-      <canvas ref={canvasRef} className="w-full" />
+      <canvas ref={canvasRef} className="w-full cursor-pointer" />
       <div className="flex justify-center gap-4 text-[10px] mt-1">
         <span className="flex items-center gap-1">
           <span className="inline-block w-4 h-0.5 rounded bg-red-500 dark:bg-red-400" />
-          <span className="text-zinc-500 dark:text-zinc-400">Normal</span>
+          <span className="text-zinc-500 dark:text-zinc-400">Official</span>
         </span>
         <span className="flex items-center gap-1">
           <span className="inline-block w-4 h-0.5 rounded bg-blue-600 dark:bg-blue-400" />
@@ -581,7 +629,7 @@ const OffsetChart = memo(function OffsetChart({ syncMethod, simDate }: { syncMet
 }, (prev, next) => {
   const prevDay = Math.floor(prev.simDate.getTime() / 86400000);
   const nextDay = Math.floor(next.simDate.getTime() / 86400000);
-  return prev.syncMethod === next.syncMethod && prevDay === nextDay;
+  return prev.syncMethod === next.syncMethod && prevDay === nextDay && prev.onJump === next.onJump;
 });
 
 const PLAYBACK_SPEEDS = [
@@ -669,6 +717,7 @@ export default function Home() {
   const [playing, setPlaying] = useState(false);
   const [speedIdx, setSpeedIdx] = useState(1);
   const [syncMethod, setSyncMethod] = useState<SyncMethod>("solstices");
+  const [activeTourIdx, setActiveTourIdx] = useState<number | null>(null);
   const playRef = useRef(false);
 
   useEffect(() => {
@@ -712,6 +761,7 @@ export default function Home() {
       if (!val) return;
       setUseRealtime(false);
       setPlaying(false);
+      setActiveTourIdx(null);
       const [y, m, d] = val.split("-").map(Number);
       setSimDate((prev) => {
         const next = new Date(prev || new Date());
@@ -728,6 +778,7 @@ export default function Home() {
       if (!val) return;
       setUseRealtime(false);
       setPlaying(false);
+      setActiveTourIdx(null);
       const [h, m] = val.split(":").map(Number);
       setSimDate((prev) => {
         const next = new Date(prev || new Date());
@@ -741,12 +792,14 @@ export default function Home() {
   const step = useCallback((delta: number) => {
     setUseRealtime(false);
     setPlaying(false);
+    setActiveTourIdx(null);
     setSimDate((prev) => (prev ? new Date(prev.getTime() + delta) : prev));
   }, []);
 
   const goToNow = useCallback(() => {
     setUseRealtime(true);
     setPlaying(false);
+    setActiveTourIdx(null);
     setSimDate(new Date());
   }, []);
 
@@ -757,7 +810,7 @@ export default function Home() {
 
   const handleBackgroundClick = useCallback((e: React.MouseEvent) => {
     const target = e.target as HTMLElement;
-    if (target.closest("button, input, select, a, canvas, details, [role='button'], .mini-timeline")) return;
+    if (target.closest("button, input, select, a, canvas, details, [role='button']")) return;
     togglePlay();
   }, [togglePlay]);
 
@@ -776,14 +829,7 @@ export default function Home() {
   const timeStr = `${String(simDate.getHours()).padStart(2, "0")}:${String(simDate.getMinutes()).padStart(2, "0")}`;
 
   const tourStops = getTourStops(syncMethod, simDate.getFullYear());
-  const activeTour = tourStops.find((stop) => {
-    const d = stop.date();
-    return (
-      simDate.getFullYear() === d.getFullYear() &&
-      simDate.getMonth() === d.getMonth() &&
-      simDate.getDate() === d.getDate()
-    );
-  });
+  const activeTour = activeTourIdx !== null ? tourStops[activeTourIdx] ?? null : null;
 
   const { speedPct, dailyShiftSec } = getGradualRate(simDate, syncMethod);
   const gSign = dailyShiftSec >= 0 ? "+" : "";
@@ -840,24 +886,17 @@ export default function Home() {
         <ClockFace time={gradualTime} label="Smooth" subtitle="Shifts seconds per day" />
       </div>
 
-      {/* Timeline */}
-      <div className="w-full max-w-lg mx-auto px-4">
-        <MiniTimeline
-          date={simDate}
-          onJump={(d) => {
-            setUseRealtime(false);
-            setPlaying(false);
-            setSimDate(d);
-          }}
-        />
-      </div>
-
       {/* Chart + sync method selector */}
       <div className="w-full max-w-lg mx-auto px-4">
         <div className="pt-2">
-          <OffsetChart syncMethod={syncMethod} simDate={simDate} />
+          <OffsetChart syncMethod={syncMethod} simDate={simDate} onJump={(d) => {
+            setUseRealtime(false);
+            setPlaying(false);
+            setSimDate(d);
+            setActiveTourIdx(null);
+          }} />
         </div>
-        <div className="flex items-center justify-center gap-2 pt-1">
+        <div className="flex items-center justify-center gap-2 pt-3 pb-3">
           <span className="text-xs text-zinc-500 dark:text-zinc-400">Sync at:</span>
           <div className="flex rounded-full overflow-hidden border border-zinc-300 dark:border-zinc-600">
             {(["transitions", "solstices"] as SyncMethod[]).map((m) => (
@@ -881,11 +920,7 @@ export default function Home() {
       <div className="flex flex-col items-center px-4 gap-2">
         <div className="flex flex-wrap justify-center gap-2">
           {tourStops.map((stop, i) => {
-            const stopDate = stop.date();
-            const isActive =
-              simDate.getFullYear() === stopDate.getFullYear() &&
-              simDate.getMonth() === stopDate.getMonth() &&
-              simDate.getDate() === stopDate.getDate();
+            const isActive = activeTourIdx === i;
             return (
               <button
                 key={i}
@@ -893,6 +928,7 @@ export default function Home() {
                   setUseRealtime(false);
                   setPlaying(false);
                   setSimDate(stop.date());
+                  setActiveTourIdx(i);
                 }}
                 className={`rounded-full px-3 py-1.5 text-xs font-medium transition-colors ${
                   isActive
