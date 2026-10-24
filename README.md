@@ -23,10 +23,10 @@ Daylight saving time transitions are jarring. Every spring we lose an hour of sl
 
 This app shows two clocks side by side:
 
-- **Normal clock** — works like your clock does today, jumping 1 hour overnight at each DST transition
-- **Gradual clock** — spreads that same hour over months, shifting just a few seconds per day
+- **Official clock** — works like your clock does today, jumping 1 hour overnight at each DST transition
+- **Smooth clock** — spreads that same hour over months, shifting just a few seconds per day
 
-By default, the gradual clock syncs at the **solstices** — zero offset at the summer and winter solstices, smoothly easing between them. This is a better smoothing of the normal DST step function, with about half the total cumulative deviation from normal time compared to syncing at DST transitions.
+By default, the smooth clock syncs at the **solstices** — zero offset at the summer and winter solstices, smoothly easing between them. This is a better smoothing of the official DST step function, with about half the total cumulative deviation from official time compared to syncing at DST transitions.
 
 ## How it works
 
@@ -40,22 +40,22 @@ Where `progress` is how far between two sync points (0 at one, 1 at the next). W
 
 This has two nice properties:
 
-1. **Zero offset at sync points** — the gradual and normal clocks match exactly
-2. **Zero rate of change at sync points** — the gradual clock doesn't suddenly start or stop drifting; it eases in and out smoothly
+1. **Zero offset at sync points** — the smooth and official clocks match exactly
+2. **Zero rate of change at sync points** — the smooth clock doesn't suddenly start or stop drifting; it eases in and out smoothly
 
-At its fastest drift, the gradual clock shifts about 24 seconds per day — imperceptible in daily life.
+At its fastest drift, the smooth clock shifts about 24 seconds per day — imperceptible in daily life.
 
 ## The app
 
 The interactive demo lets you explore the concept:
 
-- **Sync method selector** — choose when the gradual clock syncs with the normal clock:
-  - **Solstices** (default) — zero offset at summer and winter solstices; ~50 min max offset from normal; lowest total deviation
+- **Sync method selector** — choose when the smooth clock syncs with the official clock:
+  - **Solstices** (default) — zero offset at summer and winter solstices; ~50 min max offset from official; lowest total deviation
   - **DST transitions** — zero offset at spring forward and fall back; max 1-hour drift mid-season
 - **Tour stops** walk through key moments in the year, with descriptions that adapt to the selected sync method
 - **Timeline bar** — click anywhere to jump to that point in the year
 - **Playback controls** — step by minute/hour/day or play continuously at various speeds
-- **Clock speed stats** — shows the instantaneous rate of each clock (the normal clock shows 95.83% on spring-forward day and 104.17% on fall-back day; the gradual clock never deviates more than ~0.03%)
+- **Clock speed stats** — shows the instantaneous rate of each clock (the official clock shows 95.83% on spring-forward day and 104.17% on fall-back day; the smooth clock never deviates more than ~0.03%)
 
 ## Smooth Time
 
