@@ -852,6 +852,31 @@ export default function Home() {
         />
       </div>
 
+      {/* Sync method selector + chart */}
+      <div className="w-full max-w-lg mx-auto px-4">
+        <div className="flex items-center justify-center gap-2 pt-2">
+          <span className="text-xs text-zinc-500 dark:text-zinc-400">Sync at:</span>
+          <div className="flex rounded-full overflow-hidden border border-zinc-300 dark:border-zinc-600">
+            {(["transitions", "solstices"] as SyncMethod[]).map((m) => (
+              <button
+                key={m}
+                onClick={() => setSyncMethod(m)}
+                className={`px-3 py-1 text-xs font-medium transition-colors ${
+                  syncMethod === m
+                    ? "bg-zinc-900 text-white dark:bg-zinc-100 dark:text-zinc-900"
+                    : "bg-white dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-700"
+                }`}
+              >
+                {m === "transitions" ? "DST transitions" : "Solstices"}
+              </button>
+            ))}
+          </div>
+        </div>
+        <div className="pt-2">
+          <OffsetChart syncMethod={syncMethod} simDate={simDate} />
+        </div>
+      </div>
+
       {/* Tour stops — primary interaction */}
       <div className="flex flex-col items-center px-4 gap-2">
         <div className="flex flex-wrap justify-center gap-2">
@@ -964,28 +989,6 @@ export default function Home() {
               </div>
             </div>
           </div>
-        </div>
-        {/* Sync method selector + chart */}
-        <div className="flex items-center justify-center gap-2 pt-4">
-          <span className="text-xs text-zinc-500 dark:text-zinc-400">Sync at:</span>
-          <div className="flex rounded-full overflow-hidden border border-zinc-300 dark:border-zinc-600">
-            {(["transitions", "solstices"] as SyncMethod[]).map((m) => (
-              <button
-                key={m}
-                onClick={() => setSyncMethod(m)}
-                className={`px-3 py-1 text-xs font-medium transition-colors ${
-                  syncMethod === m
-                    ? "bg-zinc-900 text-white dark:bg-zinc-100 dark:text-zinc-900"
-                    : "bg-white dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-700"
-                }`}
-              >
-                {m === "transitions" ? "DST transitions" : "Solstices"}
-              </button>
-            ))}
-          </div>
-        </div>
-        <div className="pt-2">
-          <OffsetChart syncMethod={syncMethod} simDate={simDate} />
         </div>
         {/* Origin */}
         <div className="max-w-md mx-auto mt-6 px-4">
