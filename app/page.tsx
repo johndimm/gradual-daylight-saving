@@ -480,16 +480,13 @@ const OffsetChart = memo(function OffsetChart({ syncMethod, simDate }: { syncMet
     const simDayOfYear = (simDate.getTime() - yearStart) / 86400000;
 
     for (const stop of stops) {
-      const isBefore = stop.label === "Before fall back";
-      if (isBefore) continue;
-
       const d = stop.date();
       const stopDay = (d.getTime() - yearStart) / 86400000;
       const val = activeFn(stopDay);
       const sx = xPos(stopDay);
       const sy = yPos(val);
       const isActive = Math.abs(stopDay - simDayOfYear) < 1 ||
-        (stop.label === "After fall back" && Math.abs(stopDay - 1 - simDayOfYear) < 1);
+        (stop.label === "Fall back" && Math.abs(stopDay - 1 - simDayOfYear) < 1);
 
       // Dot
       ctx.beginPath();
@@ -503,13 +500,12 @@ const OffsetChart = memo(function OffsetChart({ syncMethod, simDate }: { syncMet
       }
 
       // Label with halo for readability over chart lines
-      const isAfter = stop.label === "After fall back";
+      const isFallBack = stop.label === "Fall back";
       const isWinter = stop.label === "Winter solstice";
       ctx.font = "bold 9px system-ui";
       const fg = dark ? "#d6d3d1" : "#57534e";
       const halo = dark ? "#1c1917" : "#fafaf9";
       let shortLabel = stop.label
-        .replace("After fall back", "Fall back")
         .replace("A month later", "Month later");
 
       function drawLabel(text: string, lx: number, ly: number) {
@@ -528,7 +524,7 @@ const OffsetChart = memo(function OffsetChart({ syncMethod, simDate }: { syncMet
         ctx.textAlign = "center";
         ctx.textBaseline = "alphabetic";
         drawLabel(shortLabel, labelX, sy - 16);
-      } else if (isAfter) {
+      } else if (isFallBack) {
         ctx.textAlign = "right";
         ctx.textBaseline = "bottom";
         drawLabel(shortLabel, sx - 4, sy - 8);
@@ -615,13 +611,8 @@ function getTourStops(method: SyncMethod, year: number) {
         desc: "The gradual clock catches up to the normal clock — both are a full hour ahead of standard time. This is one of two sync points per year.",
       },
       {
-        date: () => new Date(beforeFb.getFullYear(), beforeFb.getMonth(), beforeFb.getDate(), 12, 0, 0),
-        label: "Before fall back",
-        desc: "The gradual clock has been easing back down toward standard time, while the normal clock stays an hour ahead. The gap between them is near its peak.",
-      },
-      {
         date: () => afterFb,
-        label: "After fall back",
+        label: "Fall back",
         desc: "The normal clock jumped back an hour. The gradual clock is still easing down smoothly — now slightly ahead of the normal clock.",
       },
       {
@@ -653,13 +644,8 @@ function getTourStops(method: SyncMethod, year: number) {
       desc: "Halfway there — the gradual clock is 30 minutes behind and still falling back. The drift rate peaks here at about 24 seconds per day, then gradually slows as it approaches a full hour behind by fall.",
     },
     {
-      date: () => new Date(beforeFb.getFullYear(), beforeFb.getMonth(), beforeFb.getDate(), 12, 0, 0),
-      label: "Before fall back",
-      desc: "Nearly an hour apart. The gradual clock has given back almost the full hour, matching what the sudden jump will do.",
-    },
-    {
       date: () => afterFb,
-      label: "After fall back",
+      label: "Fall back",
       desc: "Together again. The normal clock jumped back an hour; the gradual clock was already there. The cycle repeats.",
     },
   ];
@@ -1019,14 +1005,14 @@ export default function Home() {
         <div className="mt-6 mx-4">
           <div className="max-w-md mx-auto text-center mb-3">
             <p className="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed">
-              If there were a single source of truth for time, we could tweak it to give the benefits of daylight saving without the jarring jumps. There isn&apos;t. The next best thing is to tweak your own daily routine.
+              If there were a single source of truth for time, we could rig it to give the benefits of daylight saving without the abrupt shifts, and the world would automatically adapt. There isn&apos;t. The next best thing is to tweak your own daily routine.
             </p>
           </div>
           <a
             href="/clock"
             className="block max-w-md mx-auto rounded-2xl bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 p-5 hover:bg-zinc-800 dark:hover:bg-zinc-200 transition-colors"
           >
-            <div className="text-lg font-semibold mb-1">Try Smooth Clock</div>
+            <div className="text-lg font-semibold mb-1">Try Smooth Time</div>
             <div className="text-sm text-zinc-400 dark:text-zinc-500 leading-relaxed">
               A bedside alarm clock that shifts your wake-up time by seconds per day — so you adapt to daylight saving gradually, without ever losing an hour of sleep.
             </div>
