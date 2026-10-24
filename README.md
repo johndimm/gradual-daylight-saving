@@ -57,11 +57,11 @@ The interactive demo lets you explore the concept:
 - **Playback controls** — step by minute/hour/day or play continuously at various speeds
 - **Clock speed stats** — shows the instantaneous rate of each clock (the normal clock shows 95.83% on spring-forward day and 104.17% on fall-back day; the gradual clock never deviates more than ~0.03%)
 
-## Smooth Clock
+## Smooth Time
 
 If there were a single source of truth for time, we could tweak it to give the benefits of daylight saving without the jarring jumps. There isn't. The next best thing is to tweak your own daily routine.
 
-**Smooth Clock** is a bedside alarm clock that shifts your wake-up time by seconds per day — so you adapt to daylight saving gradually, without ever losing an hour of sleep. Available at `/clock` in the app.
+**Smooth Time** is a bedside alarm clock that shifts your wake-up time by seconds per day — so you adapt to daylight saving gradually, without ever losing an hour of sleep. Available at `/clock` in the app.
 
 Features:
 
@@ -74,7 +74,7 @@ Features:
 
 ## Implementation
 
-If there were a single source of truth for time — a global NTP adjustment — this wouldn't require any hardware changes. The servers would simply report a slightly adjusted time following the cosine easing curve. But since there isn't, Smooth Clock applies the adjustment personally: set your alarm to smooth time and your wake-up shifts by seconds per day instead of an hour overnight.
+If there were a single source of truth for time — a global NTP adjustment — this wouldn't require any hardware changes. The servers would simply report a slightly adjusted time following the cosine easing curve. But since there isn't, Smooth Time applies the adjustment personally: set your alarm to smooth time and your wake-up shifts by seconds per day instead of an hour overnight.
 
 ## Running locally
 
