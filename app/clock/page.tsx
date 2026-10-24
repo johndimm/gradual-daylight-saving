@@ -488,7 +488,7 @@ export default function SmoothClock() {
       )}
 
       {/* Title */}
-      <div className="text-sm uppercase tracking-widest text-zinc-700 mb-1">Smooth Clock</div>
+      <div className="text-sm uppercase tracking-widest text-zinc-700 mb-1">Smooth Time</div>
 
       {/* Clock display */}
       {displayStyle === "digital" && (
@@ -498,7 +498,7 @@ export default function SmoothClock() {
           <div className="text-5xl sm:text-7xl font-mono font-bold tabular-nums mt-4">
             {formatTime(smoothTime)}
           </div>
-          <div className="text-sm text-zinc-600 mt-2 font-mono">{offsetLabel} from normal</div>
+          <div className="text-sm text-zinc-600 mt-2 font-mono">{offsetLabel} from official</div>
         </>
       )}
 
@@ -509,7 +509,7 @@ export default function SmoothClock() {
           <div className="text-2xl sm:text-3xl font-mono font-bold tabular-nums mt-6">
             {formatTime(smoothTime)}
           </div>
-          <div className="text-sm text-zinc-600 mt-2 font-mono">{offsetLabel} from normal</div>
+          <div className="text-sm text-zinc-600 mt-2 font-mono">{offsetLabel} from official</div>
         </>
       )}
 
@@ -526,14 +526,14 @@ export default function SmoothClock() {
         <>
           <div className="text-lg sm:text-xl text-zinc-500 mb-6">{formatDate(smoothTime)}</div>
           <FlipClock time={smoothTime} />
-          <div className="text-sm text-zinc-600 mt-6 font-mono">{offsetLabel} from normal</div>
+          <div className="text-sm text-zinc-600 mt-6 font-mono">{offsetLabel} from official</div>
         </>
       )}
 
       {/* Settings panel */}
       {showSettings && (
         <div
-          className="mt-8 bg-zinc-900 rounded-2xl p-6 max-w-md w-full mx-4 space-y-6"
+          className="mt-8 bg-zinc-900 rounded-2xl p-6 max-w-md w-full mx-4 space-y-6 select-auto"
           onClick={(e) => e.stopPropagation()}
         >
           {/* Alarm */}
@@ -548,7 +548,7 @@ export default function SmoothClock() {
                   saveSetting("smoothclock-alarm-time", e.target.value);
                   firedForMinuteRef.current = "";
                 }}
-                className="flex-1 rounded-lg border border-zinc-700 bg-zinc-800 px-4 py-3 text-lg font-mono text-white"
+                className="flex-1 rounded-lg border border-zinc-700 bg-zinc-800 px-4 py-3 text-lg font-mono text-white select-auto"
               />
               <button
                 onClick={() => {
@@ -685,7 +685,7 @@ export default function SmoothClock() {
 
           {/* About */}
           <div>
-            <div className="text-sm text-zinc-400 uppercase tracking-wider mb-3">What is Smooth Clock?</div>
+            <div className="text-sm text-zinc-400 uppercase tracking-wider mb-3">What is Smooth Time?</div>
             <div className="text-sm text-zinc-400 leading-relaxed space-y-2">
               <p>
                 This clock doesn&apos;t jump an hour twice a year. Instead, it shifts
@@ -704,7 +704,7 @@ export default function SmoothClock() {
                 at the midpoints.
               </p>
             </div>
-            <a href="/" className="inline-block mt-3 text-xs text-zinc-600 hover:text-zinc-400 transition-colors">
+            <a href="/" className="inline-block mt-4 text-sm text-blue-400 hover:text-blue-300 underline underline-offset-2 transition-colors">
               See the interactive explainer →
             </a>
           </div>

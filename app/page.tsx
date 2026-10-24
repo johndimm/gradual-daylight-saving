@@ -826,7 +826,7 @@ export default function Home() {
         <p className="mt-3 text-base sm:text-lg text-zinc-600 dark:text-zinc-300 text-center max-w-xl leading-relaxed">
           The left clock jumps an hour twice a year, like yours does now.
           The right clock spreads that hour over months — a few seconds per day.
-          Click the stops below to see how they diverge and converge through the year.
+          Click the stops to see how they diverge and converge through the year.
         </p>
       </div>
 
@@ -837,7 +837,7 @@ export default function Home() {
 
       {/* Clocks + difference */}
       <div className="relative flex items-center justify-center gap-2 sm:gap-14 px-3 sm:px-4 py-4">
-        <ClockFace time={simDate} label="Normal" subtitle="Jumps 1 hour overnight" />
+        <ClockFace time={simDate} label="Official" subtitle="Jumps 1 hour overnight" />
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
           <div className="flex flex-col items-center gap-0.5 bg-zinc-50/90 dark:bg-zinc-950/90 px-3 py-1 rounded-lg">
             <div className="text-[9px] sm:text-[10px] uppercase tracking-wider text-zinc-400 dark:text-zinc-500">
@@ -851,7 +851,7 @@ export default function Home() {
             </div>
           </div>
         </div>
-        <ClockFace time={gradualTime} label="Gradual" subtitle="Shifts seconds per day" />
+        <ClockFace time={gradualTime} label="Smooth" subtitle="Shifts seconds per day" />
       </div>
 
       {/* Timeline */}
@@ -928,7 +928,7 @@ export default function Home() {
               className="rounded border border-zinc-300 dark:border-zinc-600 bg-white dark:bg-zinc-800 px-2 py-1 text-xs text-zinc-900 dark:text-zinc-100"
             />
           </div>
-          <div className="flex items-center gap-1">
+          <div className="flex flex-wrap items-center justify-center gap-1">
             <div className="flex rounded overflow-hidden border border-zinc-300 dark:border-zinc-600">
               {STEPS.map((s) => (
                 <button
@@ -957,7 +957,7 @@ export default function Home() {
                 </button>
               ))}
             </div>
-            <div className="flex items-center gap-1.5 ml-1">
+            <div className="flex items-center gap-1.5">
               <span className="text-[10px] text-zinc-500 dark:text-zinc-400">
                 Speed:
               </span>
