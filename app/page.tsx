@@ -852,9 +852,12 @@ export default function Home() {
         />
       </div>
 
-      {/* Sync method selector + chart */}
+      {/* Chart + sync method selector */}
       <div className="w-full max-w-lg mx-auto px-4">
-        <div className="flex items-center justify-center gap-2 pt-2">
+        <div className="pt-2">
+          <OffsetChart syncMethod={syncMethod} simDate={simDate} />
+        </div>
+        <div className="flex items-center justify-center gap-2 pt-1">
           <span className="text-xs text-zinc-500 dark:text-zinc-400">Sync at:</span>
           <div className="flex rounded-full overflow-hidden border border-zinc-300 dark:border-zinc-600">
             {(["transitions", "solstices"] as SyncMethod[]).map((m) => (
@@ -871,9 +874,6 @@ export default function Home() {
               </button>
             ))}
           </div>
-        </div>
-        <div className="pt-2">
-          <OffsetChart syncMethod={syncMethod} simDate={simDate} />
         </div>
       </div>
 
