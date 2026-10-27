@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#3b82f6"/>
+      <stop offset="100%" stop-color="#16a34a"/>
+    </linearGradient>
+  </defs>
+  <!-- Circle background -->
+  <circle cx="256" cy="256" r="248" fill="#18181b"/>
+  <circle cx="256" cy="256" r="230" fill="none" stroke="#3f3f46" stroke-width="6"/>
+  <!-- Hour ticks -->
+  <g stroke="#71717a" stroke-width="8" stroke-linecap="round">
+    <line x1="256" y1="46" x2="256" y2="76"/>
+    <line x1="256" y1="436" x2="256" y2="466"/>
+    <line x1="46" y1="256" x2="76" y2="256"/>
+    <line x1="436" y1="256" x2="466" y2="256"/>
+  </g>
+  <!-- Smooth cosine wave across the face -->
+  <path d="M 60 256 C 110 256, 130 156, 180 156 S 250 256, 256 256 S 310 356, 340 356 S 410 256, 452 256" fill="none" stroke="url(#g)" stroke-width="14" stroke-linecap="round" opacity="0.9"/>
+  <!-- Clock hands -->
+  <line x1="256" y1="256" x2="256" y2="110" stroke="#e4e4e7" stroke-width="14" stroke-linecap="round"/>
+  <line x1="256" y1="256" x2="356" y2="196" stroke="#e4e4e7" stroke-width="10" stroke-linecap="round"/>
+  <!-- Center dot -->
+  <circle cx="256" cy="256" r="14" fill="#e4e4e7"/>
+</svg>
