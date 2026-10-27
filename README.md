@@ -4,7 +4,7 @@
 
 Instead of jumping an hour overnight twice a year, clocks could shift by a few seconds each day — spreading the transition over months. Since most clocks already sync from the network, time servers could ease us in without anyone noticing.
 
-[Live demo](https://gradual-daylight-saving-five.vercel.app/)
+[Live demo](https://gradual.johndimm.org/)
 
 ## Origin
 

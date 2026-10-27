@@ -1057,7 +1057,15 @@ export default function Home() {
             </div>
           </a>
         </div>
-        <div className="flex justify-center mt-3">
+        <div className="flex justify-center gap-4 mt-3">
+          <a
+            href="https://claude.ai/artifact/GZinF4RFc4dW15BD6TXFDh"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-xs text-zinc-400 dark:text-zinc-500 hover:text-zinc-600 dark:hover:text-zinc-300 transition-colors"
+          >
+            How the math works
+          </a>
           <a
             href="https://github.com/johndimm/gradual-daylight-saving"
             target="_blank"
