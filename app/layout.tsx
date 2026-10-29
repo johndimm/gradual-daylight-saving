@@ -52,7 +52,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <body className="min-h-full flex flex-col">
         {children}
         <div style={{ position: 'fixed', bottom: 10, left: 10, zIndex: 9999, display: 'flex', gap: 6 }}>
-          <a href="https://johndimm.org" title="All apps — John Dimm" aria-label="All apps"
+          <a href="https://www.johndimm.org" title="All apps — John Dimm" aria-label="All apps"
              style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: 34, height: 34, borderRadius: 9, border: '1px solid rgba(255,255,255,0.14)', background: 'rgba(20,20,22,0.82)', color: '#e5e5e5', fontSize: 15, textDecoration: 'none', backdropFilter: 'blur(4px)' }}>🏠</a>
         </div>
       </body>
