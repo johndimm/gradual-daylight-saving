@@ -343,11 +343,20 @@ export default function Home() {
   const [useRealtime, setUseRealtime] = useState(false);
   const [playing, setPlaying] = useState(false);
   const [speedIdx, setSpeedIdx] = useState(1);
-  const [syncMethod, setSyncMethod] = useState<SyncMethod>("solstices");
+  const [syncMethod, setSyncMethodState] = useState<SyncMethod>("solstices");
   const [activeTourIdx, setActiveTourIdx] = useState<number | null>(null);
   const playRef = useRef(false);
 
+  const setSyncMethod = (m: SyncMethod) => {
+    setSyncMethodState(m);
+    try { localStorage.setItem("smoothclock-sync", JSON.stringify(m)); } catch {}
+  };
+
   useEffect(() => {
+    try {
+      const saved = localStorage.getItem("smoothclock-sync");
+      if (saved) setSyncMethodState(JSON.parse(saved));
+    } catch {}
     setSimDate(new Date(2026, 5, 21, 12, 0, 0));
   }, []);
 
@@ -484,7 +493,7 @@ export default function Home() {
         </h1>
         <p className="mt-3 text-base sm:text-lg text-zinc-600 dark:text-zinc-300 text-center max-w-xl leading-relaxed">
           The left clock jumps an hour twice a year, like yours does now.
-          The right clock spreads that hour over months — a few seconds per day.
+          The right clock spreads that hour over months — up to half a minute per day.
         </p>
         <div className="flex flex-wrap justify-center gap-x-4 gap-y-1 mt-3">
           <a href="/about" className="text-sm text-zinc-500 dark:text-zinc-400 hover:text-zinc-800 dark:hover:text-zinc-200 underline transition-colors">
