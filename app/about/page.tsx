@@ -94,56 +94,60 @@ export default function AboutPage() {
           </figure>
 
           <p>
-            In 1914, William Willett proposed changing the clocks eight times a year
-            instead of two — four shifts of 20 minutes each in spring, four more in
-            autumn. He had noticed something important: the main objection to
-            daylight saving isn&apos;t the concept — it&apos;s losing an hour of sleep.
-            His plan cut that to 20 minutes.
+            In 1907, William Willett published a pamphlet
+            called <em>The Waste of Daylight</em>. He proposed shifting clocks
+            forward in spring and back in autumn to gain evening daylight. His
+            original plan called for four shifts of 20 minutes each &mdash; a
+            gentler approach than a single jump. He thought the benefits were
+            obvious: more time outdoors, better health, less money spent on
+            artificial light.
           </p>
 
           <p>
-            Parliament rejected it. The reason was cost. Every clock had to be
-            reset by hand. Resetting twice a year was bad enough. Eight times
-            was unthinkable.
+            By 1914, his proposal had been simplified to a single 60-minute
+            shift &mdash; the version that eventually became law. But the
+            obstacle was always cost. Every clock had to be reset by hand.
+            Even one shift was disruptive. Four shifts was unthinkable.
           </p>
         </div>
 
-        {/* Step 1: Willett's plan is now feasible */}
+        {/* Step 1: Willett's original plan is now feasible */}
         <div className="mt-12 space-y-6 text-base sm:text-lg text-zinc-600 dark:text-zinc-300 leading-relaxed">
           <p className="text-xl sm:text-2xl font-bold text-zinc-900 dark:text-zinc-100">
-            That was 1914. Today, shifting is nearly free.
+            Today, shifting is nearly free.
           </p>
 
           <p>
-            Your phone&apos;s clock is whatever the network says it is. When was
+            The time on your phone is whatever the network says it is. When was
             the last time you set it manually? For most clocks in the modern
-            world, the cost of a time shift has dropped to zero. Not all —
+            world, the cost of a time shift has dropped to zero. Not all &mdash;
             wall clocks, wristwatches, and some industrial systems still need
-            manual adjustment. But the balance has flipped: in 1914 every clock
-            was manual. Today most are networked.
+            manual adjustment. But the balance has flipped: in Willett&apos;s day
+            every clock was manual. Today most are networked.
           </p>
 
           <p>
-            That means Willett&apos;s plan could actually work now. Eight shifts
-            a year, 20 minutes each, applied automatically by your phone. No
-            manual clock-setting. Would it be better than what we have? Almost
-            certainly. The people who dread losing an hour of sleep twice a year
-            would lose 20 minutes instead — barely enough to notice. That alone
-            would be an improvement.
+            That means Willett&apos;s original plan &mdash; four shifts of
+            20 minutes &mdash; could actually work now. Your phone would apply
+            each shift automatically. No manual clock-setting required. Would
+            it be better than what we have? Almost certainly. The people who
+            dread losing an hour of sleep twice a year would lose 20 minutes
+            instead &mdash; barely enough to notice. That alone would be
+            an improvement.
           </p>
         </div>
 
         {/* Step 2: But we can do better */}
         <div className="mt-12 space-y-6 text-base sm:text-lg text-zinc-600 dark:text-zinc-300 leading-relaxed">
           <p className="text-xl sm:text-2xl font-bold text-zinc-900 dark:text-zinc-100">
-            But why stop there?
+            But why stop at four?
           </p>
 
           <p>
             Twenty minutes is still a shift you can feel. If the cost of
-            resetting is zero, there&apos;s no reason to limit ourselves to eight
-            shifts a year. Why not 365 — one for each day? Each shift would
-            be about 32 seconds. Your phone applies today&apos;s offset
+            resetting is zero, there&apos;s no reason to limit ourselves to four
+            shifts a year. Why not 365 &mdash; one for each day? Each shift
+            would be about 32 seconds. Your phone applies today&apos;s offset
             automatically. You never notice.
           </p>
 
@@ -164,10 +168,10 @@ export default function AboutPage() {
             <div className="text-xs text-zinc-400 dark:text-zinc-500">each shift</div>
           </div>
           <div className="p-4 rounded-xl bg-zinc-100 dark:bg-zinc-900">
-            <div className="text-2xl sm:text-3xl font-bold text-zinc-900 dark:text-zinc-100">8</div>
+            <div className="text-2xl sm:text-3xl font-bold text-zinc-900 dark:text-zinc-100">4</div>
             <div className="text-sm text-zinc-500 dark:text-zinc-400 mt-1">shifts/year</div>
             <div className="text-lg font-semibold text-amber-500 dark:text-amber-400 mt-2">20 min</div>
-            <div className="text-xs text-zinc-400 dark:text-zinc-500">Willett, 1914</div>
+            <div className="text-xs text-zinc-400 dark:text-zinc-500">Willett, 1907</div>
           </div>
           <div className="p-4 rounded-xl bg-zinc-100 dark:bg-zinc-900 ring-2 ring-green-500 dark:ring-green-400">
             <div className="text-2xl sm:text-3xl font-bold text-zinc-900 dark:text-zinc-100">365</div>
@@ -223,9 +227,7 @@ export default function AboutPage() {
 
           <div className="flex justify-center gap-6 mt-6">
             <a
-              href="https://claude.ai/artifact/GZinF4RFc4dW15BD6TXFDh"
-              target="_blank"
-              rel="noopener noreferrer"
+              href="/math"
               className="text-sm text-zinc-400 dark:text-zinc-500 hover:text-zinc-600 dark:hover:text-zinc-300 transition-colors"
             >
               How the math works
