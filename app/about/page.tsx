@@ -207,7 +207,7 @@ export default function AboutPage() {
         {/* Closing */}
         <div className="mt-16 pt-8 border-t border-zinc-200 dark:border-zinc-800">
           <p className="text-xl sm:text-2xl font-bold text-zinc-900 dark:text-zinc-100 text-center leading-relaxed">
-            The seasons change gradually.<br />Our clocks should too.
+            Seasons change gradually. Why can&apos;t our clocks?
           </p>
 
           <div className="mt-8 flex flex-col sm:flex-row gap-3 justify-center">
