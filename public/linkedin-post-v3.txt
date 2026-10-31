@@ -1,0 +1,59 @@
+
+https://gradual.johndimm.org
+
+Spring forward and you lose an hour of sleep. Twice a year the clock-change debate flares up, and it's always the same three options:
+
+  1. Keep the current system — two jarring shifts a year
+  2. Permanent standard time — aligned with the sun, but dark evenings year-round
+  3. Permanent daylight saving — brighter evenings, but dark winter mornings that worry doctors and school parents
+
+These have been argued for decades and nobody can agree. Permanent standard sacrifices evening light. Permanent daylight saving means kids waiting for the school bus in the dark in January. The current system means everyone loses an hour of sleep and spends a week adjusting. Each side has real points, and the debate is stuck.
+
+There's a fourth option nobody talks about:
+
+  4. Gradual daylight saving — shift continuously, a few seconds a day, so you get the sunlight benefit with no abrupt jump at all
+
+It doesn't pick a side — it removes the tradeoff.
+
+When DST was invented over a century ago, every clock had to be reset by hand. That made each shift expensive and error-prone, so we settled on two per year — one hour each. But that was a compromise between two forces pulling in opposite directions:
+
+  - Fewer shifts are better (less hassle — but each shift is bigger)
+  - Shorter shifts are better (less disruption — but you need more of them)
+
+A hundred years ago, "fewer" won by a landslide. Today? Cellphones changed everything.
+
+Your phone's clock is whatever the network says it is. When was the last time you set it manually? The cost of a time shift has dropped to zero.
+
+So if your main complaint is losing an hour of sleep, you don't have to go all the way to continuous shifting to fix it. Make four half-hour shifts instead of two one-hour shifts. Or eight fifteen-minute shifts. Each one is small enough that your body barely notices. The technology to do this has existed for decades — we just never had a reason to, because resetting every clock in your house four times a year was worse than twice.
+
+But why stop there? If shifting is free, go all the way. Make a table of 365 offsets — one for each day of the year. On January 1, the clock is 32 seconds ahead of standard. By the summer solstice, it's the full 60 minutes. By winter solstice, it's back to zero. The maximum daily change? About 32 seconds. Your phone applies today's offset automatically. You never notice.
+
+That's it. No exotic physics, no redefining the second. Just a lookup table. The entire system fits on an index card.
+
+"But what about my schedule?"
+
+This is the sharpest objection. If the clock shifts every day, does school start at a different time every day? No. School starts at 8:00 AM — it always says 8:00 on the clock. The shift is in the relationship between clock time and solar time, not in anyone's schedule. You don't reschedule your life. The network adjusts the seconds. Everything that runs on clock time — meetings, classes, business hours — stays exactly where it is.
+
+"What about cross-timezone scheduling?"
+
+A fair concern. If one region uses gradual DST and another doesn't, the offset between them drifts by a few seconds a day instead of jumping an hour twice a year. But here's the thing: meeting software and phones already handle timezone math automatically. Google Calendar doesn't care whether your offset is UTC-5 or UTC-4:58:20. It shows everyone the right time in their own zone. The infrastructure for this already exists — we just aren't using it.
+
+"The IT industry would have a meltdown."
+
+Maybe not. Computers already handle leap seconds, timezone database updates, and the complexity of regions that observe DST at different dates. A gradual shift is actually simpler than the current system — it's a smooth function, not an abrupt discontinuity. No more "is this timestamp before or after the spring-forward gap?" edge cases. No more impossible 2:30 AM on the second Sunday in March.
+
+"Just pick standard or daylight and stick with it."
+
+A lot of people feel this way — and it's a perfectly reasonable position. But it's been stuck in legislatures for years precisely because permanent standard and permanent daylight each have real downsides that block consensus. Gradual doesn't require that fight. It gives you the same sunlight tracking as DST with none of the disruption.
+
+"What about the kitchen wall clock? The $20,000 Rolex?"
+
+Not every clock is networked. The honest answer: those clocks already can't handle DST gracefully. Twice a year someone walks around the house resetting them. Under gradual shifting, they'd drift by at most 32 seconds a day — about 4 minutes a week at the peak. That's less noticeable than the hour we ask people to swallow in a single night. For anyone who cares, it's a small correction every few weeks rather than a jarring reset.
+
+And honestly? Before standardized clocks, humanity kept time with variable-length hours for millennia. The period from sunrise to sunset was always "12 hours," whether it was June or December. Our ancestors handled fluid time just fine. We're more equipped than they were.
+
+Legacy clocks are a reason to be thoughtful, not a reason to keep losing an hour of sleep.
+
+The seasons change gradually. Our clocks should too.
+
+Try it: https://gradual.johndimm.org

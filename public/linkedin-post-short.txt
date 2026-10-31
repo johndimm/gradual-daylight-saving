@@ -1,0 +1,14 @@
+The DST debate has 3 options. There should be 4.
+
+1. Keep the current system
+2. Permanent standard time
+3. Permanent daylight saving
+4. Gradual daylight saving
+
+What if your clock shifted by 32 seconds a day instead of 1 hour overnight?
+
+Same sunlight benefits. No lost sleep. No jet lag. No legislative deadlock. Just a lookup table of 365 offsets that your phone applies automatically.
+
+The entire system fits on an index card.
+
+https://gradual.johndimm.org/about

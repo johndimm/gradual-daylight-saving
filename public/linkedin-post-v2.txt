@@ -1,0 +1,32 @@
+
+https://gradual.johndimm.org
+
+Spring forward and you lose an hour of sleep. Twice a year the clock-change debate flares up, and the same four options come around:
+
+  1. Keep the current system — two jarring shifts a year
+  2. Permanent standard time — aligned with the sun, but dark evenings year-round
+  3. Permanent daylight saving — brighter evenings, but dark winter mornings that worry doctors and school parents
+  4. Gradual daylight saving — shift continuously, a few seconds a day, so you get the sunlight benefit with no abrupt jump at all
+
+The first three have been argued for decades and nobody can agree. Permanent standard sacrifices evening light. Permanent daylight saving means kids waiting for the school bus in the dark in January. The current system means everyone loses an hour of sleep and spends a week adjusting. Each side has real points, and the debate is stuck.
+
+Gradual is a different kind of answer. It doesn't pick a side — it removes the tradeoff.
+
+When DST was invented over a century ago, every clock had to be reset by hand. That made each shift expensive and error-prone, so we settled on two per year — one hour each. But that was a compromise between two forces pulling in opposite directions:
+
+  - Fewer shifts are better (less hassle — but each shift is bigger)
+  - Shorter shifts are better (less disruption — but you need more of them)
+
+A hundred years ago, "fewer" won by a landslide. Today? Cellphones changed everything.
+
+Your phone's clock is whatever the network says it is. When was the last time you set it manually? The cost of a time shift has dropped to zero.
+
+If shifting is free, go all the way. Shift every day. Shift continuously, at the level of the second. Your phone won't notice. Neither will you — except that you'll get more sunlight without ever losing an hour of sleep.
+
+But what about the kitchen wall clock? The wristwatch your grandfather left you? Fair point — not every clock is networked. The honest answer: those clocks already can't handle DST gracefully. Twice a year someone walks around the house resetting them. Under gradual shifting, they'd simply drift by a few minutes over the course of a season — less noticeable than the hour we ask people to swallow in a single night. And for anyone who cares, it's a small correction every few weeks rather than a jarring reset.
+
+Legacy clocks are a reason to be thoughtful, not a reason to keep losing an hour of sleep.
+
+The seasons change gradually. Our clocks should too.
+
+Try it: https://gradual.johndimm.org

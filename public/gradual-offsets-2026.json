@@ -1,0 +1,2192 @@
+[
+  {
+    "day": 1,
+    "date": "Jan 1",
+    "offsetSeconds": 32,
+    "dailyChangeSeconds": 5
+  },
+  {
+    "day": 2,
+    "date": "Jan 2",
+    "offsetSeconds": 38,
+    "dailyChangeSeconds": 6
+  },
+  {
+    "day": 3,
+    "date": "Jan 3",
+    "offsetSeconds": 45,
+    "dailyChangeSeconds": 7
+  },
+  {
+    "day": 4,
+    "date": "Jan 4",
+    "offsetSeconds": 52,
+    "dailyChangeSeconds": 7
+  },
+  {
+    "day": 5,
+    "date": "Jan 5",
+    "offsetSeconds": 60,
+    "dailyChangeSeconds": 8
+  },
+  {
+    "day": 6,
+    "date": "Jan 6",
+    "offsetSeconds": 68,
+    "dailyChangeSeconds": 8
+  },
+  {
+    "day": 7,
+    "date": "Jan 7",
+    "offsetSeconds": 77,
+    "dailyChangeSeconds": 9
+  },
+  {
+    "day": 8,
+    "date": "Jan 8",
+    "offsetSeconds": 86,
+    "dailyChangeSeconds": 9
+  },
+  {
+    "day": 9,
+    "date": "Jan 9",
+    "offsetSeconds": 96,
+    "dailyChangeSeconds": 10
+  },
+  {
+    "day": 10,
+    "date": "Jan 10",
+    "offsetSeconds": 106,
+    "dailyChangeSeconds": 10
+  },
+  {
+    "day": 11,
+    "date": "Jan 11",
+    "offsetSeconds": 117,
+    "dailyChangeSeconds": 11
+  },
+  {
+    "day": 12,
+    "date": "Jan 12",
+    "offsetSeconds": 128,
+    "dailyChangeSeconds": 11
+  },
+  {
+    "day": 13,
+    "date": "Jan 13",
+    "offsetSeconds": 140,
+    "dailyChangeSeconds": 12
+  },
+  {
+    "day": 14,
+    "date": "Jan 14",
+    "offsetSeconds": 152,
+    "dailyChangeSeconds": 12
+  },
+  {
+    "day": 15,
+    "date": "Jan 15",
+    "offsetSeconds": 165,
+    "dailyChangeSeconds": 13
+  },
+  {
+    "day": 16,
+    "date": "Jan 16",
+    "offsetSeconds": 178,
+    "dailyChangeSeconds": 13
+  },
+  {
+    "day": 17,
+    "date": "Jan 17",
+    "offsetSeconds": 192,
+    "dailyChangeSeconds": 14
+  },
+  {
+    "day": 18,
+    "date": "Jan 18",
+    "offsetSeconds": 206,
+    "dailyChangeSeconds": 14
+  },
+  {
+    "day": 19,
+    "date": "Jan 19",
+    "offsetSeconds": 221,
+    "dailyChangeSeconds": 15
+  },
+  {
+    "day": 20,
+    "date": "Jan 20",
+    "offsetSeconds": 236,
+    "dailyChangeSeconds": 15
+  },
+  {
+    "day": 21,
+    "date": "Jan 21",
+    "offsetSeconds": 252,
+    "dailyChangeSeconds": 16
+  },
+  {
+    "day": 22,
+    "date": "Jan 22",
+    "offsetSeconds": 268,
+    "dailyChangeSeconds": 16
+  },
+  {
+    "day": 23,
+    "date": "Jan 23",
+    "offsetSeconds": 284,
+    "dailyChangeSeconds": 16
+  },
+  {
+    "day": 24,
+    "date": "Jan 24",
+    "offsetSeconds": 301,
+    "dailyChangeSeconds": 17
+  },
+  {
+    "day": 25,
+    "date": "Jan 25",
+    "offsetSeconds": 319,
+    "dailyChangeSeconds": 18
+  },
+  {
+    "day": 26,
+    "date": "Jan 26",
+    "offsetSeconds": 337,
+    "dailyChangeSeconds": 18
+  },
+  {
+    "day": 27,
+    "date": "Jan 27",
+    "offsetSeconds": 355,
+    "dailyChangeSeconds": 18
+  },
+  {
+    "day": 28,
+    "date": "Jan 28",
+    "offsetSeconds": 374,
+    "dailyChangeSeconds": 19
+  },
+  {
+    "day": 29,
+    "date": "Jan 29",
+    "offsetSeconds": 393,
+    "dailyChangeSeconds": 19
+  },
+  {
+    "day": 30,
+    "date": "Jan 30",
+    "offsetSeconds": 412,
+    "dailyChangeSeconds": 19
+  },
+  {
+    "day": 31,
+    "date": "Jan 31",
+    "offsetSeconds": 432,
+    "dailyChangeSeconds": 20
+  },
+  {
+    "day": 32,
+    "date": "Feb 1",
+    "offsetSeconds": 453,
+    "dailyChangeSeconds": 21
+  },
+  {
+    "day": 33,
+    "date": "Feb 2",
+    "offsetSeconds": 474,
+    "dailyChangeSeconds": 21
+  },
+  {
+    "day": 34,
+    "date": "Feb 3",
+    "offsetSeconds": 495,
+    "dailyChangeSeconds": 21
+  },
+  {
+    "day": 35,
+    "date": "Feb 4",
+    "offsetSeconds": 516,
+    "dailyChangeSeconds": 21
+  },
+  {
+    "day": 36,
+    "date": "Feb 5",
+    "offsetSeconds": 538,
+    "dailyChangeSeconds": 22
+  },
+  {
+    "day": 37,
+    "date": "Feb 6",
+    "offsetSeconds": 561,
+    "dailyChangeSeconds": 23
+  },
+  {
+    "day": 38,
+    "date": "Feb 7",
+    "offsetSeconds": 584,
+    "dailyChangeSeconds": 23
+  },
+  {
+    "day": 39,
+    "date": "Feb 8",
+    "offsetSeconds": 607,
+    "dailyChangeSeconds": 23
+  },
+  {
+    "day": 40,
+    "date": "Feb 9",
+    "offsetSeconds": 630,
+    "dailyChangeSeconds": 23
+  },
+  {
+    "day": 41,
+    "date": "Feb 10",
+    "offsetSeconds": 654,
+    "dailyChangeSeconds": 24
+  },
+  {
+    "day": 42,
+    "date": "Feb 11",
+    "offsetSeconds": 678,
+    "dailyChangeSeconds": 24
+  },
+  {
+    "day": 43,
+    "date": "Feb 12",
+    "offsetSeconds": 702,
+    "dailyChangeSeconds": 24
+  },
+  {
+    "day": 44,
+    "date": "Feb 13",
+    "offsetSeconds": 727,
+    "dailyChangeSeconds": 25
+  },
+  {
+    "day": 45,
+    "date": "Feb 14",
+    "offsetSeconds": 752,
+    "dailyChangeSeconds": 25
+  },
+  {
+    "day": 46,
+    "date": "Feb 15",
+    "offsetSeconds": 778,
+    "dailyChangeSeconds": 26
+  },
+  {
+    "day": 47,
+    "date": "Feb 16",
+    "offsetSeconds": 804,
+    "dailyChangeSeconds": 26
+  },
+  {
+    "day": 48,
+    "date": "Feb 17",
+    "offsetSeconds": 830,
+    "dailyChangeSeconds": 26
+  },
+  {
+    "day": 49,
+    "date": "Feb 18",
+    "offsetSeconds": 856,
+    "dailyChangeSeconds": 26
+  },
+  {
+    "day": 50,
+    "date": "Feb 19",
+    "offsetSeconds": 882,
+    "dailyChangeSeconds": 26
+  },
+  {
+    "day": 51,
+    "date": "Feb 20",
+    "offsetSeconds": 909,
+    "dailyChangeSeconds": 27
+  },
+  {
+    "day": 52,
+    "date": "Feb 21",
+    "offsetSeconds": 936,
+    "dailyChangeSeconds": 27
+  },
+  {
+    "day": 53,
+    "date": "Feb 22",
+    "offsetSeconds": 964,
+    "dailyChangeSeconds": 28
+  },
+  {
+    "day": 54,
+    "date": "Feb 23",
+    "offsetSeconds": 992,
+    "dailyChangeSeconds": 28
+  },
+  {
+    "day": 55,
+    "date": "Feb 24",
+    "offsetSeconds": 1019,
+    "dailyChangeSeconds": 27
+  },
+  {
+    "day": 56,
+    "date": "Feb 25",
+    "offsetSeconds": 1048,
+    "dailyChangeSeconds": 29
+  },
+  {
+    "day": 57,
+    "date": "Feb 26",
+    "offsetSeconds": 1076,
+    "dailyChangeSeconds": 28
+  },
+  {
+    "day": 58,
+    "date": "Feb 27",
+    "offsetSeconds": 1104,
+    "dailyChangeSeconds": 28
+  },
+  {
+    "day": 59,
+    "date": "Feb 28",
+    "offsetSeconds": 1133,
+    "dailyChangeSeconds": 29
+  },
+  {
+    "day": 60,
+    "date": "Mar 1",
+    "offsetSeconds": 1162,
+    "dailyChangeSeconds": 29
+  },
+  {
+    "day": 61,
+    "date": "Mar 2",
+    "offsetSeconds": 1191,
+    "dailyChangeSeconds": 29
+  },
+  {
+    "day": 62,
+    "date": "Mar 3",
+    "offsetSeconds": 1221,
+    "dailyChangeSeconds": 30
+  },
+  {
+    "day": 63,
+    "date": "Mar 4",
+    "offsetSeconds": 1250,
+    "dailyChangeSeconds": 29
+  },
+  {
+    "day": 64,
+    "date": "Mar 5",
+    "offsetSeconds": 1280,
+    "dailyChangeSeconds": 30
+  },
+  {
+    "day": 65,
+    "date": "Mar 6",
+    "offsetSeconds": 1310,
+    "dailyChangeSeconds": 30
+  },
+  {
+    "day": 66,
+    "date": "Mar 7",
+    "offsetSeconds": 1340,
+    "dailyChangeSeconds": 30
+  },
+  {
+    "day": 67,
+    "date": "Mar 8",
+    "offsetSeconds": 1369,
+    "dailyChangeSeconds": 29
+  },
+  {
+    "day": 68,
+    "date": "Mar 9",
+    "offsetSeconds": 1399,
+    "dailyChangeSeconds": 30
+  },
+  {
+    "day": 69,
+    "date": "Mar 10",
+    "offsetSeconds": 1429,
+    "dailyChangeSeconds": 30
+  },
+  {
+    "day": 70,
+    "date": "Mar 11",
+    "offsetSeconds": 1460,
+    "dailyChangeSeconds": 31
+  },
+  {
+    "day": 71,
+    "date": "Mar 12",
+    "offsetSeconds": 1490,
+    "dailyChangeSeconds": 30
+  },
+  {
+    "day": 72,
+    "date": "Mar 13",
+    "offsetSeconds": 1521,
+    "dailyChangeSeconds": 31
+  },
+  {
+    "day": 73,
+    "date": "Mar 14",
+    "offsetSeconds": 1552,
+    "dailyChangeSeconds": 31
+  },
+  {
+    "day": 74,
+    "date": "Mar 15",
+    "offsetSeconds": 1582,
+    "dailyChangeSeconds": 30
+  },
+  {
+    "day": 75,
+    "date": "Mar 16",
+    "offsetSeconds": 1613,
+    "dailyChangeSeconds": 31
+  },
+  {
+    "day": 76,
+    "date": "Mar 17",
+    "offsetSeconds": 1644,
+    "dailyChangeSeconds": 31
+  },
+  {
+    "day": 77,
+    "date": "Mar 18",
+    "offsetSeconds": 1675,
+    "dailyChangeSeconds": 31
+  },
+  {
+    "day": 78,
+    "date": "Mar 19",
+    "offsetSeconds": 1706,
+    "dailyChangeSeconds": 31
+  },
+  {
+    "day": 79,
+    "date": "Mar 20",
+    "offsetSeconds": 1737,
+    "dailyChangeSeconds": 31
+  },
+  {
+    "day": 80,
+    "date": "Mar 21",
+    "offsetSeconds": 1768,
+    "dailyChangeSeconds": 31
+  },
+  {
+    "day": 81,
+    "date": "Mar 22",
+    "offsetSeconds": 1799,
+    "dailyChangeSeconds": 31
+  },
+  {
+    "day": 82,
+    "date": "Mar 23",
+    "offsetSeconds": 1830,
+    "dailyChangeSeconds": 31
+  },
+  {
+    "day": 83,
+    "date": "Mar 24",
+    "offsetSeconds": 1861,
+    "dailyChangeSeconds": 31
+  },
+  {
+    "day": 84,
+    "date": "Mar 25",
+    "offsetSeconds": 1893,
+    "dailyChangeSeconds": 32
+  },
+  {
+    "day": 85,
+    "date": "Mar 26",
+    "offsetSeconds": 1924,
+    "dailyChangeSeconds": 31
+  },
+  {
+    "day": 86,
+    "date": "Mar 27",
+    "offsetSeconds": 1955,
+    "dailyChangeSeconds": 31
+  },
+  {
+    "day": 87,
+    "date": "Mar 28",
+    "offsetSeconds": 1985,
+    "dailyChangeSeconds": 30
+  },
+  {
+    "day": 88,
+    "date": "Mar 29",
+    "offsetSeconds": 2016,
+    "dailyChangeSeconds": 31
+  },
+  {
+    "day": 89,
+    "date": "Mar 30",
+    "offsetSeconds": 2047,
+    "dailyChangeSeconds": 31
+  },
+  {
+    "day": 90,
+    "date": "Mar 31",
+    "offsetSeconds": 2078,
+    "dailyChangeSeconds": 31
+  },
+  {
+    "day": 91,
+    "date": "Apr 1",
+    "offsetSeconds": 2109,
+    "dailyChangeSeconds": 31
+  },
+  {
+    "day": 92,
+    "date": "Apr 2",
+    "offsetSeconds": 2139,
+    "dailyChangeSeconds": 30
+  },
+  {
+    "day": 93,
+    "date": "Apr 3",
+    "offsetSeconds": 2170,
+    "dailyChangeSeconds": 31
+  },
+  {
+    "day": 94,
+    "date": "Apr 4",
+    "offsetSeconds": 2200,
+    "dailyChangeSeconds": 30
+  },
+  {
+    "day": 95,
+    "date": "Apr 5",
+    "offsetSeconds": 2230,
+    "dailyChangeSeconds": 30
+  },
+  {
+    "day": 96,
+    "date": "Apr 6",
+    "offsetSeconds": 2260,
+    "dailyChangeSeconds": 30
+  },
+  {
+    "day": 97,
+    "date": "Apr 7",
+    "offsetSeconds": 2290,
+    "dailyChangeSeconds": 30
+  },
+  {
+    "day": 98,
+    "date": "Apr 8",
+    "offsetSeconds": 2320,
+    "dailyChangeSeconds": 30
+  },
+  {
+    "day": 99,
+    "date": "Apr 9",
+    "offsetSeconds": 2350,
+    "dailyChangeSeconds": 30
+  },
+  {
+    "day": 100,
+    "date": "Apr 10",
+    "offsetSeconds": 2379,
+    "dailyChangeSeconds": 29
+  },
+  {
+    "day": 101,
+    "date": "Apr 11",
+    "offsetSeconds": 2409,
+    "dailyChangeSeconds": 30
+  },
+  {
+    "day": 102,
+    "date": "Apr 12",
+    "offsetSeconds": 2438,
+    "dailyChangeSeconds": 29
+  },
+  {
+    "day": 103,
+    "date": "Apr 13",
+    "offsetSeconds": 2467,
+    "dailyChangeSeconds": 29
+  },
+  {
+    "day": 104,
+    "date": "Apr 14",
+    "offsetSeconds": 2496,
+    "dailyChangeSeconds": 29
+  },
+  {
+    "day": 105,
+    "date": "Apr 15",
+    "offsetSeconds": 2524,
+    "dailyChangeSeconds": 28
+  },
+  {
+    "day": 106,
+    "date": "Apr 16",
+    "offsetSeconds": 2552,
+    "dailyChangeSeconds": 28
+  },
+  {
+    "day": 107,
+    "date": "Apr 17",
+    "offsetSeconds": 2581,
+    "dailyChangeSeconds": 29
+  },
+  {
+    "day": 108,
+    "date": "Apr 18",
+    "offsetSeconds": 2608,
+    "dailyChangeSeconds": 27
+  },
+  {
+    "day": 109,
+    "date": "Apr 19",
+    "offsetSeconds": 2636,
+    "dailyChangeSeconds": 28
+  },
+  {
+    "day": 110,
+    "date": "Apr 20",
+    "offsetSeconds": 2664,
+    "dailyChangeSeconds": 28
+  },
+  {
+    "day": 111,
+    "date": "Apr 21",
+    "offsetSeconds": 2691,
+    "dailyChangeSeconds": 27
+  },
+  {
+    "day": 112,
+    "date": "Apr 22",
+    "offsetSeconds": 2718,
+    "dailyChangeSeconds": 27
+  },
+  {
+    "day": 113,
+    "date": "Apr 23",
+    "offsetSeconds": 2744,
+    "dailyChangeSeconds": 26
+  },
+  {
+    "day": 114,
+    "date": "Apr 24",
+    "offsetSeconds": 2770,
+    "dailyChangeSeconds": 26
+  },
+  {
+    "day": 115,
+    "date": "Apr 25",
+    "offsetSeconds": 2796,
+    "dailyChangeSeconds": 26
+  },
+  {
+    "day": 116,
+    "date": "Apr 26",
+    "offsetSeconds": 2822,
+    "dailyChangeSeconds": 26
+  },
+  {
+    "day": 117,
+    "date": "Apr 27",
+    "offsetSeconds": 2848,
+    "dailyChangeSeconds": 26
+  },
+  {
+    "day": 118,
+    "date": "Apr 28",
+    "offsetSeconds": 2873,
+    "dailyChangeSeconds": 25
+  },
+  {
+    "day": 119,
+    "date": "Apr 29",
+    "offsetSeconds": 2898,
+    "dailyChangeSeconds": 25
+  },
+  {
+    "day": 120,
+    "date": "Apr 30",
+    "offsetSeconds": 2922,
+    "dailyChangeSeconds": 24
+  },
+  {
+    "day": 121,
+    "date": "May 1",
+    "offsetSeconds": 2946,
+    "dailyChangeSeconds": 24
+  },
+  {
+    "day": 122,
+    "date": "May 2",
+    "offsetSeconds": 2970,
+    "dailyChangeSeconds": 24
+  },
+  {
+    "day": 123,
+    "date": "May 3",
+    "offsetSeconds": 2993,
+    "dailyChangeSeconds": 23
+  },
+  {
+    "day": 124,
+    "date": "May 4",
+    "offsetSeconds": 3016,
+    "dailyChangeSeconds": 23
+  },
+  {
+    "day": 125,
+    "date": "May 5",
+    "offsetSeconds": 3039,
+    "dailyChangeSeconds": 23
+  },
+  {
+    "day": 126,
+    "date": "May 6",
+    "offsetSeconds": 3062,
+    "dailyChangeSeconds": 23
+  },
+  {
+    "day": 127,
+    "date": "May 7",
+    "offsetSeconds": 3084,
+    "dailyChangeSeconds": 22
+  },
+  {
+    "day": 128,
+    "date": "May 8",
+    "offsetSeconds": 3105,
+    "dailyChangeSeconds": 21
+  },
+  {
+    "day": 129,
+    "date": "May 9",
+    "offsetSeconds": 3126,
+    "dailyChangeSeconds": 21
+  },
+  {
+    "day": 130,
+    "date": "May 10",
+    "offsetSeconds": 3147,
+    "dailyChangeSeconds": 21
+  },
+  {
+    "day": 131,
+    "date": "May 11",
+    "offsetSeconds": 3168,
+    "dailyChangeSeconds": 21
+  },
+  {
+    "day": 132,
+    "date": "May 12",
+    "offsetSeconds": 3188,
+    "dailyChangeSeconds": 20
+  },
+  {
+    "day": 133,
+    "date": "May 13",
+    "offsetSeconds": 3207,
+    "dailyChangeSeconds": 19
+  },
+  {
+    "day": 134,
+    "date": "May 14",
+    "offsetSeconds": 3226,
+    "dailyChangeSeconds": 19
+  },
+  {
+    "day": 135,
+    "date": "May 15",
+    "offsetSeconds": 3245,
+    "dailyChangeSeconds": 19
+  },
+  {
+    "day": 136,
+    "date": "May 16",
+    "offsetSeconds": 3263,
+    "dailyChangeSeconds": 18
+  },
+  {
+    "day": 137,
+    "date": "May 17",
+    "offsetSeconds": 3281,
+    "dailyChangeSeconds": 18
+  },
+  {
+    "day": 138,
+    "date": "May 18",
+    "offsetSeconds": 3299,
+    "dailyChangeSeconds": 18
+  },
+  {
+    "day": 139,
+    "date": "May 19",
+    "offsetSeconds": 3316,
+    "dailyChangeSeconds": 17
+  },
+  {
+    "day": 140,
+    "date": "May 20",
+    "offsetSeconds": 3332,
+    "dailyChangeSeconds": 16
+  },
+  {
+    "day": 141,
+    "date": "May 21",
+    "offsetSeconds": 3348,
+    "dailyChangeSeconds": 16
+  },
+  {
+    "day": 142,
+    "date": "May 22",
+    "offsetSeconds": 3364,
+    "dailyChangeSeconds": 16
+  },
+  {
+    "day": 143,
+    "date": "May 23",
+    "offsetSeconds": 3379,
+    "dailyChangeSeconds": 15
+  },
+  {
+    "day": 144,
+    "date": "May 24",
+    "offsetSeconds": 3394,
+    "dailyChangeSeconds": 15
+  },
+  {
+    "day": 145,
+    "date": "May 25",
+    "offsetSeconds": 3408,
+    "dailyChangeSeconds": 14
+  },
+  {
+    "day": 146,
+    "date": "May 26",
+    "offsetSeconds": 3422,
+    "dailyChangeSeconds": 14
+  },
+  {
+    "day": 147,
+    "date": "May 27",
+    "offsetSeconds": 3435,
+    "dailyChangeSeconds": 13
+  },
+  {
+    "day": 148,
+    "date": "May 28",
+    "offsetSeconds": 3448,
+    "dailyChangeSeconds": 13
+  },
+  {
+    "day": 149,
+    "date": "May 29",
+    "offsetSeconds": 3460,
+    "dailyChangeSeconds": 12
+  },
+  {
+    "day": 150,
+    "date": "May 30",
+    "offsetSeconds": 3472,
+    "dailyChangeSeconds": 12
+  },
+  {
+    "day": 151,
+    "date": "May 31",
+    "offsetSeconds": 3483,
+    "dailyChangeSeconds": 11
+  },
+  {
+    "day": 152,
+    "date": "Jun 1",
+    "offsetSeconds": 3494,
+    "dailyChangeSeconds": 11
+  },
+  {
+    "day": 153,
+    "date": "Jun 2",
+    "offsetSeconds": 3504,
+    "dailyChangeSeconds": 10
+  },
+  {
+    "day": 154,
+    "date": "Jun 3",
+    "offsetSeconds": 3514,
+    "dailyChangeSeconds": 10
+  },
+  {
+    "day": 155,
+    "date": "Jun 4",
+    "offsetSeconds": 3523,
+    "dailyChangeSeconds": 9
+  },
+  {
+    "day": 156,
+    "date": "Jun 5",
+    "offsetSeconds": 3532,
+    "dailyChangeSeconds": 9
+  },
+  {
+    "day": 157,
+    "date": "Jun 6",
+    "offsetSeconds": 3540,
+    "dailyChangeSeconds": 8
+  },
+  {
+    "day": 158,
+    "date": "Jun 7",
+    "offsetSeconds": 3548,
+    "dailyChangeSeconds": 8
+  },
+  {
+    "day": 159,
+    "date": "Jun 8",
+    "offsetSeconds": 3555,
+    "dailyChangeSeconds": 7
+  },
+  {
+    "day": 160,
+    "date": "Jun 9",
+    "offsetSeconds": 3562,
+    "dailyChangeSeconds": 7
+  },
+  {
+    "day": 161,
+    "date": "Jun 10",
+    "offsetSeconds": 3568,
+    "dailyChangeSeconds": 6
+  },
+  {
+    "day": 162,
+    "date": "Jun 11",
+    "offsetSeconds": 3573,
+    "dailyChangeSeconds": 5
+  },
+  {
+    "day": 163,
+    "date": "Jun 12",
+    "offsetSeconds": 3578,
+    "dailyChangeSeconds": 5
+  },
+  {
+    "day": 164,
+    "date": "Jun 13",
+    "offsetSeconds": 3583,
+    "dailyChangeSeconds": 5
+  },
+  {
+    "day": 165,
+    "date": "Jun 14",
+    "offsetSeconds": 3587,
+    "dailyChangeSeconds": 4
+  },
+  {
+    "day": 166,
+    "date": "Jun 15",
+    "offsetSeconds": 3590,
+    "dailyChangeSeconds": 3
+  },
+  {
+    "day": 167,
+    "date": "Jun 16",
+    "offsetSeconds": 3593,
+    "dailyChangeSeconds": 3
+  },
+  {
+    "day": 168,
+    "date": "Jun 17",
+    "offsetSeconds": 3596,
+    "dailyChangeSeconds": 3
+  },
+  {
+    "day": 169,
+    "date": "Jun 18",
+    "offsetSeconds": 3598,
+    "dailyChangeSeconds": 2
+  },
+  {
+    "day": 170,
+    "date": "Jun 19",
+    "offsetSeconds": 3599,
+    "dailyChangeSeconds": 1
+  },
+  {
+    "day": 171,
+    "date": "Jun 20",
+    "offsetSeconds": 3600,
+    "dailyChangeSeconds": 1
+  },
+  {
+    "day": 172,
+    "date": "Jun 21",
+    "offsetSeconds": 3600,
+    "dailyChangeSeconds": 0
+  },
+  {
+    "day": 173,
+    "date": "Jun 22",
+    "offsetSeconds": 3600,
+    "dailyChangeSeconds": 0
+  },
+  {
+    "day": 174,
+    "date": "Jun 23",
+    "offsetSeconds": 3599,
+    "dailyChangeSeconds": -1
+  },
+  {
+    "day": 175,
+    "date": "Jun 24",
+    "offsetSeconds": 3598,
+    "dailyChangeSeconds": -1
+  },
+  {
+    "day": 176,
+    "date": "Jun 25",
+    "offsetSeconds": 3596,
+    "dailyChangeSeconds": -2
+  },
+  {
+    "day": 177,
+    "date": "Jun 26",
+    "offsetSeconds": 3593,
+    "dailyChangeSeconds": -3
+  },
+  {
+    "day": 178,
+    "date": "Jun 27",
+    "offsetSeconds": 3590,
+    "dailyChangeSeconds": -3
+  },
+  {
+    "day": 179,
+    "date": "Jun 28",
+    "offsetSeconds": 3587,
+    "dailyChangeSeconds": -3
+  },
+  {
+    "day": 180,
+    "date": "Jun 29",
+    "offsetSeconds": 3583,
+    "dailyChangeSeconds": -4
+  },
+  {
+    "day": 181,
+    "date": "Jun 30",
+    "offsetSeconds": 3579,
+    "dailyChangeSeconds": -4
+  },
+  {
+    "day": 182,
+    "date": "Jul 1",
+    "offsetSeconds": 3574,
+    "dailyChangeSeconds": -5
+  },
+  {
+    "day": 183,
+    "date": "Jul 2",
+    "offsetSeconds": 3568,
+    "dailyChangeSeconds": -6
+  },
+  {
+    "day": 184,
+    "date": "Jul 3",
+    "offsetSeconds": 3562,
+    "dailyChangeSeconds": -6
+  },
+  {
+    "day": 185,
+    "date": "Jul 4",
+    "offsetSeconds": 3555,
+    "dailyChangeSeconds": -7
+  },
+  {
+    "day": 186,
+    "date": "Jul 5",
+    "offsetSeconds": 3548,
+    "dailyChangeSeconds": -7
+  },
+  {
+    "day": 187,
+    "date": "Jul 6",
+    "offsetSeconds": 3541,
+    "dailyChangeSeconds": -7
+  },
+  {
+    "day": 188,
+    "date": "Jul 7",
+    "offsetSeconds": 3533,
+    "dailyChangeSeconds": -8
+  },
+  {
+    "day": 189,
+    "date": "Jul 8",
+    "offsetSeconds": 3524,
+    "dailyChangeSeconds": -9
+  },
+  {
+    "day": 190,
+    "date": "Jul 9",
+    "offsetSeconds": 3515,
+    "dailyChangeSeconds": -9
+  },
+  {
+    "day": 191,
+    "date": "Jul 10",
+    "offsetSeconds": 3505,
+    "dailyChangeSeconds": -10
+  },
+  {
+    "day": 192,
+    "date": "Jul 11",
+    "offsetSeconds": 3495,
+    "dailyChangeSeconds": -10
+  },
+  {
+    "day": 193,
+    "date": "Jul 12",
+    "offsetSeconds": 3484,
+    "dailyChangeSeconds": -11
+  },
+  {
+    "day": 194,
+    "date": "Jul 13",
+    "offsetSeconds": 3473,
+    "dailyChangeSeconds": -11
+  },
+  {
+    "day": 195,
+    "date": "Jul 14",
+    "offsetSeconds": 3462,
+    "dailyChangeSeconds": -11
+  },
+  {
+    "day": 196,
+    "date": "Jul 15",
+    "offsetSeconds": 3449,
+    "dailyChangeSeconds": -13
+  },
+  {
+    "day": 197,
+    "date": "Jul 16",
+    "offsetSeconds": 3437,
+    "dailyChangeSeconds": -12
+  },
+  {
+    "day": 198,
+    "date": "Jul 17",
+    "offsetSeconds": 3424,
+    "dailyChangeSeconds": -13
+  },
+  {
+    "day": 199,
+    "date": "Jul 18",
+    "offsetSeconds": 3410,
+    "dailyChangeSeconds": -14
+  },
+  {
+    "day": 200,
+    "date": "Jul 19",
+    "offsetSeconds": 3396,
+    "dailyChangeSeconds": -14
+  },
+  {
+    "day": 201,
+    "date": "Jul 20",
+    "offsetSeconds": 3382,
+    "dailyChangeSeconds": -14
+  },
+  {
+    "day": 202,
+    "date": "Jul 21",
+    "offsetSeconds": 3367,
+    "dailyChangeSeconds": -15
+  },
+  {
+    "day": 203,
+    "date": "Jul 22",
+    "offsetSeconds": 3351,
+    "dailyChangeSeconds": -16
+  },
+  {
+    "day": 204,
+    "date": "Jul 23",
+    "offsetSeconds": 3335,
+    "dailyChangeSeconds": -16
+  },
+  {
+    "day": 205,
+    "date": "Jul 24",
+    "offsetSeconds": 3319,
+    "dailyChangeSeconds": -16
+  },
+  {
+    "day": 206,
+    "date": "Jul 25",
+    "offsetSeconds": 3302,
+    "dailyChangeSeconds": -17
+  },
+  {
+    "day": 207,
+    "date": "Jul 26",
+    "offsetSeconds": 3285,
+    "dailyChangeSeconds": -17
+  },
+  {
+    "day": 208,
+    "date": "Jul 27",
+    "offsetSeconds": 3267,
+    "dailyChangeSeconds": -18
+  },
+  {
+    "day": 209,
+    "date": "Jul 28",
+    "offsetSeconds": 3249,
+    "dailyChangeSeconds": -18
+  },
+  {
+    "day": 210,
+    "date": "Jul 29",
+    "offsetSeconds": 3231,
+    "dailyChangeSeconds": -18
+  },
+  {
+    "day": 211,
+    "date": "Jul 30",
+    "offsetSeconds": 3212,
+    "dailyChangeSeconds": -19
+  },
+  {
+    "day": 212,
+    "date": "Jul 31",
+    "offsetSeconds": 3192,
+    "dailyChangeSeconds": -20
+  },
+  {
+    "day": 213,
+    "date": "Aug 1",
+    "offsetSeconds": 3172,
+    "dailyChangeSeconds": -20
+  },
+  {
+    "day": 214,
+    "date": "Aug 2",
+    "offsetSeconds": 3152,
+    "dailyChangeSeconds": -20
+  },
+  {
+    "day": 215,
+    "date": "Aug 3",
+    "offsetSeconds": 3132,
+    "dailyChangeSeconds": -20
+  },
+  {
+    "day": 216,
+    "date": "Aug 4",
+    "offsetSeconds": 3111,
+    "dailyChangeSeconds": -21
+  },
+  {
+    "day": 217,
+    "date": "Aug 5",
+    "offsetSeconds": 3089,
+    "dailyChangeSeconds": -22
+  },
+  {
+    "day": 218,
+    "date": "Aug 6",
+    "offsetSeconds": 3068,
+    "dailyChangeSeconds": -21
+  },
+  {
+    "day": 219,
+    "date": "Aug 7",
+    "offsetSeconds": 3045,
+    "dailyChangeSeconds": -23
+  },
+  {
+    "day": 220,
+    "date": "Aug 8",
+    "offsetSeconds": 3023,
+    "dailyChangeSeconds": -22
+  },
+  {
+    "day": 221,
+    "date": "Aug 9",
+    "offsetSeconds": 3000,
+    "dailyChangeSeconds": -23
+  },
+  {
+    "day": 222,
+    "date": "Aug 10",
+    "offsetSeconds": 2977,
+    "dailyChangeSeconds": -23
+  },
+  {
+    "day": 223,
+    "date": "Aug 11",
+    "offsetSeconds": 2953,
+    "dailyChangeSeconds": -24
+  },
+  {
+    "day": 224,
+    "date": "Aug 12",
+    "offsetSeconds": 2929,
+    "dailyChangeSeconds": -24
+  },
+  {
+    "day": 225,
+    "date": "Aug 13",
+    "offsetSeconds": 2905,
+    "dailyChangeSeconds": -24
+  },
+  {
+    "day": 226,
+    "date": "Aug 14",
+    "offsetSeconds": 2881,
+    "dailyChangeSeconds": -24
+  },
+  {
+    "day": 227,
+    "date": "Aug 15",
+    "offsetSeconds": 2856,
+    "dailyChangeSeconds": -25
+  },
+  {
+    "day": 228,
+    "date": "Aug 16",
+    "offsetSeconds": 2831,
+    "dailyChangeSeconds": -25
+  },
+  {
+    "day": 229,
+    "date": "Aug 17",
+    "offsetSeconds": 2805,
+    "dailyChangeSeconds": -26
+  },
+  {
+    "day": 230,
+    "date": "Aug 18",
+    "offsetSeconds": 2779,
+    "dailyChangeSeconds": -26
+  },
+  {
+    "day": 231,
+    "date": "Aug 19",
+    "offsetSeconds": 2753,
+    "dailyChangeSeconds": -26
+  },
+  {
+    "day": 232,
+    "date": "Aug 20",
+    "offsetSeconds": 2727,
+    "dailyChangeSeconds": -26
+  },
+  {
+    "day": 233,
+    "date": "Aug 21",
+    "offsetSeconds": 2700,
+    "dailyChangeSeconds": -27
+  },
+  {
+    "day": 234,
+    "date": "Aug 22",
+    "offsetSeconds": 2673,
+    "dailyChangeSeconds": -27
+  },
+  {
+    "day": 235,
+    "date": "Aug 23",
+    "offsetSeconds": 2646,
+    "dailyChangeSeconds": -27
+  },
+  {
+    "day": 236,
+    "date": "Aug 24",
+    "offsetSeconds": 2619,
+    "dailyChangeSeconds": -27
+  },
+  {
+    "day": 237,
+    "date": "Aug 25",
+    "offsetSeconds": 2591,
+    "dailyChangeSeconds": -28
+  },
+  {
+    "day": 238,
+    "date": "Aug 26",
+    "offsetSeconds": 2563,
+    "dailyChangeSeconds": -28
+  },
+  {
+    "day": 239,
+    "date": "Aug 27",
+    "offsetSeconds": 2535,
+    "dailyChangeSeconds": -28
+  },
+  {
+    "day": 240,
+    "date": "Aug 28",
+    "offsetSeconds": 2507,
+    "dailyChangeSeconds": -28
+  },
+  {
+    "day": 241,
+    "date": "Aug 29",
+    "offsetSeconds": 2479,
+    "dailyChangeSeconds": -28
+  },
+  {
+    "day": 242,
+    "date": "Aug 30",
+    "offsetSeconds": 2450,
+    "dailyChangeSeconds": -29
+  },
+  {
+    "day": 243,
+    "date": "Aug 31",
+    "offsetSeconds": 2421,
+    "dailyChangeSeconds": -29
+  },
+  {
+    "day": 244,
+    "date": "Sep 1",
+    "offsetSeconds": 2392,
+    "dailyChangeSeconds": -29
+  },
+  {
+    "day": 245,
+    "date": "Sep 2",
+    "offsetSeconds": 2363,
+    "dailyChangeSeconds": -29
+  },
+  {
+    "day": 246,
+    "date": "Sep 3",
+    "offsetSeconds": 2333,
+    "dailyChangeSeconds": -30
+  },
+  {
+    "day": 247,
+    "date": "Sep 4",
+    "offsetSeconds": 2304,
+    "dailyChangeSeconds": -29
+  },
+  {
+    "day": 248,
+    "date": "Sep 5",
+    "offsetSeconds": 2274,
+    "dailyChangeSeconds": -30
+  },
+  {
+    "day": 249,
+    "date": "Sep 6",
+    "offsetSeconds": 2244,
+    "dailyChangeSeconds": -30
+  },
+  {
+    "day": 250,
+    "date": "Sep 7",
+    "offsetSeconds": 2214,
+    "dailyChangeSeconds": -30
+  },
+  {
+    "day": 251,
+    "date": "Sep 8",
+    "offsetSeconds": 2184,
+    "dailyChangeSeconds": -30
+  },
+  {
+    "day": 252,
+    "date": "Sep 9",
+    "offsetSeconds": 2154,
+    "dailyChangeSeconds": -30
+  },
+  {
+    "day": 253,
+    "date": "Sep 10",
+    "offsetSeconds": 2123,
+    "dailyChangeSeconds": -31
+  },
+  {
+    "day": 254,
+    "date": "Sep 11",
+    "offsetSeconds": 2093,
+    "dailyChangeSeconds": -30
+  },
+  {
+    "day": 255,
+    "date": "Sep 12",
+    "offsetSeconds": 2062,
+    "dailyChangeSeconds": -31
+  },
+  {
+    "day": 256,
+    "date": "Sep 13",
+    "offsetSeconds": 2032,
+    "dailyChangeSeconds": -30
+  },
+  {
+    "day": 257,
+    "date": "Sep 14",
+    "offsetSeconds": 2001,
+    "dailyChangeSeconds": -31
+  },
+  {
+    "day": 258,
+    "date": "Sep 15",
+    "offsetSeconds": 1970,
+    "dailyChangeSeconds": -31
+  },
+  {
+    "day": 259,
+    "date": "Sep 16",
+    "offsetSeconds": 1940,
+    "dailyChangeSeconds": -30
+  },
+  {
+    "day": 260,
+    "date": "Sep 17",
+    "offsetSeconds": 1909,
+    "dailyChangeSeconds": -31
+  },
+  {
+    "day": 261,
+    "date": "Sep 18",
+    "offsetSeconds": 1878,
+    "dailyChangeSeconds": -31
+  },
+  {
+    "day": 262,
+    "date": "Sep 19",
+    "offsetSeconds": 1847,
+    "dailyChangeSeconds": -31
+  },
+  {
+    "day": 263,
+    "date": "Sep 20",
+    "offsetSeconds": 1816,
+    "dailyChangeSeconds": -31
+  },
+  {
+    "day": 264,
+    "date": "Sep 21",
+    "offsetSeconds": 1785,
+    "dailyChangeSeconds": -31
+  },
+  {
+    "day": 265,
+    "date": "Sep 22",
+    "offsetSeconds": 1754,
+    "dailyChangeSeconds": -31
+  },
+  {
+    "day": 266,
+    "date": "Sep 23",
+    "offsetSeconds": 1723,
+    "dailyChangeSeconds": -31
+  },
+  {
+    "day": 267,
+    "date": "Sep 24",
+    "offsetSeconds": 1693,
+    "dailyChangeSeconds": -30
+  },
+  {
+    "day": 268,
+    "date": "Sep 25",
+    "offsetSeconds": 1662,
+    "dailyChangeSeconds": -31
+  },
+  {
+    "day": 269,
+    "date": "Sep 26",
+    "offsetSeconds": 1631,
+    "dailyChangeSeconds": -31
+  },
+  {
+    "day": 270,
+    "date": "Sep 27",
+    "offsetSeconds": 1600,
+    "dailyChangeSeconds": -31
+  },
+  {
+    "day": 271,
+    "date": "Sep 28",
+    "offsetSeconds": 1570,
+    "dailyChangeSeconds": -30
+  },
+  {
+    "day": 272,
+    "date": "Sep 29",
+    "offsetSeconds": 1539,
+    "dailyChangeSeconds": -31
+  },
+  {
+    "day": 273,
+    "date": "Sep 30",
+    "offsetSeconds": 1508,
+    "dailyChangeSeconds": -31
+  },
+  {
+    "day": 274,
+    "date": "Oct 1",
+    "offsetSeconds": 1478,
+    "dailyChangeSeconds": -30
+  },
+  {
+    "day": 275,
+    "date": "Oct 2",
+    "offsetSeconds": 1448,
+    "dailyChangeSeconds": -30
+  },
+  {
+    "day": 276,
+    "date": "Oct 3",
+    "offsetSeconds": 1417,
+    "dailyChangeSeconds": -31
+  },
+  {
+    "day": 277,
+    "date": "Oct 4",
+    "offsetSeconds": 1387,
+    "dailyChangeSeconds": -30
+  },
+  {
+    "day": 278,
+    "date": "Oct 5",
+    "offsetSeconds": 1357,
+    "dailyChangeSeconds": -30
+  },
+  {
+    "day": 279,
+    "date": "Oct 6",
+    "offsetSeconds": 1327,
+    "dailyChangeSeconds": -30
+  },
+  {
+    "day": 280,
+    "date": "Oct 7",
+    "offsetSeconds": 1298,
+    "dailyChangeSeconds": -29
+  },
+  {
+    "day": 281,
+    "date": "Oct 8",
+    "offsetSeconds": 1268,
+    "dailyChangeSeconds": -30
+  },
+  {
+    "day": 282,
+    "date": "Oct 9",
+    "offsetSeconds": 1239,
+    "dailyChangeSeconds": -29
+  },
+  {
+    "day": 283,
+    "date": "Oct 10",
+    "offsetSeconds": 1209,
+    "dailyChangeSeconds": -30
+  },
+  {
+    "day": 284,
+    "date": "Oct 11",
+    "offsetSeconds": 1180,
+    "dailyChangeSeconds": -29
+  },
+  {
+    "day": 285,
+    "date": "Oct 12",
+    "offsetSeconds": 1151,
+    "dailyChangeSeconds": -29
+  },
+  {
+    "day": 286,
+    "date": "Oct 13",
+    "offsetSeconds": 1123,
+    "dailyChangeSeconds": -28
+  },
+  {
+    "day": 287,
+    "date": "Oct 14",
+    "offsetSeconds": 1094,
+    "dailyChangeSeconds": -29
+  },
+  {
+    "day": 288,
+    "date": "Oct 15",
+    "offsetSeconds": 1066,
+    "dailyChangeSeconds": -28
+  },
+  {
+    "day": 289,
+    "date": "Oct 16",
+    "offsetSeconds": 1038,
+    "dailyChangeSeconds": -28
+  },
+  {
+    "day": 290,
+    "date": "Oct 17",
+    "offsetSeconds": 1010,
+    "dailyChangeSeconds": -28
+  },
+  {
+    "day": 291,
+    "date": "Oct 18",
+    "offsetSeconds": 982,
+    "dailyChangeSeconds": -28
+  },
+  {
+    "day": 292,
+    "date": "Oct 19",
+    "offsetSeconds": 955,
+    "dailyChangeSeconds": -27
+  },
+  {
+    "day": 293,
+    "date": "Oct 20",
+    "offsetSeconds": 928,
+    "dailyChangeSeconds": -27
+  },
+  {
+    "day": 294,
+    "date": "Oct 21",
+    "offsetSeconds": 901,
+    "dailyChangeSeconds": -27
+  },
+  {
+    "day": 295,
+    "date": "Oct 22",
+    "offsetSeconds": 874,
+    "dailyChangeSeconds": -27
+  },
+  {
+    "day": 296,
+    "date": "Oct 23",
+    "offsetSeconds": 848,
+    "dailyChangeSeconds": -26
+  },
+  {
+    "day": 297,
+    "date": "Oct 24",
+    "offsetSeconds": 822,
+    "dailyChangeSeconds": -26
+  },
+  {
+    "day": 298,
+    "date": "Oct 25",
+    "offsetSeconds": 796,
+    "dailyChangeSeconds": -26
+  },
+  {
+    "day": 299,
+    "date": "Oct 26",
+    "offsetSeconds": 770,
+    "dailyChangeSeconds": -26
+  },
+  {
+    "day": 300,
+    "date": "Oct 27",
+    "offsetSeconds": 745,
+    "dailyChangeSeconds": -25
+  },
+  {
+    "day": 301,
+    "date": "Oct 28",
+    "offsetSeconds": 720,
+    "dailyChangeSeconds": -25
+  },
+  {
+    "day": 302,
+    "date": "Oct 29",
+    "offsetSeconds": 696,
+    "dailyChangeSeconds": -24
+  },
+  {
+    "day": 303,
+    "date": "Oct 30",
+    "offsetSeconds": 672,
+    "dailyChangeSeconds": -24
+  },
+  {
+    "day": 304,
+    "date": "Oct 31",
+    "offsetSeconds": 648,
+    "dailyChangeSeconds": -24
+  },
+  {
+    "day": 305,
+    "date": "Nov 1",
+    "offsetSeconds": 623,
+    "dailyChangeSeconds": -25
+  },
+  {
+    "day": 306,
+    "date": "Nov 2",
+    "offsetSeconds": 600,
+    "dailyChangeSeconds": -23
+  },
+  {
+    "day": 307,
+    "date": "Nov 3",
+    "offsetSeconds": 577,
+    "dailyChangeSeconds": -23
+  },
+  {
+    "day": 308,
+    "date": "Nov 4",
+    "offsetSeconds": 555,
+    "dailyChangeSeconds": -22
+  },
+  {
+    "day": 309,
+    "date": "Nov 5",
+    "offsetSeconds": 532,
+    "dailyChangeSeconds": -23
+  },
+  {
+    "day": 310,
+    "date": "Nov 6",
+    "offsetSeconds": 511,
+    "dailyChangeSeconds": -21
+  },
+  {
+    "day": 311,
+    "date": "Nov 7",
+    "offsetSeconds": 489,
+    "dailyChangeSeconds": -22
+  },
+  {
+    "day": 312,
+    "date": "Nov 8",
+    "offsetSeconds": 468,
+    "dailyChangeSeconds": -21
+  },
+  {
+    "day": 313,
+    "date": "Nov 9",
+    "offsetSeconds": 448,
+    "dailyChangeSeconds": -20
+  },
+  {
+    "day": 314,
+    "date": "Nov 10",
+    "offsetSeconds": 428,
+    "dailyChangeSeconds": -20
+  },
+  {
+    "day": 315,
+    "date": "Nov 11",
+    "offsetSeconds": 408,
+    "dailyChangeSeconds": -20
+  },
+  {
+    "day": 316,
+    "date": "Nov 12",
+    "offsetSeconds": 388,
+    "dailyChangeSeconds": -20
+  },
+  {
+    "day": 317,
+    "date": "Nov 13",
+    "offsetSeconds": 369,
+    "dailyChangeSeconds": -19
+  },
+  {
+    "day": 318,
+    "date": "Nov 14",
+    "offsetSeconds": 351,
+    "dailyChangeSeconds": -18
+  },
+  {
+    "day": 319,
+    "date": "Nov 15",
+    "offsetSeconds": 333,
+    "dailyChangeSeconds": -18
+  },
+  {
+    "day": 320,
+    "date": "Nov 16",
+    "offsetSeconds": 315,
+    "dailyChangeSeconds": -18
+  },
+  {
+    "day": 321,
+    "date": "Nov 17",
+    "offsetSeconds": 298,
+    "dailyChangeSeconds": -17
+  },
+  {
+    "day": 322,
+    "date": "Nov 18",
+    "offsetSeconds": 281,
+    "dailyChangeSeconds": -17
+  },
+  {
+    "day": 323,
+    "date": "Nov 19",
+    "offsetSeconds": 265,
+    "dailyChangeSeconds": -16
+  },
+  {
+    "day": 324,
+    "date": "Nov 20",
+    "offsetSeconds": 249,
+    "dailyChangeSeconds": -16
+  },
+  {
+    "day": 325,
+    "date": "Nov 21",
+    "offsetSeconds": 233,
+    "dailyChangeSeconds": -16
+  },
+  {
+    "day": 326,
+    "date": "Nov 22",
+    "offsetSeconds": 218,
+    "dailyChangeSeconds": -15
+  },
+  {
+    "day": 327,
+    "date": "Nov 23",
+    "offsetSeconds": 204,
+    "dailyChangeSeconds": -14
+  },
+  {
+    "day": 328,
+    "date": "Nov 24",
+    "offsetSeconds": 190,
+    "dailyChangeSeconds": -14
+  },
+  {
+    "day": 329,
+    "date": "Nov 25",
+    "offsetSeconds": 176,
+    "dailyChangeSeconds": -14
+  },
+  {
+    "day": 330,
+    "date": "Nov 26",
+    "offsetSeconds": 163,
+    "dailyChangeSeconds": -13
+  },
+  {
+    "day": 331,
+    "date": "Nov 27",
+    "offsetSeconds": 151,
+    "dailyChangeSeconds": -12
+  },
+  {
+    "day": 332,
+    "date": "Nov 28",
+    "offsetSeconds": 138,
+    "dailyChangeSeconds": -13
+  },
+  {
+    "day": 333,
+    "date": "Nov 29",
+    "offsetSeconds": 127,
+    "dailyChangeSeconds": -11
+  },
+  {
+    "day": 334,
+    "date": "Nov 30",
+    "offsetSeconds": 116,
+    "dailyChangeSeconds": -11
+  },
+  {
+    "day": 335,
+    "date": "Dec 1",
+    "offsetSeconds": 105,
+    "dailyChangeSeconds": -11
+  },
+  {
+    "day": 336,
+    "date": "Dec 2",
+    "offsetSeconds": 95,
+    "dailyChangeSeconds": -10
+  },
+  {
+    "day": 337,
+    "date": "Dec 3",
+    "offsetSeconds": 85,
+    "dailyChangeSeconds": -10
+  },
+  {
+    "day": 338,
+    "date": "Dec 4",
+    "offsetSeconds": 76,
+    "dailyChangeSeconds": -9
+  },
+  {
+    "day": 339,
+    "date": "Dec 5",
+    "offsetSeconds": 67,
+    "dailyChangeSeconds": -9
+  },
+  {
+    "day": 340,
+    "date": "Dec 6",
+    "offsetSeconds": 59,
+    "dailyChangeSeconds": -8
+  },
+  {
+    "day": 341,
+    "date": "Dec 7",
+    "offsetSeconds": 52,
+    "dailyChangeSeconds": -7
+  },
+  {
+    "day": 342,
+    "date": "Dec 8",
+    "offsetSeconds": 45,
+    "dailyChangeSeconds": -7
+  },
+  {
+    "day": 343,
+    "date": "Dec 9",
+    "offsetSeconds": 38,
+    "dailyChangeSeconds": -7
+  },
+  {
+    "day": 344,
+    "date": "Dec 10",
+    "offsetSeconds": 32,
+    "dailyChangeSeconds": -6
+  },
+  {
+    "day": 345,
+    "date": "Dec 11",
+    "offsetSeconds": 26,
+    "dailyChangeSeconds": -6
+  },
+  {
+    "day": 346,
+    "date": "Dec 12",
+    "offsetSeconds": 21,
+    "dailyChangeSeconds": -5
+  },
+  {
+    "day": 347,
+    "date": "Dec 13",
+    "offsetSeconds": 17,
+    "dailyChangeSeconds": -4
+  },
+  {
+    "day": 348,
+    "date": "Dec 14",
+    "offsetSeconds": 13,
+    "dailyChangeSeconds": -4
+  },
+  {
+    "day": 349,
+    "date": "Dec 15",
+    "offsetSeconds": 10,
+    "dailyChangeSeconds": -3
+  },
+  {
+    "day": 350,
+    "date": "Dec 16",
+    "offsetSeconds": 7,
+    "dailyChangeSeconds": -3
+  },
+  {
+    "day": 351,
+    "date": "Dec 17",
+    "offsetSeconds": 4,
+    "dailyChangeSeconds": -3
+  },
+  {
+    "day": 352,
+    "date": "Dec 18",
+    "offsetSeconds": 2,
+    "dailyChangeSeconds": -2
+  },
+  {
+    "day": 353,
+    "date": "Dec 19",
+    "offsetSeconds": 1,
+    "dailyChangeSeconds": -1
+  },
+  {
+    "day": 354,
+    "date": "Dec 20",
+    "offsetSeconds": 0,
+    "dailyChangeSeconds": -1
+  },
+  {
+    "day": 355,
+    "date": "Dec 21",
+    "offsetSeconds": 0,
+    "dailyChangeSeconds": 0
+  },
+  {
+    "day": 356,
+    "date": "Dec 22",
+    "offsetSeconds": 0,
+    "dailyChangeSeconds": 0
+  },
+  {
+    "day": 357,
+    "date": "Dec 23",
+    "offsetSeconds": 1,
+    "dailyChangeSeconds": 1
+  },
+  {
+    "day": 358,
+    "date": "Dec 24",
+    "offsetSeconds": 2,
+    "dailyChangeSeconds": 1
+  },
+  {
+    "day": 359,
+    "date": "Dec 25",
+    "offsetSeconds": 4,
+    "dailyChangeSeconds": 2
+  },
+  {
+    "day": 360,
+    "date": "Dec 26",
+    "offsetSeconds": 7,
+    "dailyChangeSeconds": 3
+  },
+  {
+    "day": 361,
+    "date": "Dec 27",
+    "offsetSeconds": 10,
+    "dailyChangeSeconds": 3
+  },
+  {
+    "day": 362,
+    "date": "Dec 28",
+    "offsetSeconds": 13,
+    "dailyChangeSeconds": 3
+  },
+  {
+    "day": 363,
+    "date": "Dec 29",
+    "offsetSeconds": 17,
+    "dailyChangeSeconds": 4
+  },
+  {
+    "day": 364,
+    "date": "Dec 30",
+    "offsetSeconds": 22,
+    "dailyChangeSeconds": 5
+  },
+  {
+    "day": 365,
+    "date": "Dec 31",
+    "offsetSeconds": 27,
+    "dailyChangeSeconds": 5
+  }
+]

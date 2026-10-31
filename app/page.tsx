@@ -633,9 +633,10 @@ const OffsetChart = memo(function OffsetChart({ syncMethod, simDate, onJump }: {
 });
 
 const PLAYBACK_SPEEDS = [
-  { label: "1 hour/s", msPerTick: 3600000, tickMs: 50 },
-  { label: "1 day/s", msPerTick: 86400000, tickMs: 50 },
-  { label: "1 week/s", msPerTick: 604800000, tickMs: 50 },
+  { label: "1 min/s", msPerTick: 3000, tickMs: 50 },
+  { label: "1 hr/s", msPerTick: 180000, tickMs: 50 },
+  { label: "1 day/s", msPerTick: 4320000, tickMs: 50 },
+  { label: "1 week/s", msPerTick: 30240000, tickMs: 50 },
 ];
 
 function getTourStops(method: SyncMethod, year: number) {
@@ -1026,8 +1027,18 @@ export default function Home() {
             </div>
           </div>
         </div>
+        {/* About link */}
+        <div className="max-w-md mx-auto mt-6 px-4 text-center">
+          <a
+            href="/about"
+            className="text-sm font-medium text-zinc-500 dark:text-zinc-400 hover:text-zinc-800 dark:hover:text-zinc-200 transition-colors"
+          >
+            Why gradual? The case for a fourth option &rarr;
+          </a>
+        </div>
+
         {/* Origin */}
-        <div className="max-w-md mx-auto mt-6 px-4">
+        <div className="max-w-xl mx-auto mt-6 px-4">
           <details className="group">
             <summary className="text-xs font-medium text-zinc-400 dark:text-zinc-500 cursor-pointer hover:text-zinc-600 dark:hover:text-zinc-300 transition-colors">
               How this app started

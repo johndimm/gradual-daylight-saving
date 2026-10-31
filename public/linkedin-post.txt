@@ -1,0 +1,24 @@
+
+https://gradual.johndimm.org
+
+Spring forward and you lose an hour of sleep.  That is the problem.
+
+We designed daylight saving to make two 1-hour shifts in time.  Why only two?   Because each shift is expensive and error prone. 
+
+If we were willing to force people to reset their clocks more often, we could have decided to make four half-hour shifts, or eight fifteen-minute shifts.  We were balancing two requirements that pull in opposite directions:
+
+  - fewer shifts are better (but that means longer shifts)
+  - shorter shifts are better (but that means more shifts)
+
+Fewer shifts was by far the more important requirement at the invention of daylight saving over 100 years ago.  Every clock needed a person to reset it.
+
+Cellphones change everything. The time is what the network says it is.  When was the last time you reset your phone's clock?  The DST shift happens by itself and the cost goes to 0. 
+
+Suppose cellphones ruled the world.  All clocks are networked.  The ones that are not are beautiful relics.
+
+If it costs nothing to have more shifts, why not go all the way and shift every day?  Or continuously, at the level of the second?  Your cellphone is in no way inconvenienced.
+
+You no longer lose an hour of sleep.  You may not have the feeling that anything is happening.  You just get more sunlight.
+
+The seasons change gradually.  So should our clocks.
+
