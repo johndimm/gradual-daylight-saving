@@ -1,14 +1,9 @@
-The DST debate has 3 options. There should be 4.
+In 1914, William Willett proposed 8 clock shifts a year instead of 2 — each only 20 minutes. Parliament rejected it. Too many resets.
 
-1. Keep the current system
-2. Permanent standard time
-3. Permanent daylight saving
-4. Gradual daylight saving
+But Willett was right about the problem: nobody likes losing an hour of sleep.
 
-What if your clock shifted by 32 seconds a day instead of 1 hour overnight?
+Today most clocks reset themselves. The cost of a shift is nearly zero.
 
-Same sunlight benefits. No lost sleep. No jet lag. No legislative deadlock. Just a lookup table of 365 offsets that your phone applies automatically.
-
-The entire system fits on an index card.
+So follow his logic all the way: 365 shifts of 32 seconds. One per day. You never notice.
 
 https://gradual.johndimm.org/about

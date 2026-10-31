@@ -17,8 +17,8 @@ function OffsetTable({ year }: { year: number }) {
 
   useEffect(() => {
     if (!tableRef.current || today < 0) return;
-    const row = tableRef.current.querySelector("[data-current]");
-    if (row) row.scrollIntoView({ block: "center" });
+    const row = tableRef.current.querySelector("[data-current]") as HTMLElement | null;
+    if (row) tableRef.current.scrollTop = row.offsetTop - tableRef.current.clientHeight / 2;
   }, [today]);
 
   function fmt(sec: number): string {
@@ -78,93 +78,110 @@ export default function AboutPage() {
       <article className="max-w-2xl mx-auto px-6 py-12 sm:py-20">
         {/* Header */}
         <h1 className="text-3xl sm:text-4xl font-bold text-zinc-900 dark:text-zinc-100 leading-tight">
-          The DST debate has three options.<br />
-          <span className="text-zinc-500 dark:text-zinc-400">There should be four.</span>
+          An idea whose time has come
         </h1>
 
         <div className="mt-8 space-y-6 text-base sm:text-lg text-zinc-600 dark:text-zinc-300 leading-relaxed">
+          <figure className="float-right ml-6 mb-4 w-40 sm:w-52">
+            <img
+              src="/waste-of-daylight-title.png"
+              alt="Title page of The Waste of Daylight by William Willett, Nineteenth Edition, March 1914"
+              className="rounded-lg shadow-lg"
+            />
+            <figcaption className="mt-2 text-xs text-zinc-400 dark:text-zinc-500 text-center">
+              Willett&apos;s pamphlet, 19th edition, 1914
+            </figcaption>
+          </figure>
+
           <p>
-            Spring forward and you lose an hour of sleep. Twice a year the clock-change debate
-            flares up, and it&apos;s always the same three options:
+            In 1914, William Willett proposed changing the clocks eight times a year
+            instead of two — four shifts of 20 minutes each in spring, four more in
+            autumn. He had noticed something important: the main objection to
+            daylight saving isn&apos;t the concept — it&apos;s losing an hour of sleep.
+            His plan cut that to 20 minutes.
           </p>
 
-          <ol className="list-decimal pl-6 space-y-2">
-            <li><strong className="text-zinc-800 dark:text-zinc-100">Keep the current system</strong> — two jarring shifts a year</li>
-            <li><strong className="text-zinc-800 dark:text-zinc-100">Permanent standard time</strong> — aligned with the sun, but dark evenings year-round</li>
-            <li><strong className="text-zinc-800 dark:text-zinc-100">Permanent daylight saving</strong> — brighter evenings, but dark winter mornings that worry doctors and school parents</li>
-          </ol>
-
           <p>
-            These have been argued for decades and nobody can agree. Permanent standard
-            sacrifices evening light. Permanent daylight saving means kids waiting for the
-            school bus in the dark in January. The current system means everyone loses an
-            hour of sleep and spends a week adjusting. Each side has real points, and the
-            debate is stuck.
+            Parliament rejected it. The reason was cost. Every clock had to be
+            reset by hand. Resetting twice a year was bad enough. Eight times
+            was unthinkable.
           </p>
         </div>
 
-        {/* The fourth option */}
-        <div className="mt-12 p-6 sm:p-8 rounded-2xl bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900">
-          <div className="text-sm uppercase tracking-wider text-zinc-400 dark:text-zinc-500 mb-2">The fourth option</div>
-          <h2 className="text-2xl sm:text-3xl font-bold mb-3">Gradual daylight saving</h2>
-          <p className="text-lg text-zinc-300 dark:text-zinc-600 leading-relaxed">
-            Shift continuously, a few seconds a day, so you get the sunlight benefit with
-            no abrupt jump at all. It doesn&apos;t pick a side — it removes the tradeoff.
-          </p>
-        </div>
-
-        {/* Why it's possible now */}
+        {/* Step 1: Willett's plan is now feasible */}
         <div className="mt-12 space-y-6 text-base sm:text-lg text-zinc-600 dark:text-zinc-300 leading-relaxed">
-          <h2 className="text-2xl font-bold text-zinc-900 dark:text-zinc-100">Why now?</h2>
-
-          <p>
-            When DST was invented over a century ago, every clock had to be reset by hand.
-            That made each shift expensive and error-prone, so we settled on two per year —
-            one hour each. But that was a compromise between two forces pulling in opposite
-            directions:
-          </p>
-
-          <ul className="space-y-2 pl-6 list-disc">
-            <li><strong className="text-zinc-800 dark:text-zinc-100">Fewer shifts are better</strong> — less hassle, but each shift is bigger</li>
-            <li><strong className="text-zinc-800 dark:text-zinc-100">Shorter shifts are better</strong> — less disruption, but you need more of them</li>
-          </ul>
-
-          <p>
-            A hundred years ago, &ldquo;fewer&rdquo; won by a landslide. Today? Cellphones
-            changed everything. Your phone&apos;s clock is whatever the network says it is.
-            When was the last time you set it manually? The cost of a time shift has dropped
-            to zero.
+          <p className="text-xl sm:text-2xl font-bold text-zinc-900 dark:text-zinc-100">
+            That was 1914. Today, shifting is nearly free.
           </p>
 
           <p>
-            If your main complaint is losing an hour of sleep, you don&apos;t have to go all
-            the way to continuous shifting to fix it. Make four half-hour shifts instead of two
-            one-hour shifts. Or eight fifteen-minute shifts. Each one is small enough that your
-            body barely notices.
+            Your phone&apos;s clock is whatever the network says it is. When was
+            the last time you set it manually? For most clocks in the modern
+            world, the cost of a time shift has dropped to zero. Not all —
+            wall clocks, wristwatches, and some industrial systems still need
+            manual adjustment. But the balance has flipped: in 1914 every clock
+            was manual. Today most are networked.
           </p>
 
           <p>
-            But why stop there? If shifting is free, go all the way.
+            That means Willett&apos;s plan could actually work now. Eight shifts
+            a year, 20 minutes each, applied automatically by your phone. No
+            manual clock-setting. Would it be better than what we have? Almost
+            certainly. The people who dread losing an hour of sleep twice a year
+            would lose 20 minutes instead — barely enough to notice. That alone
+            would be an improvement.
           </p>
+        </div>
+
+        {/* Step 2: But we can do better */}
+        <div className="mt-12 space-y-6 text-base sm:text-lg text-zinc-600 dark:text-zinc-300 leading-relaxed">
+          <p className="text-xl sm:text-2xl font-bold text-zinc-900 dark:text-zinc-100">
+            But why stop there?
+          </p>
+
+          <p>
+            Twenty minutes is still a shift you can feel. If the cost of
+            resetting is zero, there&apos;s no reason to limit ourselves to eight
+            shifts a year. Why not 365 — one for each day? Each shift would
+            be about 32 seconds. Your phone applies today&apos;s offset
+            automatically. You never notice.
+          </p>
+
+          <p>
+            A smooth curve from 0 at the winter solstice to +60 minutes at the summer
+            solstice and back again. No lost sleep. No jet lag. No jarring reset. Just
+            the same sunlight tracking we already have, delivered so gradually that
+            nobody feels it.
+          </p>
+        </div>
+
+        {/* The progression */}
+        <div className="mt-12 grid grid-cols-3 gap-3 sm:gap-4 text-center">
+          <div className="p-4 rounded-xl bg-zinc-100 dark:bg-zinc-900">
+            <div className="text-2xl sm:text-3xl font-bold text-zinc-900 dark:text-zinc-100">2</div>
+            <div className="text-sm text-zinc-500 dark:text-zinc-400 mt-1">shifts/year</div>
+            <div className="text-lg font-semibold text-red-500 dark:text-red-400 mt-2">60 min</div>
+            <div className="text-xs text-zinc-400 dark:text-zinc-500">each shift</div>
+          </div>
+          <div className="p-4 rounded-xl bg-zinc-100 dark:bg-zinc-900">
+            <div className="text-2xl sm:text-3xl font-bold text-zinc-900 dark:text-zinc-100">8</div>
+            <div className="text-sm text-zinc-500 dark:text-zinc-400 mt-1">shifts/year</div>
+            <div className="text-lg font-semibold text-amber-500 dark:text-amber-400 mt-2">20 min</div>
+            <div className="text-xs text-zinc-400 dark:text-zinc-500">Willett, 1914</div>
+          </div>
+          <div className="p-4 rounded-xl bg-zinc-100 dark:bg-zinc-900 ring-2 ring-green-500 dark:ring-green-400">
+            <div className="text-2xl sm:text-3xl font-bold text-zinc-900 dark:text-zinc-100">365</div>
+            <div className="text-sm text-zinc-500 dark:text-zinc-400 mt-1">shifts/year</div>
+            <div className="text-lg font-semibold text-green-500 dark:text-green-400 mt-2">32 sec</div>
+            <div className="text-xs text-zinc-400 dark:text-zinc-500">gradual</div>
+          </div>
         </div>
 
         {/* The lookup table */}
         <div className="mt-12 space-y-6">
           <h2 className="text-2xl font-bold text-zinc-900 dark:text-zinc-100">
-            The entire system fits on an index card
+            The entire system is 365 numbers
           </h2>
-
-          <p className="text-base sm:text-lg text-zinc-600 dark:text-zinc-300 leading-relaxed">
-            Make a table of 365 offsets — one for each day of the year. On January 1, the
-            clock is 32 seconds ahead of standard. By the summer solstice, it&apos;s the full
-            60 minutes. By winter solstice, it&apos;s back to zero. The maximum daily change?
-            About 32 seconds.
-          </p>
-
-          <p className="text-base sm:text-lg text-zinc-600 dark:text-zinc-300 leading-relaxed">
-            No exotic physics, no redefining the second. Just a lookup table. Your phone
-            applies today&apos;s offset automatically. You never notice.
-          </p>
 
           <div className="mt-4">
             <div className="flex items-center justify-between mb-3">
@@ -180,86 +197,6 @@ export default function AboutPage() {
               </a>
             </div>
             <OffsetTable year={year} />
-          </div>
-        </div>
-
-        {/* Objections */}
-        <div className="mt-16 space-y-10">
-          <h2 className="text-2xl font-bold text-zinc-900 dark:text-zinc-100">
-            &ldquo;But what about...&rdquo;
-          </h2>
-
-          <div className="space-y-8">
-            <div>
-              <h3 className="text-lg font-semibold text-zinc-800 dark:text-zinc-100 mb-2">
-                &ldquo;Does school start at a different time every day?&rdquo;
-              </h3>
-              <p className="text-base text-zinc-600 dark:text-zinc-300 leading-relaxed">
-                No. School starts at 8:00 AM — it always says 8:00 on the clock. The shift is
-                in the relationship between clock time and solar time, not in anyone&apos;s schedule.
-                You don&apos;t reschedule your life. The network adjusts the seconds. Everything
-                that runs on clock time — meetings, classes, business hours — stays exactly where it is.
-              </p>
-            </div>
-
-            <div>
-              <h3 className="text-lg font-semibold text-zinc-800 dark:text-zinc-100 mb-2">
-                &ldquo;What about cross-timezone scheduling?&rdquo;
-              </h3>
-              <p className="text-base text-zinc-600 dark:text-zinc-300 leading-relaxed">
-                Meeting software and phones already handle timezone math automatically. Google
-                Calendar doesn&apos;t care whether your offset is UTC-5 or UTC-4:58:20. It shows
-                everyone the right time in their own zone. The infrastructure already exists — we
-                just aren&apos;t using it.
-              </p>
-            </div>
-
-            <div>
-              <h3 className="text-lg font-semibold text-zinc-800 dark:text-zinc-100 mb-2">
-                &ldquo;The IT industry would have a meltdown.&rdquo;
-              </h3>
-              <p className="text-base text-zinc-600 dark:text-zinc-300 leading-relaxed">
-                Computers already handle leap seconds, timezone database updates, and the complexity
-                of regions that observe DST at different dates. A gradual shift is actually{" "}
-                <em>simpler</em> than the current system — it&apos;s a smooth function, not an
-                abrupt discontinuity. No more &ldquo;is this timestamp before or after the
-                spring-forward gap?&rdquo; edge cases. No more impossible 2:30 AM on the second
-                Sunday in March.
-              </p>
-            </div>
-
-            <div>
-              <h3 className="text-lg font-semibold text-zinc-800 dark:text-zinc-100 mb-2">
-                &ldquo;Just pick standard or daylight and stick with it.&rdquo;
-              </h3>
-              <p className="text-base text-zinc-600 dark:text-zinc-300 leading-relaxed">
-                A perfectly reasonable position. But it&apos;s been stuck in legislatures for
-                years precisely because permanent standard and permanent daylight each have real
-                downsides that block consensus. Gradual doesn&apos;t require that fight. It gives
-                you the same sunlight tracking as DST with none of the disruption.
-              </p>
-            </div>
-
-            <div>
-              <h3 className="text-lg font-semibold text-zinc-800 dark:text-zinc-100 mb-2">
-                &ldquo;What about the kitchen wall clock? The $20,000 Rolex?&rdquo;
-              </h3>
-              <div className="text-base text-zinc-600 dark:text-zinc-300 leading-relaxed space-y-3">
-                <p>
-                  Not every clock is networked. The honest answer: those clocks already can&apos;t
-                  handle DST gracefully. Twice a year someone walks around the house resetting them.
-                  Under gradual shifting, they&apos;d drift by at most 32 seconds a day — about 4
-                  minutes a week at the peak. That&apos;s less noticeable than the hour we ask people
-                  to swallow in a single night.
-                </p>
-                <p>
-                  Before standardized clocks, humanity kept time with variable-length hours for
-                  millennia. The period from sunrise to sunset was always &ldquo;12 hours,&rdquo;
-                  whether it was June or December. Our ancestors handled fluid time just fine. We&apos;re
-                  more equipped than they were.
-                </p>
-              </div>
-            </div>
           </div>
         </div>
 

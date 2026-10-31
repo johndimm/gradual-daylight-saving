@@ -859,8 +859,26 @@ export default function Home() {
         <p className="mt-3 text-base sm:text-lg text-zinc-600 dark:text-zinc-300 text-center max-w-xl leading-relaxed">
           The left clock jumps an hour twice a year, like yours does now.
           The right clock spreads that hour over months — a few seconds per day.
-          Click the stops to see how they diverge and converge through the year.
+          Click the chart to scrub through the year — click near a labeled point
+          for details.
         </p>
+        <div className="flex flex-wrap justify-center gap-x-4 gap-y-1 mt-3">
+          <a href="/about" className="text-sm text-zinc-500 dark:text-zinc-400 hover:text-zinc-800 dark:hover:text-zinc-200 underline transition-colors">
+            The argument
+          </a>
+          <a href="/started" className="text-sm text-zinc-500 dark:text-zinc-400 hover:text-zinc-800 dark:hover:text-zinc-200 underline transition-colors">
+            How this app started
+          </a>
+          <a href="https://claude.ai/artifact/GZinF4RFc4dW15BD6TXFDh" target="_blank" rel="noopener noreferrer" className="text-sm text-zinc-500 dark:text-zinc-400 hover:text-zinc-800 dark:hover:text-zinc-200 underline transition-colors">
+            How the math works
+          </a>
+          <a href="https://github.com/johndimm/gradual-daylight-saving" target="_blank" rel="noopener noreferrer" className="text-sm text-zinc-500 dark:text-zinc-400 hover:text-zinc-800 dark:hover:text-zinc-200 underline transition-colors">
+            GitHub
+          </a>
+          <a href="https://www.johndimm.org" target="_blank" rel="noopener noreferrer" className="text-sm text-zinc-500 dark:text-zinc-400 hover:text-zinc-800 dark:hover:text-zinc-200 underline transition-colors">
+            johndimm.org
+          </a>
+        </div>
       </div>
 
       {/* Date label */}
@@ -893,8 +911,22 @@ export default function Home() {
           <OffsetChart syncMethod={syncMethod} simDate={simDate} onJump={(d) => {
             setUseRealtime(false);
             setPlaying(false);
-            setSimDate(d);
-            setActiveTourIdx(null);
+            const stops = getTourStops(syncMethod, d.getFullYear());
+            const clickDay = (d.getTime() - new Date(d.getFullYear(), 0, 1).getTime()) / 86400000;
+            let nearestIdx: number | null = null;
+            let nearestDist = Infinity;
+            for (let i = 0; i < stops.length; i++) {
+              const stopDay = (stops[i].date().getTime() - new Date(d.getFullYear(), 0, 1).getTime()) / 86400000;
+              const dist = Math.abs(clickDay - stopDay);
+              if (dist < nearestDist) { nearestDist = dist; nearestIdx = i; }
+            }
+            if (nearestDist < 7) {
+              setSimDate(stops[nearestIdx!].date());
+              setActiveTourIdx(nearestIdx);
+            } else {
+              setSimDate(d);
+              setActiveTourIdx(null);
+            }
           }} />
         </div>
         <div className="flex items-center justify-center gap-2 pt-3 pb-3">
@@ -917,30 +949,14 @@ export default function Home() {
         </div>
       </div>
 
-      {/* Tour stops — primary interaction */}
+      {/* Tour description (when a labeled point on the chart is clicked) */}
       <div className="flex flex-col items-center px-4 gap-2">
-        <div className="flex flex-wrap justify-center gap-2">
-          {tourStops.map((stop, i) => {
-            const isActive = activeTourIdx === i;
-            return (
-              <button
-                key={i}
-                onClick={() => {
-                  setUseRealtime(false);
-                  setPlaying(false);
-                  setSimDate(stop.date());
-                  setActiveTourIdx(i);
-                }}
-                className={`rounded-full px-3 py-1.5 text-xs font-medium transition-colors ${
-                  isActive
-                    ? "bg-zinc-900 text-white dark:bg-zinc-100 dark:text-zinc-900"
-                    : "bg-zinc-200 text-zinc-700 dark:bg-zinc-700 dark:text-zinc-300 hover:bg-zinc-300 dark:hover:bg-zinc-600"
-                }`}
-              >
-                {stop.label}
-              </button>
-            );
-          })}
+        {activeTour ? (
+          <p className="text-base sm:text-lg text-zinc-600 dark:text-zinc-300 leading-relaxed text-center max-w-lg">
+            <span className="font-semibold text-zinc-900 dark:text-zinc-100">{activeTour.label}.</span>{" "}
+            {activeTour.desc}
+          </p>
+        ) : (
           <button
             onClick={goToNow}
             className={`rounded-full px-3 py-1.5 text-xs font-medium transition-colors ${
@@ -951,11 +967,6 @@ export default function Home() {
           >
             Right now
           </button>
-        </div>
-        {activeTour && (
-          <p className="text-base sm:text-lg text-zinc-600 dark:text-zinc-300 leading-relaxed text-center max-w-lg">
-            {activeTour.desc}
-          </p>
         )}
       </div>
 
@@ -1027,64 +1038,8 @@ export default function Home() {
             </div>
           </div>
         </div>
-        {/* About link */}
-        <div className="max-w-md mx-auto mt-6 px-4 text-center">
-          <a
-            href="/about"
-            className="text-sm font-medium text-zinc-500 dark:text-zinc-400 hover:text-zinc-800 dark:hover:text-zinc-200 transition-colors"
-          >
-            Why gradual? The case for a fourth option &rarr;
-          </a>
-        </div>
-
-        {/* Origin */}
-        <div className="max-w-xl mx-auto mt-6 px-4">
-          <details className="group">
-            <summary className="text-xs font-medium text-zinc-400 dark:text-zinc-500 cursor-pointer hover:text-zinc-600 dark:hover:text-zinc-300 transition-colors">
-              How this app started
-            </summary>
-            <blockquote className="mt-2 pl-3 border-l-2 border-zinc-200 dark:border-zinc-700 text-xs text-zinc-500 dark:text-zinc-400 leading-relaxed italic">
-              I want an app that shows 2 clocks. The first is a normal clock showing standard time or daylight saving time. The second is a hypothetical clock that follows the daylight saving pattern without making the sudden 1-hour jumps. Instead, it makes microchanges every day (or hour or second) to satisfy 2 conditions: it tracks the normal time shifts, and there is no sudden jump in time. The changes are smoothed out over the entire period. There is a calendar to switch to a different day or month so you can watch how the times differ. Maybe a play button to sit back and watch.
-            </blockquote>
-            <p className="mt-1.5 text-[10px] text-zinc-400 dark:text-zinc-500">
-              — the prompt to Claude Code that built this app
-            </p>
-          </details>
-        </div>
-        {/* Smooth Clock CTA */}
-        <div className="mt-6 mx-4">
-          <div className="max-w-md mx-auto text-center mb-3">
-            <p className="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed">
-              If there were a single source of truth for time, we could rig it to give the benefits of daylight saving without the abrupt shifts, and the world would automatically adapt. There isn&apos;t. The next best thing is to tweak your own daily routine.
-            </p>
-          </div>
-          <a
-            href="/clock"
-            className="block max-w-md mx-auto rounded-2xl bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 p-5 hover:bg-zinc-800 dark:hover:bg-zinc-200 transition-colors"
-          >
-            <div className="text-lg font-semibold mb-1">Try Smooth Time</div>
-            <div className="text-sm text-zinc-400 dark:text-zinc-500 leading-relaxed">
-              A bedside alarm clock that shifts your wake-up time by seconds per day — so you adapt to daylight saving gradually, without ever losing an hour of sleep.
-            </div>
-          </a>
-        </div>
-        <div className="flex justify-center gap-4 mt-3">
-          <a
-            href="https://claude.ai/artifact/GZinF4RFc4dW15BD6TXFDh"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-xs text-zinc-400 dark:text-zinc-500 hover:text-zinc-600 dark:hover:text-zinc-300 transition-colors"
-          >
-            How the math works
-          </a>
-          <a
-            href="https://github.com/johndimm/gradual-daylight-saving"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-xs text-zinc-400 dark:text-zinc-500 hover:text-zinc-600 dark:hover:text-zinc-300 transition-colors"
-          >
-            GitHub
-          </a>
+        <div className="mt-8 text-center text-xs text-zinc-400 dark:text-zinc-500">
+          &copy; {new Date().getFullYear()} John Dimm
         </div>
       </div>
     </div>

@@ -1,0 +1,17 @@
+An idea whose time has come
+
+In 1914, William Willett proposed changing the clocks eight times a year instead of two — four shifts of 20 minutes each in spring, four more in autumn. He had noticed something important: the main objection to daylight saving isn't the concept — it's losing an hour of sleep. His plan cut that to 20 minutes.
+
+Parliament rejected it. The reason was cost. Every clock had to be reset by hand. Resetting twice a year was bad enough. Eight times was unthinkable.
+
+That was 1914. Today, shifting is nearly free. Your phone's clock is whatever the network says it is. When was the last time you set it manually? For most clocks in the modern world, the cost of a time shift has dropped to zero. Not all — wall clocks, wristwatches, and some industrial systems still need manual adjustment. But the balance has flipped: in 1914 every clock was manual. Today most are networked.
+
+That means Willett's plan could actually work now. Eight shifts a year, 20 minutes each, applied automatically by your phone. No manual clock-setting. Would it be better than what we have? Almost certainly. The people who dread losing an hour of sleep twice a year would lose 20 minutes instead — barely enough to notice. That alone would be an improvement.
+
+But why stop there? Twenty minutes is still a shift you can feel. If the cost of resetting is zero, there's no reason to limit ourselves to eight shifts a year. Why not 365 — one for each day? Each shift would be about 32 seconds. Your phone applies today's offset automatically. You never notice.
+
+A smooth curve from 0 at the winter solstice to +60 minutes at the summer solstice and back again. No lost sleep. No jet lag. No jarring reset. Just the same sunlight tracking we already have, delivered so gradually that nobody feels it.
+
+The seasons change gradually. Our clocks should too.
+
+https://gradual.johndimm.org
