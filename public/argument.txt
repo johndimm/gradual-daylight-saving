@@ -2,7 +2,7 @@ An idea whose time has come
 
 In 1907, William Willett published a pamphlet called "The Waste of Daylight." He proposed shifting clocks forward in spring and back in autumn to gain evening daylight. His original plan called for four shifts of 20 minutes each — a gentler approach than a single jump. He thought the benefits were obvious: more time outdoors, better health, less money spent on artificial light.
 
-By 1914, his proposal had been simplified to a single 60-minute shift — the version that eventually became law. But the obstacle was always cost. Every clock had to be reset by hand. Even one shift was disruptive. Four shifts was unthinkable.
+By 1914, his proposal had been simplified to a single 60-minute shift — the version that eventually became law. The concern was always cost. Every clock had to be reset by hand. Even one shift was disruptive. Four shifts was unthinkable.
 
 Today, shifting is nearly free. The time on your phone is whatever the network says it is. When was the last time you set it manually? For most clocks in the modern world, the cost of a time shift has dropped to zero. Not all — wall clocks, wristwatches, and some industrial systems still need manual adjustment. But the balance has flipped: in Willett's day every clock was manual. Today most are networked.
 

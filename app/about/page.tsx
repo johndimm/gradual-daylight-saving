@@ -105,8 +105,8 @@ export default function AboutPage() {
 
           <p>
             By 1914, his proposal had been simplified to a single 60-minute
-            shift &mdash; the version that eventually became law. But the
-            obstacle was always cost. Every clock had to be reset by hand.
+            shift &mdash; the version that eventually became law. The concern
+            was always cost. Every clock had to be reset by hand.
             Even one shift was disruptive. Four shifts was unthinkable.
           </p>
         </div>
