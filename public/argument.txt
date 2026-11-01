@@ -1,14 +1,14 @@
 An idea whose time has come
 
-In 1907, William Willett published a pamphlet called "The Waste of Daylight." He proposed shifting clocks forward in spring and back in autumn to gain evening daylight. His original plan called for four shifts of 20 minutes each — a gentler approach than a single jump. He thought the benefits were obvious: more time outdoors, better health, less money spent on artificial light.
+In 1907, William Willett published a pamphlet called "The Waste of Daylight." He proposed shifting clocks forward in spring and back in autumn to gain evening daylight. His original plan called for eight shifts of 20 minutes each — four forward in spring, four back in autumn. A gentler approach than a single jump. He thought the benefits were obvious: more time outdoors, better health, less money spent on artificial light.
 
-By 1914, his proposal had been simplified to a single 60-minute shift — the version that eventually became law. The concern was always cost. Every clock had to be reset by hand. Even one shift was disruptive. Four shifts was unthinkable.
+By 1914, his proposal had been simplified to a single 60-minute shift — the version that eventually became law. The concern was always cost. Every clock had to be reset by hand. Even one shift was disruptive. Eight was unthinkable.
 
 Today, shifting is nearly free. The time on your phone is whatever the network says it is. When was the last time you set it manually? For most clocks in the modern world, the cost of a time shift has dropped to zero. Not all — wall clocks, wristwatches, and some industrial systems still need manual adjustment. But the balance has flipped: in Willett's day every clock was manual. Today most are networked.
 
-That means Willett's original plan — four shifts of 20 minutes — could actually work now. Your phone would apply each shift automatically. No manual clock-setting required. Would it be better than what we have? Almost certainly. The people who dread losing an hour of sleep twice a year would lose 20 minutes instead — barely enough to notice. That alone would be an improvement.
+That means Willett's original plan — eight shifts of 20 minutes — could actually work now. Your phone would apply each shift automatically. No manual clock-setting required. Would it be better than what we have? Almost certainly. The people who dread losing an hour of sleep twice a year would lose 20 minutes instead — barely enough to notice. That alone would be an improvement.
 
-But why stop at four? Twenty minutes is still a shift you can feel. If the cost of resetting is zero, there's no reason to limit ourselves to four shifts a year. Why not 365 — one for each day? Each shift would be about 32 seconds. Your phone applies today's offset automatically. You never notice.
+But why stop at eight? Twenty minutes is still a shift you can feel. If the cost of resetting is zero, there's no reason to limit ourselves to eight shifts a year. Why not 365 — one for each day? Each shift would be about 32 seconds. Your phone applies today's offset automatically. You never notice.
 
 A smooth curve from 0 at the winter solstice to +60 minutes at the summer solstice and back again. No lost sleep. No jet lag. No jarring reset. Just the same sunlight tracking we already have, delivered so gradually that nobody feels it.
 

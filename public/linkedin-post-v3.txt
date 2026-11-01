@@ -28,7 +28,7 @@ So if your main complaint is losing an hour of sleep, you don't have to go all t
 
 But why stop there? If shifting is free, go all the way. Make a table of 365 offsets — one for each day of the year. On January 1, the clock is 32 seconds ahead of standard. By the summer solstice, it's the full 60 minutes. By winter solstice, it's back to zero. The maximum daily change? About 32 seconds. Your phone applies today's offset automatically. You never notice.
 
-That's it. No exotic physics, no redefining the second. Just a lookup table. The entire system fits on an index card.
+That's it. No exotic physics, no redefining the second. Just a lookup table.
 
 "But what about my schedule?"
 

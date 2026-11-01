@@ -689,7 +689,7 @@ export default function SmoothClock() {
             <div className="text-sm text-zinc-400 leading-relaxed space-y-2">
               <p>
                 This clock doesn&apos;t jump an hour twice a year. Instead, it shifts
-                by a few seconds each day, spreading the daylight saving transition
+                by up to half a minute each day, spreading the daylight saving transition
                 over months.
               </p>
               <p>

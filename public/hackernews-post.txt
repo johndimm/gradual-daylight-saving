@@ -1,0 +1,11 @@
+Title: Show HN: Gradual Daylight Saving – Spread the 1-hour shifts over the whole year
+
+URL: https://gradual.johndimm.org
+
+Text:
+
+Instead of jumping an hour twice a year, shift up to half a minute per day using a cosine easing function. The offset rises smoothly from 0 at winter solstice to +60 minutes at summer solstice and back. Max daily change is ~32 seconds.
+
+William Willett's original 1907 proposal was actually 8 shifts of 20 minutes — four forward in spring, four back in autumn. Gentler than what we ended up with. Now that most clocks are networked, there's no reason to stop at 8.
+
+The site has an interactive demo with two clocks (official vs. smooth), a year-long offset chart, and a working Smooth Time clock you can use as an alarm. Built with Next.js.

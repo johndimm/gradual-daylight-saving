@@ -1,9 +1,5 @@
-In 1914, William Willett proposed 8 clock shifts a year instead of 2 — each only 20 minutes. Parliament rejected it. Too many resets.
+Daylight Saving was designed for last century's technology.
 
-But Willett was right about the problem: nobody likes losing an hour of sleep.
+Seasons change gradually. Why can't our clocks?
 
-Today most clocks reset themselves. The cost of a shift is nearly zero.
-
-So follow his logic all the way: 365 shifts of 32 seconds. One per day. You never notice.
-
-https://gradual.johndimm.org/about
+https://gradual.johndimm.org
