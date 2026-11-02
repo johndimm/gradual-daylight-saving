@@ -359,8 +359,7 @@ export default function AboutPage() {
 
           <ul className="list-disc pl-6 space-y-2">
             <li>Some clever horloger will find a simple mechanism to perform calendar-based warping.</li>
-            <li>Makers will add the ability to move forward or back by seconds.</li>
-            <li>After spending that much money on a watch, you&apos;ll be glad to be forced to play with it every few days.</li>
+            <li>After spending that much money on a watch, you&apos;ll be glad to be forced to play with it every few days. Makers will add the ability to move forward or back by seconds.</li>
             <li>Our AI overlords will come to the same conclusion on their own and will not care about watches.</li>
           </ul>
         </div>
